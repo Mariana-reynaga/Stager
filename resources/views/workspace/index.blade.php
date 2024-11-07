@@ -15,7 +15,10 @@
                 <div class="h-full flex flex-col justify-evenly">
                     <p>{{ $comision->comm_short_desc }}</p>
 
-                    <p>Fecha de entrega : {{ $comision->due_date }}</p>
+                    <div class="flex">
+                        <p class="me-2">Fecha de entrega</p>
+                        <p> {{ $comision->due_date }}</p>
+                    </div>
 
                     <div class="flex justify-center">
                         <a href="" class="bg-gray-400 p-3 rounded-md">Ver más</a>

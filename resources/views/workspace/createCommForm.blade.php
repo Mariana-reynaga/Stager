@@ -6,7 +6,7 @@
     <form action="{{ route('newComm.process') }}" method="POST">
         @csrf
         <input type="hidden" name="user_id" id="user_id" value="2">
-        
+
         <div class="flex">
             <div class="w-1/3">
                 {{-- titulo de la comision --}}
@@ -25,6 +25,12 @@
                             id="comm_title"
                             value="{{old('comm_title')}}"
                         >
+
+                        @error('comm_title')
+                            <div class="text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -42,7 +48,14 @@
                             name="comm_short_desc"
                             id="comm_short_desc"
                             cols="30"
-                            rows="3"></textarea>
+                            rows="3"
+                            >{{ old('comm_short_desc') }}</textarea>
+
+                        @error('comm_short_desc')
+                            <div class="text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -60,7 +73,14 @@
                             type="date"
                             name="due_date"
                             id="due_date"
+                            value="{{ old('due_date') }}"
                         >
+
+                        @error('due_date')
+                            <div class="text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -68,6 +88,7 @@
             <div class="w-2/3">
                 <div class="mb-4">
                     <div class="flex justify-evenly">
+                        {{-- Forma de contacto al cliente --}}
                         <div class="">
                             <x-label-de-form>
                                 <x-slot name="forName">comm_client_social</x-slot>
@@ -80,9 +101,8 @@
                                         class="border border-solid border-gray-600 rounded-md p-2 w-full"
                                         name="comm_client_social"
                                         id="comm_client_social"
-                                        value="{{old('comm_client_social')}}"
                                 >
-                                    <option value="">Elija una opción</option>
+                                    {{-- <option value="">Elija una opción</option>
                                     <option value="Facebook">Facebook</option>
                                     <option value="twitter / X">twitter / X</option>
                                     <option value="Instagram">Instagram</option>
@@ -91,12 +111,20 @@
                                     <option value="Tumblr">Tumblr</option>
                                     <option value="Discord">Discord</option>
                                     <option value="Bluesky">Bluesky</option>
-                                    <option value="Email">Email</option>
+                                    <option value="Email">Email</option> --}}
+
                                 </select>
+
+                                @error('comm_client_social')
+                                    <div class="text-red-500">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                         </div>
 
+                        {{-- Nombre del cliente --}}
                         <div class="">
                             <x-label-de-form>
                                 <x-slot name="forName">comm_client</x-slot>
@@ -112,6 +140,12 @@
                                     id="comm_client"
                                     value="{{old('comm_client')}}"
                                 >
+
+                                @error('comm_client')
+                                    <div class="text-red-500">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 

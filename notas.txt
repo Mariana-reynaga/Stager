@@ -1,0 +1,7 @@
+hacer que la tabla de redes de clientes sea una tabla en si para que puedas hacer un foreach en el crear comision
+
+fijate como poner un valor old en el select input, mira este:  https://laracasts.com/discuss/channels/laravel/old-value-in-select-option
+
+no se como arreglar lo de fewcha AAAAAAA, pero talvez elimina los datos? y mirate la clase donde lo puso para ver como concha lo hizo
+
+hace todas las paginas, no importa si no tienen nada, para que al menos el navegador quede completo

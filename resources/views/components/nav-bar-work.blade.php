@@ -8,6 +8,7 @@
         <div class="mt-5">
             <ul>
                 <li> <x-nav-link route="newComm" >Nueva comision</x-nav-link> </li>
+                <li> <x-nav-link route="completed.workspace">Comisiones completas</x-nav-link> </li>
             </ul>
         </div>
     </div>

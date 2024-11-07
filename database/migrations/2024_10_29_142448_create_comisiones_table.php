@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comisiones', function (Blueprint $table) {
-            $table->increments('comm_id');
-            $table->string('user_id');
-            $table->char('comm_title', 50);
+            $table->id('comm_id');
+            $table->string('user_id'); // this should prob be a relation
+            $table->char('comm_title', 30);
             $table->string('comm_short_desc', length: 150);
             $table->enum('comm_client_social', ['Facebook','twitter / X', 'Instagram', 'Pixiv', 'Artstation', 'Tumblr', 'Discord', 'Bluesky' ,'Email']);
             $table->string('comm_client', length: 100);
