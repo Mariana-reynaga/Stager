@@ -1,4 +1,4 @@
-@extends('layouts.comisionForm')
+@extends('layouts.comision')
 
 @section('title', 'Crear')
 

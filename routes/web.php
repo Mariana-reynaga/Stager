@@ -16,5 +16,9 @@ Route::get('/workspace/complete', [App\Http\Controllers\ComisionesController::cl
 Route::get('/workspace/create', [App\Http\Controllers\ComisionesController::class, "createComision" ])
     ->name('espacio.completas');
 
+    // cambiar comision por el id
+Route::get('/workspace/comision', [App\Http\Controllers\ComisionesController::class, "comisionDetails" ] )
+    ->name('espacio.details');
+
 Route::get('/profile', [App\Http\Controllers\LandingController::class, "perfilTemp" ])
     ->name('user.profile');

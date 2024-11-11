@@ -17,4 +17,8 @@ class ComisionesController extends Controller
     public function createComision(){
         return view('espacioTrabajo.create-com');
     }
+
+    public function comisionDetails(){
+        return view('espacioTrabajo.coms-detalles');
+    }
 }
