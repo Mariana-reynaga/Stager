@@ -6,6 +6,10 @@
 
 
 @layer base {
+    .btn-principal{
+        @apply font-kanit text-xl text-blanco bg-rclaro px-5 py-2 rounded-md hover:bg-roscuro focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-roscuro active:bg-blanco active:border active:border-solid active:border-roscuro active:text-roscuro;
+    }
+
     @font-face {
       font-family: 'Caramel';
       font-style: normal;

@@ -11,7 +11,10 @@
 </head>
 <body>
     <main>
-        <h1>Crear Comisión</h1>
+        <div class="mt-10 ms-10 flex items-center">
+            <div class="w-10 h-10 rounded-lg bg-slate-300"></div>
+            <h1 class="ms-3 font-kanit font-semibold text-2xl text-negro">Crear Comisión</h1>
+        </div>
 
         <div class="">
             @yield('content')

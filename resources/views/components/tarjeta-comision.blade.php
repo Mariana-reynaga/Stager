@@ -5,7 +5,7 @@
         <p class="mt-2"><span class="font-bold">Entrega:</span> {{ $fecha_entrega }}</p>
 
         <div class="flex justify-center mt-3">
-            <a href="" class="bg-rclaro text-blanco px-5 py-2 w-3/5 rounded-md text-center">Ver más</a>
+            <a href="" class="btn-principal text-center">Ver más</a>
         </div>
     </div>
 </div>
