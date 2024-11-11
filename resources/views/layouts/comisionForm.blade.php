@@ -10,6 +10,12 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <main>
+        <h1>Crear Comisión</h1>
 
+        <div class="">
+            @yield('content')
+        </div>
+    </main>
 </body>
 </html>
