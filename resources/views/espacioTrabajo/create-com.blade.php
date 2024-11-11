@@ -6,6 +6,7 @@
 
 @section('content')
     <form action="">
+        @csrf
         <div class="flex w-full justify-center">
             <div class="flex justify-evenly w-4/5 mt-4">
                 <div class="flex flex-col w-1/2">

@@ -22,3 +22,7 @@ Route::get('/workspace/comision', [App\Http\Controllers\ComisionesController::cl
 
 Route::get('/profile', [App\Http\Controllers\LandingController::class, "perfilTemp" ])
     ->name('user.profile');
+
+    // Autentificación
+Route::get('/login', [App\Http\Controllers\AuthController::class, "loginForm" ])
+    ->name('auth.login.form');

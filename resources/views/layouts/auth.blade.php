@@ -11,8 +11,6 @@
 </head>
 <body>
     <main>
-        <x-landing-nav-bar />
-
         @yield('content')
 
         <footer class="bg-negro w-full min-h-40 p-5 flex flex-col items-center inset-x-0 bottom-0">
