@@ -21,10 +21,22 @@
                     </div>
 
                     {{-- links --}}
-                    <ul class="text-blanco font-kanit text-sm mt-10 h-20 flex flex-col justify-between">
-                        <li><a href="">Cargar comisión</a></li>
-                        <li><a href="">Comisiones Completas</a></li>
-                        <li><a href="">Perfil</a></li>
+                    <ul class="text-blanco font-kanit text-sm mt-10 h-28 flex flex-col justify-between">
+                        <li>
+                            <x-nav-link route="espacio.crear.form">Cargar comisión</x-nav-link>
+                        </li>
+
+                        <li>
+                            <x-nav-link route="espacio.completas">Comisiones completas</x-nav-link>
+                        </li>
+
+                        <li>
+                            <x-nav-link route="user.profile">Perfil</x-nav-link>
+                        </li>
+
+                        <li>
+                            <a href="">Cerrar sesión</a>
+                        </li>
                     </ul>
                 </div>
             </div>

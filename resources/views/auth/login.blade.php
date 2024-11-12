@@ -64,6 +64,10 @@
                     <div class="mt-6 flex justify-center">
                         <button type="submit" class="btn-secundario">Iniciar Sesión</button>
                     </div>
+
+                    <div class="mt-6 flex justify-center text-blanco font-kanit">
+                        <x-nav-link route="auth.register.form">¿No tenés cuenta? Registrate ahora</x-nav-link>
+                    </div>
                 </form>
 
             </div>

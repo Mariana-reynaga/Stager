@@ -11,6 +11,8 @@ class navLink extends Component
     /**
      * Create a new component instance.
      */
+    public string $route;
+
     public function __construct(String $route)
     {
         $this->route = $route;

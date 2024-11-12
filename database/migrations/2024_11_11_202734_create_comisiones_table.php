@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comisiones', function (Blueprint $table) {
-            $table->id();
+            $table->id('com-id');
+            $table->string('com_title');
+            $table->text('com_description');
+            $table->string('com_client');
+            $table->date('com_entrega');
+            $table->boolean('is_complete')->default(false);
             $table->timestamps();
         });
     }

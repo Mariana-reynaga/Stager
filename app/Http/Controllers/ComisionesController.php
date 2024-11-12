@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comisiones;
 
 class ComisionesController extends Controller
 {
     public function workspace(){
-        return view('espacioTrabajo.index');
+        $incompletas = Comisiones::all()->where('is_complete', false);
+
+        return view('espacioTrabajo.index',[
+            'coms_incompletas' => $incompletas
+        ]);
     }
 
     public function workspaceComplete(){

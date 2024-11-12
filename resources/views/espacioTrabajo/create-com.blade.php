@@ -13,13 +13,15 @@
                     {{-- Título de la comisión --}}
                     <div class="w-4/5">
                         <x-label-form>
-                            <x-slot name="forName">titulo-com</x-slot>
+                            <x-slot name="forName">com_title</x-slot>
                             <x-slot name="title">Título de la Comisión</x-slot>
                             Intenta que sea descriptivo y conciso
                         </x-label-form>
 
                         <input
                             type="text"
+                            name="com_title"
+                            id="com_title"
                             class="
                                 border
                                 border-solid
@@ -36,14 +38,14 @@
                     {{-- Descripción de la comisión --}}
                     <div class="w-4/5 mt-4">
                         <x-label-form>
-                            <x-slot name="forName">descrip-com</x-slot>
+                            <x-slot name="forName">com_description</x-slot>
                             <x-slot name="title">Descripción de la comisión</x-slot>
                             Describí la comisión en una oración
                         </x-label-form>
 
                         <textarea
-                            name="descrip-com"
-                            id="descrip-com"
+                            name="com_description"
+                            id="com_description"
                             cols="30"
                             rows="5"
                             class="
@@ -62,15 +64,15 @@
                     {{-- Fecha de entrega --}}
                     <div class="w-4/5 mt-4">
                         <x-label-form>
-                            <x-slot name="forName">fecha-entrega</x-slot>
+                            <x-slot name="forName">com_entrega</x-slot>
                             <x-slot name="title">Fecha de entrega</x-slot>
                             Cuando tenés que entregar el producto final
                         </x-label-form>
 
                         <input
                             type="date"
-                            name="fecha-entrega"
-                            id="fecha-entrega"
+                            name="com_entrega"
+                            id="com_entrega"
                             class="
                                 border
                                 border-solid
@@ -119,15 +121,15 @@
                         {{-- Username del cliente --}}
                         <div class="w-2/3 flex flex-col justify-between ms-3">
                             <x-label-form>
-                                <x-slot name="forName">contacto-cliente</x-slot>
+                                <x-slot name="forName">com_client</x-slot>
                                 <x-slot name="title">Nombre de usuario</x-slot>
                                 Nombre de usuario del cliente
                             </x-label-form>
 
                             <input
                                 type="text"
-                                name="comm_client"
-                                id="comm_client"
+                                name="com_client"
+                                id="com_client"
                                 class="
                                     border
                                     border-solid
