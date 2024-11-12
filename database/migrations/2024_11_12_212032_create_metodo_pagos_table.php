@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comisiones', function (Blueprint $table) {
-            $table->id('com_id');
-            $table->string('com_title');
-            $table->text('com_description');
-            $table->string('com_client');
-            $table->date('com_entrega');
-            $table->boolean('is_complete')->default(false);
+        Schema::create('metodo_pagos', function (Blueprint $table) {
+            $table->id('id_metodo_pago');
+            $table->string('metodo_pago');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comisiones');
+        Schema::dropIfExists('metodo_pagos');
     }
 };

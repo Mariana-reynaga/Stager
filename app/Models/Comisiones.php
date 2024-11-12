@@ -8,7 +8,9 @@ class Comisiones extends Model
 {
     protected $table = 'comisiones';
 
-    protected $primaryKey = 'com-id';
+    protected $primaryKey = 'com_id';
+
+    protected $fillable = [];
 
     public function casts(){
         return [

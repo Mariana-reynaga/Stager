@@ -16,9 +16,9 @@ Route::get('/workspace/complete', [App\Http\Controllers\ComisionesController::cl
 Route::get('/workspace/create', [App\Http\Controllers\ComisionesController::class, "createComision" ])
     ->name('espacio.crear.form');
 
-    // cambiar comision por el id
-Route::get('/workspace/comision', [App\Http\Controllers\ComisionesController::class, "comisionDetails" ] )
-    ->name('espacio.details');
+Route::get('/workspace/comision/{id}', [App\Http\Controllers\ComisionesController::class, "comisionDetail" ] )
+    ->name('espacio.details')
+    ->whereNumber('id');
 
 Route::get('/profile', [App\Http\Controllers\LandingController::class, "perfilTemp" ])
     ->name('user.profile');

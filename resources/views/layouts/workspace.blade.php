@@ -21,9 +21,13 @@
                     </div>
 
                     {{-- links --}}
-                    <ul class="text-blanco font-kanit text-sm mt-10 h-28 flex flex-col justify-between">
+                    <ul class="text-blanco font-kanit text-sm mt-10 h-40 flex flex-col justify-between">
                         <li>
                             <x-nav-link route="espacio.crear.form">Cargar comisión</x-nav-link>
+                        </li>
+
+                        <li>
+                            <x-nav-link route="espacio.trabajo">Comisiones en progreso</x-nav-link>
                         </li>
 
                         <li>

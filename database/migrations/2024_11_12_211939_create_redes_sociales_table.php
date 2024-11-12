@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comisiones', function (Blueprint $table) {
-            $table->id('com_id');
-            $table->string('com_title');
-            $table->text('com_description');
-            $table->string('com_client');
-            $table->date('com_entrega');
-            $table->boolean('is_complete')->default(false);
+        Schema::create('redes_sociales', function (Blueprint $table) {
+            $table->id('id_social');
+            $table->string('red_social');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comisiones');
+        Schema::dropIfExists('redes_sociales');
     }
 };

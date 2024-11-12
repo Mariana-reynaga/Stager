@@ -115,6 +115,9 @@
 
                             >
                                 <option value="">Elija una opción</option>
+                                @foreach ( $redes_sociales as $red )
+                                    <option value="">{{ $red->red_social }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -170,6 +173,9 @@
 
                         >
                             <option value="">Elija una opción</option>
+                            @foreach ($metodos_pagos as $metodo)
+                                <option value="">{{ $metodo->metodo_pago }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

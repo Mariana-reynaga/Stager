@@ -13,5 +13,4 @@ class LandingController extends Controller
     public function perfilTemp(){
         return view('perfil.index');
     }
-
 }
