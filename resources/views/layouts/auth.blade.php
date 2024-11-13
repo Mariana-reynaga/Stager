@@ -10,10 +10,11 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <main>
+    <main class="h-fit">
+
         @yield('content')
 
-        <footer class="bg-negro w-full min-h-40 p-5 flex flex-col items-center inset-x-0 bottom-0">
+        <footer class="bg-negro w-full min-h-40 p-5 flex flex-col items-center absolute inset-x-0 bottom-0">
             <div class="w-4/5 flex">
                 <div class="flex flex-col w-1/2">
                     <p class="text-blanco font-kanit font-bold text-xl">Stager</p>

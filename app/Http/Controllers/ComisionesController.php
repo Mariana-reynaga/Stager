@@ -7,10 +7,13 @@ use App\Models\Comisiones;
 use App\Models\MetodoPago;
 use App\Models\RedesSociales;
 
+
 class ComisionesController extends Controller
 {
     public function workspace(){
-        $incompletas = Comisiones::all()->where('is_complete', false);
+        $incompletas = Comisiones::all()->where('is_complete', false)->sortBy('com_entrega');
+
+        // dd($incompletas);
 
         return view('espacioTrabajo.index',[
             'coms_incompletas' => $incompletas

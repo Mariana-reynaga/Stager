@@ -3,10 +3,13 @@
 @section('title', 'Iniciar Sesión')
 
 @section('content')
-    <div class="h-96 w-full flex justify-center mt-10">
-        <a href="/">
-            <div class="bg-slate-200 w-16 h-16 rounded-3xl"></div>
-        </a>
+    <div class="w-full flex justify-center mt-20">
+        <div class="h-fit">
+            <a href="/">
+                <div class="bg-slate-200 w-16 h-16 rounded-3xl"></div>
+            </a>
+        </div>
+
         <div class="w-1/2 flex flex-col items-center">
             <div class="bg-roscuro p-3 rounded-md min-w-80 w-3/5">
                 <h2 class="font-kanit font-xl text-blanco ">¡Bienvenido a Stager!</h2>

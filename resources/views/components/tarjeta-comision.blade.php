@@ -5,7 +5,7 @@
         <p class="mt-2"><span class="font-bold">Entrega:</span> {{ $fecha_entrega }}</p>
 
         <div class="flex justify-center mt-3">
-            <a href="{{ route('espacio.details', ['id'=>$id_ruta]) }}" class="btn-principal text-center">Ver más</a>
+            <a href="{{ route('espacio.details', ['id'=>$id_ruta]) }}" class="btn-secundario text-center">Ver más</a>
         </div>
     </div>
 </div>
