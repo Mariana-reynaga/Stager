@@ -68,7 +68,7 @@
             <div class="flex flex-col items-center w-1/2">
                 <h3 class="text-blanco font-kanit font-bold text-xl">¡Toma control del show!</h3>
                 <a
-                    href=""
+                    href="{{ route('auth.register.form') }}"
                     class="
                         px-6 py-3
                         bg-blanco

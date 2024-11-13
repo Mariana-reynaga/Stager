@@ -43,7 +43,7 @@
                                 @csrf
                                 <button type="submit">Cerrar sesión</button>
                             </form>
-                            {{-- <a href="{{ route('auth.logout.process') }}">Cerrar sesión</a> --}}
+                            
                         </li>
                     </ul>
                 </div>

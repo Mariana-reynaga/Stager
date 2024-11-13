@@ -15,12 +15,12 @@ class AuthController extends Controller
 
         if (!auth()->attempt($credentials)) {
             return redirect()
-            ->back(fallback: route('auth.login.form'))
-            ->withInput();
-        }
+                   ->back(fallback: route('auth.login.form'))
+                   ->withInput();
+        }else{
 
-        return redirect()
-        ->route('espacio.trabajo');
+            return redirect()->route('espacio.trabajo');
+        }
     }
 
     public function logoutProcess(Request $req){
