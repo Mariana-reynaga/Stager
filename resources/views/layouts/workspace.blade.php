@@ -39,7 +39,11 @@
                         </li>
 
                         <li>
-                            <a href="">Cerrar sesión</a>
+                            <form action="{{ route('auth.logout.process') }}" method="POST">
+                                @csrf
+                                <button type="submit">Cerrar sesión</button>
+                            </form>
+                            {{-- <a href="{{ route('auth.logout.process') }}">Cerrar sesión</a> --}}
                         </li>
                     </ul>
                 </div>

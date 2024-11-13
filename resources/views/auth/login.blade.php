@@ -10,7 +10,7 @@
         <div class="w-1/2 flex flex-col items-center">
             <div class="bg-roscuro p-3 rounded-md min-w-80 w-3/5">
                 <h2 class="font-kanit font-xl text-blanco ">¡Bienvenido de vuelta!</h2>
-                <form action="">
+                <form action="{{ route('auth.login.process') }}" method="post">
                     @csrf
 
                     <div class="mt-5">
@@ -22,6 +22,8 @@
                             </x-label-auth>
 
                             <input
+                                name="email"
+                                id="email"
                                 type="email"
                                 class="
                                     border
@@ -34,6 +36,7 @@
                                     focus:outline-2
                                     focus:outline-blanco
                                 "
+                                value="{{ old('email') }}"
                             >
                         </div>
 
@@ -45,6 +48,8 @@
                             </x-label-auth>
 
                             <input
+                                name="password"
+                                id="password"
                                 type="password"
                                 class="
                                     border
