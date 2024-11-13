@@ -17,4 +17,12 @@ class Comisiones extends Model
             'com_entrega' => 'date'
         ];
     }
+
+    public function social(){
+        return $this->belongsTo(RedesSociales::class, 'social_fk','id_social');
+    }
+
+    public function pago(){
+        return $this->belongsTo(MetodoPago::class, 'pagos_fk','id_metodo_pago');
+    }
 }

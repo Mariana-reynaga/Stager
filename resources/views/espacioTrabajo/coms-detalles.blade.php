@@ -7,9 +7,20 @@
 @section('content')
     <div class="flex flex-col items-center w-full mt-10">
         <div class="flex justify-between font-kanit text-negro w-4/5 border-t-4 border-rclaro pt-5">
-            <div class="w-1/2">
-                <h2 class="text-xl text-rclaro">Descripción:</h2>
-                <p>{{ $comision->com_description }}</p>
+            <div class="w-1/2 flex flex-col">
+                <div class="flex flex-col">
+                    <h2 class="text-xl text-rclaro">Descripción:</h2>
+                    <p>{{ $comision->com_description }}</p>
+                </div>
+
+                <div class="flex flex-col my-4">
+                    <h2>Cliente:</h2>
+                    <p>{{ $comision->com_client }} en {{ $comision->social->red_social }}</p>
+                </div>
+
+                <div class="">
+                    <p>{{ $comision->com_client }} pago mediante: {{ $comision->pago->metodo_pago }}</p>
+                </div>
             </div>
 
             <div class="w-1/2 flex items-center">
@@ -20,6 +31,8 @@
                     <p>Completada</p>
                 @endif
             </div>
+
+
         </div>
 
         <div class="w-1/2 flex justify-evenly mt-10">

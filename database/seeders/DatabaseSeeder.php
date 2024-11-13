@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(
             [
-                ComisionesSeeder::class,
+                RedesSocialesSeeder::class,
                 MetodoPagoSeeder::class,
-                RedesSocialesSeeder::class
+                ComisionesSeeder::class,
             ]);
     }
 }

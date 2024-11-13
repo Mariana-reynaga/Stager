@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RedesSociales extends Model
 {
-    protected $table = 'redes_sociales';
+    // protected $table = 'redes_sociales';
 
-    protected $primaryKey = 'id_metodo_pago';
+    protected $primaryKey = 'id_social';
 }

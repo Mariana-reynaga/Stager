@@ -34,8 +34,8 @@ class ComisionesController extends Controller
     }
 
     public function createComision(){
-        $metodos_pagos = MetodoPago::all();
         $redes_sociales = RedesSociales::all();
+        $metodos_pagos = MetodoPago::all();
 
         return view('espacioTrabajo.create-com',[
             'redes_sociales'=> $redes_sociales,

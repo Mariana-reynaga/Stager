@@ -17,6 +17,8 @@ class ComisionesSeeder extends Seeder
             [
                 'com_title'=>'Comision de ejemplo 1',
                 'com_description'=>'Esta es una descripción para una comision de ejemplo. Sirve para verificar que todo funcione.',
+                'social_fk'=>3,
+                'pagos_fk'=>1,
                 'com_client'=>'cliente-random',
                 'com_entrega'=>'2024-12-01',
                 'is_complete'=> false,
@@ -26,6 +28,8 @@ class ComisionesSeeder extends Seeder
             [
                 'com_title'=>'Comision de ejemplo 2',
                 'com_description'=>'Esta es una descripción para una comision de ejemplo. Sirve para verificar que todo funcione.',
+                'social_fk'=>4,
+                'pagos_fk'=>3,
                 'com_client'=>'cliente-random',
                 'com_entrega'=>'2024-12-03',
                 'is_complete'=> false,
@@ -36,6 +40,8 @@ class ComisionesSeeder extends Seeder
             [
                 'com_title'=>'Comision de ejemplo 3',
                 'com_description'=>'Esta es una descripción para una comision de ejemplo. Sirve para verificar que todo funcione.',
+                'social_fk'=>1,
+                'pagos_fk'=>4,
                 'com_client'=>'cliente-random',
                 'com_entrega'=>'2024-12-06',
                 'is_complete'=> true,
