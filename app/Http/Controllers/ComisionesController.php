@@ -86,9 +86,15 @@ class ComisionesController extends Controller
 
         $comision->update(['is_complete'=>true]);
 
-        // dd($comision);
-
         return redirect()->route('espacio.completas');
+    }
+
+    public function deleteComision(int $id){
+        $comision = Comisiones::findOrFail($id);
+
+        $comision->delete($comision);
+
+        return redirect()->route('espacio.trabajo');
     }
 
     public function comisionDetails(){

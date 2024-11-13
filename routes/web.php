@@ -27,6 +27,10 @@ Route::put('/workspace/comision/{id}', [App\Http\Controllers\ComisionesControlle
     ->name('espacio.details.complete')
     ->whereNumber('id');
 
+Route::delete('/workspace/comision/{id}', [App\Http\Controllers\ComisionesController::class, "deleteComision"] )
+    ->name('espacio.details.delete')
+    ->whereNumber('id');
+
 Route::get('/profile', [App\Http\Controllers\LandingController::class, "perfilTemp" ])
     ->name('user.profile');
 

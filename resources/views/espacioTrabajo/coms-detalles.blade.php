@@ -36,7 +36,13 @@
         </div>
 
         <div class="w-1/2 flex justify-evenly mt-10">
-            <a href="" class="btn-secundario">Eliminar</a>
+            {{-- <a href="{{ route('espacio.details.delete',['id'=>$comision->com_id]) }}" class="btn-secundario">Eliminar</a> --}}
+
+            <form action="{{ route('espacio.details.delete',['id'=>$comision->com_id]) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button class="btn-secundario">Eliminar</button>
+            </form>
 
             @if ($comision->is_complete == false)
                 <form action="{{ route('espacio.details.complete',['id'=>$comision->com_id]) }}" method="post">
@@ -44,7 +50,7 @@
                     @method('PUT')
                     <button class="btn-principal">Marcar como completado</button>
                 </form>
-                {{-- <a href="" class="btn-principal">Marcar como completado</a> --}}
+
             @endif
         </div>
     </div>
