@@ -40,7 +40,7 @@ Route::get('/profile', [App\Http\Controllers\LandingController::class, "perfilTe
 
     // Autentificación
 Route::get('/login', [App\Http\Controllers\AuthController::class, "loginForm" ])
-    ->name('auth.login.form');
+    ->name('login');
 
 Route::post('/login', [App\Http\Controllers\AuthController::class, "loginProcess" ])
     ->name('auth.login.process');

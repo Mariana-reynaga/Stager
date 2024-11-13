@@ -15,7 +15,7 @@ class AuthController extends Controller
 
         if (!auth()->attempt($credentials)) {
             return redirect()
-                   ->back(fallback: route('auth.login.form'))
+                   ->back(fallback: route('login'))
                    ->withInput();
         }else{
 

@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="mt-6 flex justify-center text-blanco font-kanit">
-                        <x-nav-link route="auth.login.form">¿Ya tenés cuenta? Inicia sesión</x-nav-link>
+                        <x-nav-link route="login">¿Ya tenés cuenta? Inicia sesión</x-nav-link>
                     </div>
                 </form>
 

@@ -12,7 +12,7 @@
             </ul>
 
             <div class="w-1/3 flex justify-end text-blanco font-kanit">
-                <x-nav-link route="auth.login.form">Iniciar Sesión</x-nav-link>
+                <x-nav-link route="login">Iniciar Sesión</x-nav-link>
             </div>
         </div>
     </div>
