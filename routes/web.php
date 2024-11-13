@@ -16,8 +16,15 @@ Route::get('/workspace/complete', [App\Http\Controllers\ComisionesController::cl
 Route::get('/workspace/create', [App\Http\Controllers\ComisionesController::class, "createComision" ])
     ->name('espacio.crear.form');
 
+Route::post('/workspace/create', [App\Http\Controllers\ComisionesController::class, "createComisionProcess" ])
+    ->name('espacio.crear.process');
+
 Route::get('/workspace/comision/{id}', [App\Http\Controllers\ComisionesController::class, "comisionDetail" ] )
     ->name('espacio.details')
+    ->whereNumber('id');
+
+Route::put('/workspace/comision/{id}', [App\Http\Controllers\ComisionesController::class, "completeComisionProcess"] )
+    ->name('espacio.details.complete')
     ->whereNumber('id');
 
 Route::get('/profile', [App\Http\Controllers\LandingController::class, "perfilTemp" ])

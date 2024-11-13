@@ -5,7 +5,7 @@
 @section('section', 'Crear comision')
 
 @section('content')
-    <form action="">
+    <form action="{{ route('espacio.crear.process') }}" method="POST">
         @csrf
         <div class="flex w-full justify-center">
             <div class="flex justify-evenly w-4/5 mt-4">
@@ -32,7 +32,14 @@
                                 focus:outline
                                 focus:outline-2
                                 focus:outline-rclaro"
+                            value={{ old('com_title') }}
                         >
+
+                        @error('com_title')
+                            <div class="text-rclaro">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     {{-- Descripción de la comisión --}}
@@ -58,7 +65,13 @@
                                 focus:outline
                                 focus:outline-2
                                 focus:outline-rclaro"
-                        ></textarea>
+                        >{{ old('com_description') }}</textarea>
+
+                        @error('com_description')
+                            <div class="text-rclaro">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     {{-- Fecha de entrega --}}
@@ -84,7 +97,14 @@
                                 focus:outline-2
                                 focus:outline-rclaro
                             "
+                            value={{ old('com_entrega') }}
                         >
+
+                        @error('com_entrega')
+                            <div class="text-rclaro">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -93,14 +113,14 @@
                         {{-- Red social del cliente --}}
                         <div class="w-1/3">
                             <x-label-form>
-                                <x-slot name="forName">contacto-cliente</x-slot>
+                                <x-slot name="forName">social_fk</x-slot>
                                 <x-slot name="title">Red social</x-slot>
                                 Método de comunicación con el cliente
                             </x-label-form>
 
                             <select
-                                name="ontacto-cliente"
-                                id="ontacto-cliente"
+                                name="social_fk"
+                                id="social_fk"
                                 class="
                                     border
                                     border-solid
@@ -112,13 +132,19 @@
                                     focus:outline-2
                                     focus:outline-rclaro
                                 "
-
+                                value={{ old('social_fk') }}
                             >
                                 <option value="">Elija una opción</option>
                                 @foreach ( $redes_sociales as $red )
-                                    <option value="">{{ $red->red_social }}</option>
+                                    <option value="{{ $red->id_social }}">{{ $red->red_social }}</option>
                                 @endforeach
                             </select>
+
+                            @error('social_fk')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         {{-- Username del cliente --}}
@@ -144,21 +170,28 @@
                                     focus:outline-2
                                     focus:outline-rclaro
                                 "
+                                value={{ old('com_client') }}
                             >
+
+                            @error('com_client')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
 
                     {{-- Método de pago --}}
                     <div class="w-2/3 mt-4">
                         <x-label-form>
-                            <x-slot name="forName">metodo-pago</x-slot>
+                            <x-slot name="forName">pagos_fk</x-slot>
                             <x-slot name="title">Método de pago</x-slot>
                             Método de pago del cliente
                         </x-label-form>
 
                         <select
-                            name="metodo-pago"
-                            id="metodo-pago"
+                            name="pagos_fk"
+                            id="pagos_fk"
                             class="
                                 border
                                 border-solid
@@ -170,13 +203,19 @@
                                 focus:outline-2
                                 focus:outline-rclaro
                             "
-
+                            value={{ old('pagos_fk') }}
                         >
                             <option value="">Elija una opción</option>
                             @foreach ($metodos_pagos as $metodo)
-                                <option value="">{{ $metodo->metodo_pago }}</option>
+                                <option value="{{ $metodo->id_metodo_pago }}">{{ $metodo->metodo_pago }}</option>
                             @endforeach
                         </select>
+
+                        @error('pagos_fk')
+                            <div class="text-rclaro">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 

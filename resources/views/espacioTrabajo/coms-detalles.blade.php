@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="flex flex-col my-4">
-                    <h2>Cliente:</h2>
+                    <h2 class="text-xl text-rclaro">Cliente:</h2>
                     <p>{{ $comision->com_client }} en {{ $comision->social->red_social }}</p>
                 </div>
 
@@ -39,7 +39,12 @@
             <a href="" class="btn-secundario">Eliminar</a>
 
             @if ($comision->is_complete == false)
-                <a href="" class="btn-principal">Marcar como completado</a>
+                <form action="{{ route('espacio.details.complete',['id'=>$comision->com_id]) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <button class="btn-principal">Marcar como completado</button>
+                </form>
+                {{-- <a href="" class="btn-principal">Marcar como completado</a> --}}
             @endif
         </div>
     </div>

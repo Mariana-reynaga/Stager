@@ -43,6 +43,54 @@ class ComisionesController extends Controller
         ]);
     }
 
+    public function createComisionProcess(Request $req){
+        $req->validate(
+            [
+                'com_title' => 'required | max:30 | min:5',
+                'com_description'=>'required | max:150 | min:10',
+                'social_fk'=>'required',
+                'com_client'=>'required | max:30',
+                'com_entrega'=>'after_or_equal:tomorrow',
+                'pagos_fk'=>'required'
+            ], #mensajes de error
+            [
+                'com_title.required'=>'La comisión necesita un titulo.',
+                'com_title.max'=>'El titulo debe tener como máximo 30 caracteres.',
+                'com_title.min' => 'El titulo debe tener como minimo 5 caracteres.',
+                //
+                'com_description.required'=>'La comisión necesita una descripción.',
+                'com_description.max'=> 'La descripción debe tener como máximo 150 caracteres.',
+                'com_description.min'=> 'La descripción debe tener como minimo 10 caracteres.',
+                //
+                'social_fk.required'=>'Es requerido elegir un metodo de contacto.',
+                //
+                'com_client.required'=>'Es requerido un nombre de usuario del cliente.',
+                'com_client.max' => 'El usuario debe tener como máximo 30 caracteres.',
+                //
+                'com_entrega.after_or_equal'=> 'La fecha de entrega no puede ser antes de hoy.',
+                //
+                'pagos_fk.required'=>'Se tiene que elegir un metodo de pago'
+            ]
+        );
+
+        $input= $req->all([]);
+
+        $comision = Comisiones::create($input);
+
+        return redirect()->route('espacio.trabajo');
+    }
+
+    public function completeComisionProcess(Request $req, int $id){
+
+        $comision = Comisiones::findOrFail($id);
+
+        $comision->update(['is_complete'=>true]);
+
+        // dd($comision);
+
+        return redirect()->route('espacio.completas');
+    }
+
     public function comisionDetails(){
         return view('espacioTrabajo.coms-detalles');
     }

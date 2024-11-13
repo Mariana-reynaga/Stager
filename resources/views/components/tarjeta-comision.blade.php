@@ -1,7 +1,7 @@
 <div>
-    <div class="flex flex-col justify-evenly min-h-48 h-fit w-56 font-kanit text-negro p-3 border-2 border-rclaro rounded-md">
+    <div class="flex flex-col justify-evenly min-h-72 h-fit w-64 font-kanit text-negro p-3 border-2 border-rclaro rounded-md">
         <p class=" font-bold text-lg mb-2">{{ $titulo }}</p>
-        <p class="my-1">{{ $slot }}</p>
+        <p class="my-1 text-balance">{{ $slot }}</p>
         <p class="mt-2"><span class="font-bold">Entrega:</span> {{ $fecha_entrega }}</p>
 
         <div class="flex justify-center mt-3">
