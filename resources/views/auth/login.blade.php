@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="mt-6 flex justify-center">
-                        <button type="submit" class="btn-secundario">Iniciar Sesión</button>
+                        <button type="submit" class="btn-principal">Iniciar Sesión</button>
                     </div>
 
                     <div class="mt-6 flex justify-center text-blanco font-kanit">

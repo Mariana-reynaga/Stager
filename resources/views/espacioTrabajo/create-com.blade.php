@@ -2,9 +2,15 @@
 
 @section('title', 'Crear')
 
-@section('section', 'Crear comision')
+{{-- @section('section', 'Crear comision') --}}
 
 @section('content')
+    <div class="flex justify-center mt-5">
+        <div class="w-4/5">
+            <h1 class="font-kanit font-semibold text-2xl text-negro">Crear comision</h1>
+        </div>
+    </div>
+
     <form action="{{ route('espacio.crear.process') }}" method="POST">
         @csrf
         <div class="flex w-full justify-center">

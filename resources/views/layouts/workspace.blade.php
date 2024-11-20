@@ -17,7 +17,8 @@
                     {{-- nombre y foto usuario --}}
                     <div class="flex items-center justify-between 2xl:justify-start">
                         <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full "></div>
-                        <p class="text-blanco font-kanit 2xl:ms-5"> {{ auth()->user()->name }} </p>
+                        {{-- <p class="text-blanco font-kanit 2xl:ms-5"> {{ auth()->user()->name }} </p> --}}
+                        <x-nav-link route="user.profile"><span  class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span></x-nav-link>
                     </div>
 
                     {{-- links --}}
@@ -32,10 +33,6 @@
 
                         <li>
                             <x-nav-link route="espacio.completas">Comisiones completas</x-nav-link>
-                        </li>
-
-                        <li>
-                            <x-nav-link route="user.profile">Perfil</x-nav-link>
                         </li>
 
                         <li>
