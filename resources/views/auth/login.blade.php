@@ -10,8 +10,9 @@
             </a>
         </div>
         <div class="w-1/2 flex flex-col items-center">
-            <div class="bg-roscuro p-3 rounded-md min-w-80 w-3/5">
-                <h2 class="font-kanit font-xl text-blanco ">¡Bienvenido de vuelta!</h2>
+            <div class="border-solid border-2 border-negro p-3 rounded-md min-w-80 w-3/5">
+                <h2 class="font-kanit text-xl text-negro ">Iniciar sesión</h2>
+                
                 <form action="{{ route('auth.login.process') }}" method="post">
                     @csrf
 
@@ -72,7 +73,7 @@
                         <button type="submit" class="btn-principal">Iniciar Sesión</button>
                     </div>
 
-                    <div class="mt-6 flex justify-center text-blanco font-kanit">
+                    <div class="mt-6 flex justify-center text-negro font-kanit">
                         <x-nav-link route="auth.register.form">¿No tenés cuenta? Registrate ahora</x-nav-link>
                     </div>
                 </form>

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -35,5 +39,27 @@ class AuthController extends Controller
 
     public function registerForm(){
         return view('auth.registrar');
+    }
+
+    public function registerProcess(Request $req) {
+        $req->validate(
+            [
+                'name' => 'required | min: 4 | max: 10',
+                'email' => 'required | max:50 |unique:users,email',
+                'password'=> 'required | min: 8'
+            ]
+        );
+
+        $newUser = User::create([
+            'name'=>$req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password)
+        ]);
+
+        $creds = $req->only('email', 'password');
+
+        Auth::attempt($creds);
+        $req->session()->regenerate();
+        return redirect()->route('espacio.trabajo');
     }
 }

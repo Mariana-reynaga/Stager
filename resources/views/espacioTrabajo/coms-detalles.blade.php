@@ -1,13 +1,14 @@
 @extends('layouts.comision')
 
 @section('title', 'Detalles')
-                {{-- Aca iria la var con el titulo --}}
-{{-- @section('section', $comision->com_title) --}}
 
 @section('content')
     <div class="flex justify-center mt-5">
-        <div class="w-4/5 border-b-4 border-rclaro pb-6">
+        <div class="flex justify-between w-4/5 border-b-4 border-rclaro pb-6">
             <h1 class="font-kanit font-semibold text-2xl text-negro">{{$comision->com_title}}</h1>
+            @if ($comision->is_complete == false)
+                <a href="{{ route('espacio.edit', ['id'=>$comision->com_id]) }}" class="text-rclaro" >Editar comisión</a>
+            @endif
         </div>
     </div>
 
