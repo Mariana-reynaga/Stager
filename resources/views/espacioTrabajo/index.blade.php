@@ -1,6 +1,6 @@
 @extends('layouts.workspace')
 
-@section('title', 'Nom de user')
+@section('title', auth()->user()->name)
 
 @section('section', 'Comisiones en Proceso')
 

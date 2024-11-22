@@ -39,7 +39,7 @@
                                 focus:outline
                                 focus:outline-2
                                 focus:outline-rclaro"
-                            value={{ old('com_title', $comision->com_title) }}
+                            value="{{ old('com_title', $comision->com_title) }}"
                         >
 
                         @error('com_title')
@@ -104,7 +104,7 @@
                                 focus:outline-2
                                 focus:outline-rclaro
                             "
-                            value={{ old('com_entrega', $comision->com_entrega) }}
+                            value="{{ old('com_entrega', $comision->com_entrega->format('Y-m-d')) }}"
                         >
 
                         @error('com_entrega')

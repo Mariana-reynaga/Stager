@@ -38,7 +38,7 @@ class AuthController extends Controller
     }
 
     public function registerForm(){
-        return view('auth.registrar');
+        return view('auth.register');
     }
 
     public function registerProcess(Request $req) {
