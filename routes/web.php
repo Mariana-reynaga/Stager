@@ -16,7 +16,8 @@ Route::get('/workspace/{user_id}', [App\Http\Controllers\ComisionesController::c
 Route::get('/workspace/{user_id}/complete', [App\Http\Controllers\ComisionesController::class, "workspaceComplete" ])
     ->name('espacio.completas')
     ->whereNumber('user_id')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->middleware('UserUrlCheck');
 
     // crear comision
 Route::get('/workspace/create', [App\Http\Controllers\ComisionesController::class, "createComision" ])
@@ -60,7 +61,8 @@ Route::delete('/workspace/comision/{id}', [App\Http\Controllers\ComisionesContro
 Route::get('/profile/{user_id}', [App\Http\Controllers\AuthController::class, "profile" ])
     ->name('user.profile')
     ->whereNumber('user_id')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->middleware('UserUrlCheck');
 
     // Autentificación
 Route::get('/login', [App\Http\Controllers\AuthController::class, "loginForm" ])
