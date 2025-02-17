@@ -10,7 +10,7 @@ class Comisiones extends Model
 
     protected $primaryKey = 'com_id';
 
-    protected $fillable = ['com_title', 'com_description', 'com_client', 'com_entrega', 'is_complete','social_fk', 'pagos_fk'];
+    protected $fillable = ['com_title', 'com_description', 'com_client', 'com_entrega', 'is_complete','social_fk', 'pagos_fk', 'user_id_fk'];
 
     public function casts(){
         return [
@@ -24,5 +24,9 @@ class Comisiones extends Model
 
     public function pago(){
         return $this->belongsTo(MetodoPago::class, 'pagos_fk','id_metodo_pago');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id_fk', 'user_id');
     }
 }

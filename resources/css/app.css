@@ -6,12 +6,24 @@
 
 
 @layer base {
+    /* .btn-principal{
+        @apply font-kanit text-xl text-blanco bg-rclaro px-5 py-2 rounded-md hover:bg-roscuro focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-roscuro active:bg-blanco active:text-roscuro;
+    } */
+
+    /* .btn-secundario{
+        @apply font-kanit text-xl text-negro bg-slate-300 px-5 py-2 rounded-md shadow-md shadow-slate-600/40 hover:shadow hover:bg-slate-600 hover:text-blanco focus:shadow-none focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-roscuro active:shadow-none active:bg-slate-800 active:text-blanco;
+    } */
+
+    /* .btn-principal{
+        @apply font-kanit text-xl bg-[#39010B] text-blanco border border-[#39010B] px-5 py-2 rounded-md;
+    } */
+    
     .btn-principal{
-        @apply font-kanit text-xl text-blanco bg-rclaro px-5 py-2 rounded-md hover:bg-roscuro focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-roscuro active:bg-blanco active:border active:border-solid active:border-roscuro active:text-roscuro;
+        @apply font-kanit text-xl text-[#39010B] border border-[#39010B] px-5 py-2 rounded-md;
     }
 
     .btn-secundario{
-        @apply font-kanit text-xl text-roscuro bg-blanco border-2 border-solid border-roscuro px-5 py-2 rounded-md hover:bg-rclaro hover:text-blanco focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-roscuro active:bg-blanco active:border active:border-solid active:border-roscuro active:text-roscuro;
+        @apply font-kanit text-xl bg-roscuro text-blanco border border-roscuro px-5 py-2 rounded-md;
     }
 
     @font-face {

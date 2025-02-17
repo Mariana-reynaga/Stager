@@ -1,18 +1,19 @@
 @extends('layouts.comision')
 
-@section('title', 'Crear')
-
-{{-- @section('section', 'Crear comision') --}}
+@section('title', 'Editar')
 
 @section('content')
     <div class="flex justify-center mt-5">
         <div class="w-4/5">
-            <h1 class="font-kanit font-semibold text-2xl text-negro">Crear comision</h1>
+            <h1 class="font-kanit font-semibold text-2xl text-negro">Editar {{ $comision->com_title }}</h1>
         </div>
     </div>
 
-    <form action="{{ route('espacio.crear.process') }}" method="POST">
+    <form action="{{ route('espacio.edit.process', ['id'=> $comision->com_id]) }}" method="POST">
         @csrf
+
+        @method('PUT')
+
         <div class="flex w-full justify-center">
             <div class="flex justify-evenly w-4/5 mt-4">
                 <div class="flex flex-col w-1/2">
@@ -38,7 +39,7 @@
                                 focus:outline
                                 focus:outline-2
                                 focus:outline-rclaro"
-                            value={{ old('com_title') }}
+                            value="{{ old('com_title', $comision->com_title) }}"
                         >
 
                         @error('com_title')
@@ -71,7 +72,7 @@
                                 focus:outline
                                 focus:outline-2
                                 focus:outline-rclaro"
-                        >{{ old('com_description') }}</textarea>
+                        >{{ old('com_description', $comision->com_description) }}</textarea>
 
                         @error('com_description')
                             <div class="text-rclaro">
@@ -103,7 +104,7 @@
                                 focus:outline-2
                                 focus:outline-rclaro
                             "
-                            value={{ old('com_entrega') }}
+                            value="{{ old('com_entrega', $comision->com_entrega->format('Y-m-d')) }}"
                         >
 
                         @error('com_entrega')
@@ -138,11 +139,13 @@
                                     focus:outline-2
                                     focus:outline-rclaro
                                 "
-                                value={{ old('social_fk') }}
                             >
                                 <option value="">Elija una opción</option>
                                 @foreach ( $redes_sociales as $red )
-                                    <option value="{{ $red->id_social }}">{{ $red->red_social }}</option>
+                                    <option
+                                        value="{{ $red->id_social }}"
+                                        @selected($red->id_social == old('social_fk', $comision->social_fk))
+                                    >{{ $red->red_social }}</option>
                                 @endforeach
                             </select>
 
@@ -176,7 +179,7 @@
                                     focus:outline-2
                                     focus:outline-rclaro
                                 "
-                                value={{ old('com_client') }}
+                                value={{ old('com_client', $comision->com_client) }}
                             >
 
                             @error('com_client')
@@ -209,11 +212,14 @@
                                 focus:outline-2
                                 focus:outline-rclaro
                             "
-                            value={{ old('pagos_fk') }}
+
                         >
                             <option value="">Elija una opción</option>
                             @foreach ($metodos_pagos as $metodo)
-                                <option value="{{ $metodo->id_metodo_pago }}">{{ $metodo->metodo_pago }}</option>
+                                <option
+                                    value="{{ $metodo->id_metodo_pago }}"
+                                    @selected($metodo->id_metodo_pago == old('pagos_fk', $comision->pagos_fk))
+                                >{{ $metodo->metodo_pago }}</option>
                             @endforeach
                         </select>
 
@@ -222,31 +228,6 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                    </div>
-
-                    <div class="w-2/3 mt-4">
-                        <x-label-form>
-                            <x-slot name="forName">task</x-slot>
-                            <x-slot name="title">Lista de tareas</x-slot>
-                            Los pasos a completar
-                        </x-label-form>
-
-                        <input
-                                type="text"
-                                name="com_client"
-                                id="com_client"
-                                class="
-                                    border
-                                    border-solid
-                                    border-gray-600
-                                    rounded-md
-                                    p-2
-                                    w-full
-                                    focus:outline
-                                    focus:outline-2
-                                    focus:outline-rclaro
-                                "
-                            >
                     </div>
                 </div>
 
@@ -257,7 +238,7 @@
             <div class="w-4/5 flex justify-center">
                 <button
                 class="btn-principal w-1/3"
-                >Crear</button>
+                >Guardar</button>
             </div>
         </div>
     </form>

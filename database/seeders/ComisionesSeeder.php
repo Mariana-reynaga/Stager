@@ -15,6 +15,7 @@ class ComisionesSeeder extends Seeder
     {
         DB::table('comisiones')->insert([
             [
+                'user_id_fk' => 1,
                 'com_title'=>'Gato payaso',
                 'com_description'=>'Fullbody con fondo simple donde un gato con disfraz de payaso esta malabareando con pelotas de colores.',
                 'social_fk'=>3,
@@ -26,6 +27,7 @@ class ComisionesSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'user_id_fk' => 1,
                 'com_title'=>'Asirpa gk',
                 'com_description'=>'retrato headshot de asirpa de Golden kamuy mirando para el costado. ',
                 'social_fk'=>4,
@@ -38,7 +40,20 @@ class ComisionesSeeder extends Seeder
 
             ],
             [
+                'user_id_fk' => 1,
                 'com_title'=>'Retrato familiar Holenz',
+                'com_description'=>'Retrato familiar de la familia holenz en el estilo de los simpson.',
+                'social_fk'=>8,
+                'pagos_fk'=>4,
+                'com_client'=>'elenaSab@hotmail.com',
+                'com_entrega'=>'2024-12-06',
+                'is_complete'=> true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id_fk' => 2,
+                'com_title'=>'comision otro user',
                 'com_description'=>'Retrato familiar de la familia holenz en el estilo de los simpson.',
                 'social_fk'=>8,
                 'pagos_fk'=>4,

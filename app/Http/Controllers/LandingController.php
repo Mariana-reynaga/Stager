@@ -9,8 +9,4 @@ class LandingController extends Controller
     public function landingPage(){
         return view('landing');
     }
-
-    public function perfilTemp(){
-        return view('perfil.index');
-    }
 }

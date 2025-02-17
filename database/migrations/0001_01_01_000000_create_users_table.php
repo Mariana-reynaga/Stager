@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('user_id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -40,6 +40,12 @@ return new class extends Migration
             'name' => 'web master',
             'email'=> 'test@admin.com',
             'password'=> \Hash::make('admin123'),
+            'created_at'=>now()
+        ]);
+        DB::table('users')->insert([
+            'name' => 'otro user',
+            'email'=> 'user@gmail.com',
+            'password'=> \Hash::make('12345678'),
             'created_at'=>now()
         ]);
     }

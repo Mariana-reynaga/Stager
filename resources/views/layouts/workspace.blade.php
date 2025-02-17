@@ -16,8 +16,11 @@
                 <div class="w-4/5">
                     {{-- nombre y foto usuario --}}
                     <div class="flex items-center justify-between 2xl:justify-start">
-                        <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full "></div>
-                        <p class="text-blanco font-kanit 2xl:ms-5"> {{ auth()->user()->name }} </p>
+                        <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full  "></div>
+
+                        <x-nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id"> <span class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span></x-nav-link-param>
+
+                        {{-- <x-nav-link route="user.profile"><span  class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span></x-nav-link> --}}
                     </div>
 
                     {{-- links --}}
@@ -27,15 +30,12 @@
                         </li>
 
                         <li>
-                            <x-nav-link route="espacio.trabajo">Comisiones en progreso</x-nav-link>
+                            <x-nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones en progreso</x-nav-link-param>
                         </li>
 
                         <li>
-                            <x-nav-link route="espacio.completas">Comisiones completas</x-nav-link>
-                        </li>
+                            <x-nav-link-param route="espacio.completas" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones completas</x-nav-link-param>
 
-                        <li>
-                            <x-nav-link route="user.profile">Perfil</x-nav-link>
                         </li>
 
                         <li>
