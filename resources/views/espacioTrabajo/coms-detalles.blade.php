@@ -1,7 +1,7 @@
 @extends('layouts.comision')
 
-@section('title', 'Detalles')
-                {{-- Aca iria la var con el titulo --}}
+@section('title', 'Detalles '.$comision->com_title)
+
 @section('section', $comision->com_title)
 
 @section('content')

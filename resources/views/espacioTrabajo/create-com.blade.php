@@ -217,6 +217,31 @@
                             </div>
                         @enderror
                     </div>
+
+                    <div class="w-2/3 mt-4">
+                        <x-label-form>
+                            <x-slot name="forName">task</x-slot>
+                            <x-slot name="title">Lista de tareas</x-slot>
+                            Los pasos a completar
+                        </x-label-form>
+
+                        <input
+                                type="text"
+                                name="com_client"
+                                id="com_client"
+                                class="
+                                    border
+                                    border-solid
+                                    border-gray-600
+                                    rounded-md
+                                    p-2
+                                    w-full
+                                    focus:outline
+                                    focus:outline-2
+                                    focus:outline-rclaro
+                                "
+                            >
+                    </div>
                 </div>
 
             </div>

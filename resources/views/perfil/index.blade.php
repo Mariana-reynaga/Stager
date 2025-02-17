@@ -1,6 +1,6 @@
 @extends('layouts.workspace')
 
-@section('title', 'Crear Comsión')
+@section('title', auth()->user()->name)
 
 @section('section', 'Bienvenido User')
 
