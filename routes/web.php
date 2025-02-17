@@ -32,7 +32,8 @@ Route::post('/workspace/create', [App\Http\Controllers\ComisionesController::cla
 Route::get('/workspace/comision/{id}', [App\Http\Controllers\ComisionesController::class, "comisionDetail" ] )
     ->name('espacio.details')
     ->whereNumber('id')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->middleware('ComissionUrlCheck');
 
     // Completar comision
 Route::put('/workspace/comision/{id}', [App\Http\Controllers\ComisionesController::class, "completeComisionProcess"] )
@@ -44,7 +45,8 @@ Route::put('/workspace/comision/{id}', [App\Http\Controllers\ComisionesControlle
 Route::get('/workspace/comision/editar/{id}', [App\Http\Controllers\ComisionesController::class, "editComision" ] )
     ->name('espacio.edit')
     ->whereNumber('id')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->middleware('ComissionUrlCheck');
 
 Route::put('/workspace/comision/editar/{id}', [App\Http\Controllers\ComisionesController::class, "editComisionProcess" ] )
     ->name('espacio.edit.process')

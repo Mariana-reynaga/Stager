@@ -19,8 +19,6 @@
                         <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full  "></div>
 
                         <x-nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id"> <span class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span></x-nav-link-param>
-
-                        {{-- <x-nav-link route="user.profile"><span  class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span></x-nav-link> --}}
                     </div>
 
                     {{-- links --}}

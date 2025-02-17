@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'UserUrlCheck'=> \App\Http\Middleware\UserUrlCheck::class,
+            'ComissionUrlCheck'=> \App\Http\Middleware\ComissionUrlCheck::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

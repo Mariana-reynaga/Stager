@@ -5,9 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\User;
+use App\Models\Comisiones;
 
-class UserUrlCheck
+class ComissionUrlCheck
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,16 @@ class UserUrlCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->user_id === (int)$request->route('user_id')) {
+        $comision = Comisiones::find((int)$request->route('id'));
+
+        // dd($comision->user_id_fk);
+
+        if($comision->user_id_fk === $request->user()->user_id){
             return $next($request);
         }else{
             return redirect()->route('espacio.trabajo', ['user_id' => $request->user()->user_id]);
         }
+
+        return $next($request);
     }
 }

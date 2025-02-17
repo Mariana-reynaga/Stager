@@ -15,7 +15,9 @@
                 @guest
                         <x-nav-link route="login">Iniciar Sesión</x-nav-link>
                 @else
-                    <div class="">
+                    <div class="w-3/5 flex justify-between">
+                        <x-nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones</x-nav-link-param>
+
                         <form action="{{ route('auth.logout.process') }}" method="POST">
                             @csrf
                             <button type="submit" class="text-blanco font-kanit">Cerrar sesión</button>

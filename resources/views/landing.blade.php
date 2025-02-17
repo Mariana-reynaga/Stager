@@ -11,20 +11,20 @@
 
     {{-- que es stager --}}
     <div class="flex justify-center bg-roscuro my-16 p-6" id="descripcion">
-    <div class="w-4/5 flex">
-        {{-- descripción --}}
-        <div class="flex flex-col w-1/2 me-3">
-            <h2 class="text-blanco text-3xl mb-3 font-kanit font-bold">¿Qué es Stager?</h2>
-            <p class="text-blanco my-3 font-kanit">Stager es una <strong class="font-normal">solución</strong> para todos los artistas que hacen trabajo <strong class="font-normal">freelance</strong> y tienen dificultades para <strong class="font-normal">llegar a tiempo</strong>.</p>
+        <div class="w-4/5 flex flex-col lg:flex-row">
+            {{-- descripción --}}
+            <div class="lg:w-1/2 me-3 flex flex-col">
+                <h2 class="text-blanco text-3xl mb-3 font-kanit font-bold">¿Qué es Stager?</h2>
+                <p class="text-blanco my-3 font-kanit">Stager es una <strong class="font-normal">solución</strong> para todos los artistas que hacen trabajo <strong class="font-normal">freelance</strong> y tienen dificultades para <strong class="font-normal">llegar a tiempo</strong>.</p>
 
-            <p class="text-blanco my-3 font-kanit">Con su diseño sencillo pero atractivo, buscamos ofrecer un ambiente que promueve la creatividad y organización para todo tipo de artistas.</p>
-        </div>
+                <p class="text-blanco my-3 font-kanit">Con su diseño sencillo pero atractivo, buscamos ofrecer un ambiente que promueve la creatividad y organización para todo tipo de artistas.</p>
+            </div>
 
-        {{-- foto --}}
-        <div class="w-1/2 ms-3 flex justify-center">
-            <div class="w-2/3 h-full bg-slate-300"></div>
+            {{-- foto --}}
+            <div class="lg:w-1/2 ms-3 flex justify-center">
+                <div class="w-2/3 h-full bg-slate-300"></div>
+            </div>
         </div>
-    </div>
     </div>
 
     {{-- beneficios de stager --}}
