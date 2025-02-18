@@ -224,17 +224,18 @@
                         @enderror
                     </div>
 
+                    {{-- Lista de tareas --}}
                     <div class="w-2/3 mt-4">
                         <x-label-form>
-                            <x-slot name="forName">task</x-slot>
+                            <x-slot name="forName">com_tasks</x-slot>
                             <x-slot name="title">Lista de tareas</x-slot>
-                            Los pasos a completar
+                            Los pasos a completar, separar con comas sin espacios
                         </x-label-form>
 
                         <input
                                 type="text"
-                                name="com_client"
-                                id="com_client"
+                                name="com_tasks"
+                                id="com_tasks"
                                 class="
                                     border
                                     border-solid
@@ -246,7 +247,14 @@
                                     focus:outline-2
                                     focus:outline-rclaro
                                 "
+                                value={{ old('com_tasks') }}
                             >
+
+                            @error('com_tasks')
+                            <div class="text-rclaro">
+                                {{ $message }}
+                            </div>
+                            @enderror
                     </div>
                 </div>
 

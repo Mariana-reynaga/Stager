@@ -23,8 +23,24 @@
                     <p>{{ $comision->com_description }}</p>
                 </div>
 
-                <div class="flex mt-5">
+                <div class="flex flex-col mt-5">
                     <h2 class="text-xl font-bold text-rclaro">Tareas</h2>
+
+
+                    @foreach ($tareas as $key => $tarea )
+                        @if ($tarea->is_complete === false)
+                            <div class="flex">
+                                <p class="me-5">"{{ $tarea->task }}"</p>
+                                <p>no estoy completo!</p>
+                            </div>
+                        @else
+                            <div class="flex">
+                                <p class="me-5">"{{ $tarea->task }}"</p>
+                                <p>si estoy completo!</p>
+                            </div>
+                        @endif
+                    @endforeach
+
                 </div>
             </div>
 

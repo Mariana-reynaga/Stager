@@ -8,6 +8,8 @@ use App\Models\MetodoPago;
 use App\Models\RedesSociales;
 use App\Models\User;
 
+use Illuminate\Support\Str;
+
 class ComisionesController extends Controller
 {
     public function workspace(int $user_id){
@@ -37,8 +39,11 @@ class ComisionesController extends Controller
     public function comisionDetail(int $id){
         $comision_dets = Comisiones::find($id);
 
+        $tasks = json_decode($comision_dets->com_tasks);
+
         return view('espacioTrabajo.coms-detalles', [
-            'comision'=> $comision_dets
+            'comision'=> $comision_dets,
+            'tareas'  => $tasks
         ]);
     }
 
@@ -53,6 +58,19 @@ class ComisionesController extends Controller
     }
 
     public function createComisionProcess(Request $req){
+        $tasks_array = [];
+
+        $task = collect(explode(',' , $req->com_tasks ) );
+
+        foreach( $task as $item ){
+            $tasks_array[] = [
+                'task' => $item,
+                'is_complete' => false
+            ];
+        }
+
+        $task_final = Str::replace(' ', '', json_encode($tasks_array) );
+
         $req->validate(
             [
                 'com_title' => 'required | max:30 | min:5',
@@ -60,7 +78,8 @@ class ComisionesController extends Controller
                 'social_fk'=>'required',
                 'com_client'=>'required | max:30',
                 'com_entrega'=>'after_or_equal:tomorrow',
-                'pagos_fk'=>'required'
+                'pagos_fk'=>'required',
+                'com_tasks'=>'required'
             ], #mensajes de error
             [
                 'com_title.required'=>'La comisión necesita un titulo.',
@@ -78,15 +97,26 @@ class ComisionesController extends Controller
                 //
                 'com_entrega.after_or_equal'=> 'La fecha de entrega no puede ser antes de hoy.',
                 //
-                'pagos_fk.required'=>'Se tiene que elegir un metodo de pago'
+                'pagos_fk.required'=>'Se tiene que elegir un metodo de pago',
+                //
+                'com_tasks'=>'Las tareas no pueden estar vacias.'
             ]
         );
 
-        $input= $req->all([]);
+        $comision = new Comisiones();
+            $comision->user_id_fk       = auth()->user()->user_id;
+            $comision->com_title        = $req->com_title;
+            $comision->com_description  = $req->com_description;
+            $comision->social_fk        = $req->social_fk;
+            $comision->pagos_fk         = $req->pagos_fk;
+            $comision->com_client       = $req->com_client;
+            $comision->com_entrega      = $req->com_entrega;
+            $comision->com_tasks        = $task_final;
+            $comision->is_complete      = false;
 
-        $comision = Comisiones::create($input);
+        $comision -> save();
 
-        return redirect()->route('espacio.trabajo');
+        return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function editComision(int $id){
@@ -137,7 +167,7 @@ class ComisionesController extends Controller
 
         $comision->update($input);
 
-        return redirect()->route('espacio.details', ['id'=>$id]);
+        return redirect()->route('espacio.details', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function completeComisionProcess(Request $req, int $id){
@@ -154,10 +184,10 @@ class ComisionesController extends Controller
 
         $comision->delete($comision);
 
-        return redirect()->route('espacio.trabajo');
+        return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function comisionDetails(){
-        return view('espacioTrabajo.coms-detalles');
+        return view('espacioTrabajo.coms-detalles',);
     }
 }
