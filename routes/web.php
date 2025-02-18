@@ -60,6 +60,17 @@ Route::controller(App\Http\Controllers\ComisionesController::class)->group( func
         ->name('espacio.details.delete')
         ->whereNumber('id')
         ->middleware('auth');
+
+        // Tareas
+    Route::put('/workspace/tasks/complete/{id}', 'markTaskComplete')
+        ->name('task.complete')
+        ->whereNumber('id')
+        ->middleware('auth');
+
+    Route::put('/workspace/tasks/incomplete/{id}', 'markTaskIncomplete')
+        ->name('task.incomplete')
+        ->whereNumber('id')
+        ->middleware('auth');
 });
 
 Route::controller(App\Http\Controllers\AuthController::class)->group( function(){
@@ -88,4 +99,3 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
     Route::post('/register', "registerProcess")
         ->name('auth.register.process');
 });
-

@@ -18,7 +18,7 @@
         <div class="flex justify-between font-kanit text-negro w-4/5 pt-5 min-h-80">
             <div class="w-2/5 flex flex-col">
 
-                <div class="flex flex-col">
+                <div class="flex flex-col break-words overflow-hidden">
                     <h2 class="text-xl font-bold text-rclaro">Descripción:</h2>
                     <p>{{ $comision->com_description }}</p>
                 </div>
@@ -26,21 +26,29 @@
                 <div class="flex flex-col mt-5">
                     <h2 class="text-xl font-bold text-rclaro">Tareas</h2>
 
-
                     @foreach ($tareas as $key => $tarea )
                         @if ($tarea->is_complete === false)
-                            <div class="flex">
-                                <p class="me-5">"{{ $tarea->task }}"</p>
-                                <p>no estoy completo!</p>
-                            </div>
+                            <form action="{{ route('task.complete', ['id'=>$comision->com_id]) }}" method="POST">
+                                @method('PUT')
+                                @csrf
+                                <div class="flex my-2">
+                                    <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
+                                    <p class="me-5">"{{ $tarea->task }}"</p>
+                                    <button type="submit" class="px-4 py-2 bg-green-500 rounded-md">comp</button>
+                                </div>
+                            </form>
                         @else
-                            <div class="flex">
-                                <p class="me-5">"{{ $tarea->task }}"</p>
-                                <p>si estoy completo!</p>
-                            </div>
+                            <form action="{{ route('task.incomplete', ['id'=>$comision->com_id]) }}" method="POST">
+                                @method('PUT')
+                                @csrf
+                                <div class="flex">
+                                    <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
+                                    <p class="me-5">"{{ $tarea->task }}"</p>
+                                    <button type="submit" class="px-4 py-2 bg-red-500 rounded-md" >Desmark</button>
+                                </div>
+                            </form>
                         @endif
                     @endforeach
-
                 </div>
             </div>
 

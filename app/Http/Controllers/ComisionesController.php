@@ -167,7 +167,7 @@ class ComisionesController extends Controller
 
         $comision->update($input);
 
-        return redirect()->route('espacio.details', ['user_id'=>auth()->user()->user_id]);
+        return redirect()->route('espacio.details', ['id'=>$id]);
     }
 
     public function completeComisionProcess(Request $req, int $id){
@@ -189,5 +189,40 @@ class ComisionesController extends Controller
 
     public function comisionDetails(){
         return view('espacioTrabajo.coms-detalles',);
+    }
+
+    public function markTaskComplete(Request $req, int $id){
+        $com_info = Comisiones::find($id);
+
+        $tasks = json_decode($com_info->com_tasks);
+
+        $taskComplete = (int) $req->tasks_id; //id of the task i wanna complete
+
+        $tasks[$taskComplete] = [
+            'task' => $tasks[$taskComplete]->task,
+            'is_complete' => true
+        ];
+
+        $com_info->update(['com_tasks' => json_encode($tasks)]);
+
+        return redirect()->route('espacio.details', ['id'=>$id]);
+    }
+
+    public function markTaskIncomplete(Request $req, int $id){
+        
+        $com_info = Comisiones::find($id);
+
+        $tasks = json_decode($com_info->com_tasks);
+
+        $taskComplete = (int) $req->tasks_id; //id of the task i wanna complete
+
+        $tasks[$taskComplete] = [
+            'task' => $tasks[$taskComplete]->task,
+            'is_complete' => false
+        ];
+
+        $com_info->update(['com_tasks' => json_encode($tasks)]);
+
+        return redirect()->route('espacio.details', ['id'=>$id]);
     }
 }
