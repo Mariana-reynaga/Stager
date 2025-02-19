@@ -114,7 +114,7 @@ class ComisionesController extends Controller
             $comision->com_tasks        = $task_final;
             $comision->is_complete      = false;
 
-        $comision -> save();
+        $comision->save();
 
         return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
@@ -176,7 +176,7 @@ class ComisionesController extends Controller
 
         $comision->update(['is_complete'=>true]);
 
-        return redirect()->route('espacio.completas');
+        return redirect()->route('espacio.completas', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function deleteComision(int $id){
@@ -267,7 +267,23 @@ class ComisionesController extends Controller
         return redirect()->route('espacio.details', ['id'=>$id]);
     }
 
-    public function deleteTask(int $id){
-        
+    public function deleteTask(Request $req, int $id){
+        $com_info = Comisiones::find($id);
+
+        $tasks = json_decode($com_info->com_tasks);
+
+        $task2delete = (int) $req->tasks_id;
+
+        $tasks = array_filter($tasks, function($key) use ($task2delete) {
+            return $key != $task2delete;
+        }, ARRAY_FILTER_USE_KEY);
+
+        $tasks = array_values($tasks);
+
+        $tasks = Str::replace(' ', '', json_encode($tasks) );
+
+        $com_info->update(['com_tasks' => $tasks]);
+
+        return redirect()->route('espacio.details', ['id'=>$id]);
     }
 }
