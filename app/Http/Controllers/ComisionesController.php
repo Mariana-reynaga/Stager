@@ -69,7 +69,7 @@ class ComisionesController extends Controller
             ];
         }
 
-        $task_final = Str::replace(' ', '', json_encode($tasks_array) );
+        $task_final = Str::replace('" ', '"', json_encode($tasks_array) );
 
         $req->validate(
             [
@@ -260,9 +260,9 @@ class ComisionesController extends Controller
             array_push($tasks, $arr);
         }
 
-        $task_final = Str::replace(' ', '', json_encode($tasks) );
+        $task_final = Str::replace('" ', '"', json_encode($tasks) );
 
-        $com_info->update(['com_tasks' => $tasks]);
+        $com_info->update(['com_tasks' => $task_final]);
 
         return redirect()->route('espacio.details', ['id'=>$id]);
     }
