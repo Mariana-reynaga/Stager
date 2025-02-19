@@ -71,6 +71,21 @@ Route::controller(App\Http\Controllers\ComisionesController::class)->group( func
         ->name('task.incomplete')
         ->whereNumber('id')
         ->middleware('auth');
+
+    Route::get('/workspace/tasks/add/{id}', 'addTask')
+        ->name('task.add')
+        ->whereNumber('id')
+        ->middleware('auth');
+
+    Route::post('/workspace/tasks/add/{id}', 'addTaskProcess')
+        ->name('task.add.process')
+        ->whereNumber('id')
+        ->middleware('auth');
+
+    Route::delete('/workspace/tasks/delete/{id}', 'deleteTask')
+        ->name('task.delete.process')
+        ->whereNumber('id')
+        ->middleware('auth');
 });
 
 Route::controller(App\Http\Controllers\AuthController::class)->group( function(){

@@ -23,36 +23,48 @@
                     <p>{{ $comision->com_description }}</p>
                 </div>
 
+                {{-- Tareas --}}
                 <div class="flex flex-col mt-5">
-                    <h2 class="text-xl font-bold text-rclaro">Tareas</h2>
+                    <div class="">
+                        <h2 class="text-xl font-bold text-rclaro">Tareas</h2>
+                        <a href="{{ route('task.add', ['id'=>$comision->com_id]) }}">agregar</a>
+                    </div>
 
                     @foreach ($tareas as $key => $tarea )
-                        @if ($tarea->is_complete === false)
-                            <form action="{{ route('task.complete', ['id'=>$comision->com_id]) }}" method="POST">
-                                @method('PUT')
-                                @csrf
-                                <div class="flex my-2">
+                        <div class="flex my-2">
+                            @if ($tarea->is_complete === false)
+                                <p class="me-5">"{{ $tarea->task }}"</p>
+
+                                <form action="{{ route('task.complete', ['id'=>$comision->com_id]) }}" method="POST">
+                                    @method('PUT')
+                                    @csrf
                                     <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                    <p class="me-5">"{{ $tarea->task }}"</p>
                                     <button type="submit" class="px-4 py-2 bg-green-500 rounded-md">comp</button>
-                                </div>
-                            </form>
-                        @else
-                            <form action="{{ route('task.incomplete', ['id'=>$comision->com_id]) }}" method="POST">
-                                @method('PUT')
-                                @csrf
-                                <div class="flex">
+                                </form>
+                            @else
+                                <p class="me-5">"{{ $tarea->task }}"</p>
+                                <form action="{{ route('task.incomplete', ['id'=>$comision->com_id]) }}" method="POST">
+                                    @method('PUT')
+                                    @csrf
                                     <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                    <p class="me-5">"{{ $tarea->task }}"</p>
                                     <button type="submit" class="px-4 py-2 bg-red-500 rounded-md" >Desmark</button>
-                                </div>
+
+                                </form>
+                            @endif
+
+                            <form action="{{ route('task.delete.process', ['id'=>$comision->com_id]) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
+                                <button type="submit" class="px-4 py-2 bg-red-500 rounded-md">delete</button>
                             </form>
-                        @endif
+                        </div>
                     @endforeach
                 </div>
             </div>
 
             <div class="w-2/5 flex flex-col justify-between">
+                {{-- Fecha de entrega --}}
                 <div class="h-fit flex">
                     <h2 class="text-xl font-bold text-rclaro me-2">Fecha de entrega:</h2>
                     @if ($comision->is_complete == false)
@@ -62,6 +74,7 @@
                     @endif
                 </div>
 
+                {{-- Cliente --}}
                 <div class="flex flex-col mt-5">
                     <h2 class="text-xl font-bold text-rclaro me-2">Cliente</h2>
 
@@ -73,6 +86,7 @@
 
                 </div>
 
+                {{-- Eliminar --}}
                 <div class="flex justify-evenly mt-5">
                     <form action="{{ route('espacio.details.delete',['id'=>$comision->com_id]) }}" method="post">
                         @csrf
