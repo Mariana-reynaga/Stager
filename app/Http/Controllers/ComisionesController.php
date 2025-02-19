@@ -41,6 +41,8 @@ class ComisionesController extends Controller
 
         $tasks = json_decode($comision_dets->com_tasks);
 
+        // dd(count($tasks));
+
         return view('espacioTrabajo.coms-detalles', [
             'comision'=> $comision_dets,
             'tareas'  => $tasks

@@ -41,20 +41,37 @@
                                     <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
                                     <button type="submit" class="px-4 py-2 bg-green-500 rounded-md">comp</button>
                                 </form>
+    
+                                @if ($key != 0 && $key != count($tareas)-1 )
 
-                                @if ($key != 0)
                                     <form action="{{ route('task.moveUP', ['id'=>$comision->com_id]) }}" method="POST">
                                         @method('PUT')
                                         @csrf
                                         <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
                                         <button type="submit" class="px-4 py-2 bg-blue-500 rounded-md">up</button>
                                     </form>
-                                @else
-                                    <form action="{{ route('task.moveUP', ['id'=>$comision->com_id]) }}" method="POST">
+
+                                    <form action="{{ route('task.moveDOWN', ['id'=>$comision->com_id]) }}" method="POST">
                                         @method('PUT')
                                         @csrf
                                         <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
                                         <button type="submit" class="px-4 py-2 bg-sky-500 rounded-md">down</button>
+                                    </form>
+
+                                @elseif ($key === 0)
+                                    <form action="{{ route('task.moveDOWN', ['id'=>$comision->com_id]) }}" method="POST">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
+                                        <button type="submit" class="px-4 py-2 bg-sky-500 rounded-md">down</button>
+                                    </form>
+
+                                @elseif ($key === count($tareas)-1)
+                                    <form action="{{ route('task.moveUP', ['id'=>$comision->com_id]) }}" method="POST">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
+                                        <button type="submit" class="px-4 py-2 bg-blue-500 rounded-md">up</button>
                                     </form>
                                 @endif
 

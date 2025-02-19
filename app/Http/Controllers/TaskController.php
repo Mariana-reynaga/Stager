@@ -117,21 +117,29 @@ class TaskController extends Controller
 
         $finalPosition = $taskToMove - 1;
 
-        $temp = $tasks[$currentTaskPosition];
+        [$tasks[$currentTaskPosition], $tasks[$finalPosition]] = [$tasks[$finalPosition], $tasks[$currentTaskPosition]];
 
-
-        for ($i = $currentTaskPosition; $i >= $finalPosition ; $i--) {
-            if($i != 0){
-                $tasks[$i] = $tasks[$i - 1];
-            }
-        }
-
-        $tasks[$finalPosition] = $temp;
 
         $com_info->update(['com_tasks' => json_encode($tasks)]);
 
         return redirect()->route('espacio.details', ['id'=>$id]);
     }
 
-    
+    public function moveTaskDown(Request $req, int $id){
+        $com_info = Comisiones::find($id);
+
+        $tasks = json_decode($com_info->com_tasks);
+
+        $taskToMove = (int) $req->tasks_id;
+
+        $currentTaskPosition = $taskToMove;
+
+        $finalPosition = $taskToMove + 1;
+
+        [$tasks[$currentTaskPosition], $tasks[$finalPosition]] = [$tasks[$finalPosition], $tasks[$currentTaskPosition]];
+
+        $com_info->update(['com_tasks' => json_encode($tasks)]);
+
+        return redirect()->route('espacio.details', ['id'=>$id]);
+    }
 }

@@ -94,6 +94,11 @@ Route::controller(App\Http\Controllers\TaskController::class)->group( function()
         ->name('task.moveUP')
         ->whereNumber('id')
         ->middleware('auth');
+
+    Route::put('/workspace/tasks/moveDown/{id}', 'moveTaskDown')
+        ->name('task.moveDOWN')
+        ->whereNumber('id')
+        ->middleware('auth');
 });
 
 
