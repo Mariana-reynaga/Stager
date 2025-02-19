@@ -61,7 +61,7 @@ Route::controller(App\Http\Controllers\ComisionesController::class)->group( func
         ->whereNumber('id')
         ->middleware('auth');
 
-    });
+});
 
 Route::controller(App\Http\Controllers\TaskController::class)->group( function(){
     // Tareas
@@ -89,6 +89,11 @@ Route::controller(App\Http\Controllers\TaskController::class)->group( function()
     ->name('task.delete.process')
     ->whereNumber('id')
     ->middleware('auth');
+
+    Route::put('/workspace/tasks/moveUp/{id}', 'moveTaskUp')
+        ->name('task.moveUP')
+        ->whereNumber('id')
+        ->middleware('auth');
 });
 
 
