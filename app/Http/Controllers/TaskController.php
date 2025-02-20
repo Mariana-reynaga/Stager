@@ -24,7 +24,7 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => json_encode($tasks)]);
 
-        return redirect()->route('espacio.details', ['id'=>$id]);
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function markTaskIncomplete(Request $req, int $id){
@@ -41,7 +41,7 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => json_encode($tasks)]);
 
-        return redirect()->route('espacio.details', ['id'=>$id]);
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function addTask(int $id){
@@ -83,7 +83,7 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => $task_final]);
 
-        return redirect()->route('espacio.details', ['id'=>$id]);
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function deleteTask(Request $req, int $id){
@@ -103,7 +103,7 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => $tasks]);
 
-        return redirect()->route('espacio.details', ['id'=>$id]);
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function moveTaskUp(Request $req, int $id){
@@ -122,7 +122,7 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => json_encode($tasks)]);
 
-        return redirect()->route('espacio.details', ['id'=>$id]);
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function moveTaskDown(Request $req, int $id){
@@ -140,6 +140,6 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => json_encode($tasks)]);
 
-        return redirect()->route('espacio.details', ['id'=>$id]);
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 }
