@@ -15,7 +15,7 @@ class navLinkParam extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(string $route, string $param, int $paramValue )
+    public function __construct( string $route, string $param, int $paramValue )
     {
         $this->route = $route;
         $this->param = $param;

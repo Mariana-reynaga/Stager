@@ -41,8 +41,6 @@ class ComisionesController extends Controller
 
         $tasks = json_decode($comision_dets->com_tasks);
 
-        // dd(count($tasks));
-
         return view('espacioTrabajo.coms-detalles', [
             'comision'=> $comision_dets,
             'tareas'  => $tasks
@@ -176,7 +174,16 @@ class ComisionesController extends Controller
 
         $comision = Comisiones::findOrFail($id);
 
-        $comision->update(['is_complete'=>true]);
+        $tasks = json_decode($comision->com_tasks);
+
+        foreach($tasks as $key => $item){
+            $tasks[$key] = [
+                'task' => $item->task,
+                'is_complete' => true
+            ];
+        }
+
+        $comision->update(['is_complete'=>true, 'com_tasks' => json_encode($tasks)]);
 
         return redirect()->route('espacio.completas', ['user_id'=>auth()->user()->user_id]);
     }

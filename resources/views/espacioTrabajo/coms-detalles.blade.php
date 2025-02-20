@@ -18,6 +18,7 @@
         <div class="flex justify-between font-kanit text-negro w-4/5 pt-5 min-h-80">
             <div class="w-2/5 flex flex-col">
 
+                {{-- Descripción --}}
                 <div class="flex flex-col break-words overflow-hidden">
                     <h2 class="text-xl font-bold text-rclaro">Descripción:</h2>
                     <p>{{ $comision->com_description }}</p>
@@ -25,75 +26,73 @@
 
                 {{-- Tareas --}}
                 <div class="flex flex-col mt-5">
-                    <div class="">
-                        <h2 class="text-xl font-bold text-rclaro">Tareas</h2>
-                        <a href="{{ route('task.add', ['id'=>$comision->com_id]) }}">agregar</a>
+                    <div class="flex justify-between items-center">
+                        <h2 class="me-3 text-xl font-bold text-rclaro">Tareas</h2>
+                        @if ($comision->is_complete == false)
+                            <a href="{{ route('task.add', ['id'=>$comision->com_id]) }}" class="">agregar</a>
+                        @endif
                     </div>
 
-                    @foreach ($tareas as $key => $tarea )
-                        <div class="flex my-2">
-                            @if ($tarea->is_complete === false)
-                                <p class="me-5">"{{ $tarea->task }}"</p>
+                    <div class="grid grid-cols-3 gap-y-4">
+                        @foreach ($tareas as $key => $tarea )
 
-                                <form action="{{ route('task.complete', ['id'=>$comision->com_id]) }}" method="POST">
-                                    @method('PUT')
-                                    @csrf
-                                    <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                    <button type="submit" class="px-4 py-2 bg-green-500 rounded-md">comp</button>
-                                </form>
-    
-                                @if ($key != 0 && $key != count($tareas)-1 )
-
-                                    <form action="{{ route('task.moveUP', ['id'=>$comision->com_id]) }}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                        <button type="submit" class="px-4 py-2 bg-blue-500 rounded-md">up</button>
-                                    </form>
-
-                                    <form action="{{ route('task.moveDOWN', ['id'=>$comision->com_id]) }}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                        <button type="submit" class="px-4 py-2 bg-sky-500 rounded-md">down</button>
-                                    </form>
-
-                                @elseif ($key === 0)
-                                    <form action="{{ route('task.moveDOWN', ['id'=>$comision->com_id]) }}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                        <button type="submit" class="px-4 py-2 bg-sky-500 rounded-md">down</button>
-                                    </form>
-
-                                @elseif ($key === count($tareas)-1)
-                                    <form action="{{ route('task.moveUP', ['id'=>$comision->com_id]) }}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                        <button type="submit" class="px-4 py-2 bg-blue-500 rounded-md">up</button>
-                                    </form>
+                        <div class="">
+                            @if ($comision->is_complete == false)
+                                @if ($tarea->is_complete === false)
+                                    <p class="me-5">"{{ $tarea->task }}"</p>
+                                @else
+                                    <p class="me-5 text-slate-500 line-through">"{{ $tarea->task }}"</p>
                                 @endif
-
                             @else
-                                <p class="me-5">"{{ $tarea->task }}"</p>
-                                <form action="{{ route('task.incomplete', ['id'=>$comision->com_id]) }}" method="POST">
-                                    @method('PUT')
-                                    @csrf
-                                    <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                    <button type="submit" class="px-4 py-2 bg-red-500 rounded-md" >Desmark</button>
-
-                                </form>
+                                <p class="me-5 text-slate-500 line-through">"{{ $tarea->task }}"</p>
                             @endif
-
-                            <form action="{{ route('task.delete.process', ['id'=>$comision->com_id]) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <input type="hidden" value="{{ $key }}" name="tasks_id" id="tasks_id">
-                                <button type="submit" class="px-4 py-2 bg-red-500 rounded-md">delete</button>
-                            </form>
                         </div>
-                    @endforeach
+
+                        <div class="col-span-2">
+                            <div class="flex justify-between">
+                                @if ($comision->is_complete == false)
+
+                                    @if ($tarea->is_complete === false)
+                                        <x-task-button route="task.complete" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-green-500 rounded-md">
+                                            <img src="{{url('/images/task_icons/check.svg')}}" class="w-5" alt="">
+                                        </x-task-button>
+                                    @else
+                                        <x-task-button route="task.incomplete" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-red-500 rounded-md">
+                                            <img src="{{url('/images/task_icons/close.svg')}}" class="w-5" alt="">
+                                        </x-task-button>
+                                    @endif
+
+                                    @if (count($tareas) > 1 )
+                                        @if ($key != 0 && $key != count($tareas)-1 )
+                                            <x-task-button route="task.moveUP" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-blue-500 rounded-md">
+                                                <img src="{{url('/images/task_icons/up.svg')}}" class="w-5" alt="">
+                                            </x-task-button>
+
+                                            <x-task-button route="task.moveDOWN" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-sky-500 rounded-md">
+                                                <img src="{{url('/images/task_icons/down.svg')}}" class="w-5" alt="">
+                                            </x-task-button>
+
+                                        @elseif ($key === 0)
+                                            <x-task-button route="task.moveDOWN" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-sky-500 rounded-md">
+                                                <img src="{{url('/images/task_icons/down.svg')}}" class="w-5" alt="">
+                                            </x-task-button>
+
+                                        @elseif ($key === count($tareas)-1)
+                                            <x-task-button route="task.moveUP" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-blue-500 rounded-md">
+                                                <img src="{{url('/images/task_icons/up.svg')}}" class="w-5" alt="">
+                                            </x-task-button>
+                                        @endif
+                                    @endif
+
+
+                                    <x-task-button route="task.delete.process" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="DELETE" classes="px-4 py-2 bg-red-500 rounded-md">
+                                        <img src="{{url('/images/task_icons/trash.svg')}}" class="w-5" alt="">
+                                    </x-task-button>
+                                @endif
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 
