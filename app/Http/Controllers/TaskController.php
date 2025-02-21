@@ -81,8 +81,6 @@ class TaskController extends Controller
 
         $task_final = Str::replace('" ', '"', json_encode($tasks) );
 
-        dd($task_final);
-
         $com_info->update(['com_tasks' => $task_final]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');

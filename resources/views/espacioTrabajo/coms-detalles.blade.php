@@ -138,7 +138,6 @@
                                     @endif
                                 @endif
 
-
                                 <x-task-button route="task.delete.process" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="DELETE" classes="px-4 py-2 bg-red-500 rounded-md">
                                     <img src="{{url('/images/task_icons/trash.svg')}}" class="w-5" alt="">
                                 </x-task-button>
@@ -162,7 +161,7 @@
                 @endif
             </div>
 
-            <div x-data="{isModalOpen: false}" x-on:keydown.escape="isModalOpen=false" class="relative">
+            <div x-data="{isModalOpen: false, noteid: 0}" x-on:keydown.escape="isModalOpen=false" class="relative">
                 <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
                 {{-- Modal --}}
                 <div x-show="isModalOpen === true" x-on:click.away="isModalOpen = false" x-cloak x-transition class="w-4/5 fixed z-10" tabindex="-1">
@@ -188,7 +187,7 @@
                                         <form action="{{ route('note.delete.process', ['id'=>$comision->com_id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <input type="hidden" name="note_id" id="note_id" value="{{$key}}">
+                                            <input type="hidden" name="note_id" id="note_id" x-bind:value="noteid">
                                             <button type="submit" class="text-roscuro">Eliminar</button>
                                         </form>
                                     </div>
@@ -207,7 +206,7 @@
                             <p>{{ $nota->note }}</p>
 
                             <div class="mt-2">
-                                <button x-on:click="isModalOpen = true" class="font-semibold text-roscuro">Eliminar</button>
+                                <button  x-on:click="isModalOpen = true, noteid = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
                             </div>
                         </div>
 
@@ -215,7 +214,6 @@
                 </div>
 
             </div>
-
         </div>
     </div>
 @endsection

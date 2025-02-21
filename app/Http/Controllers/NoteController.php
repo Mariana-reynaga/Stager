@@ -58,8 +58,11 @@ class NoteController extends Controller
 
         $note2delete = (int) $req->note_id;
 
+        // dd($notes);
+
         $notes = array_filter($notes, function($key) use ($note2delete) {
             return $key != $note2delete;
+
         }, ARRAY_FILTER_USE_KEY);
 
         $notes = array_values($notes);
