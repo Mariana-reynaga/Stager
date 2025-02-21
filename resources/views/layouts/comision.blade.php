@@ -21,7 +21,10 @@
             </a>
         </div>
 
-        <div x-data="{
+        <style>
+            [x-cloak] { display: none !important; }
+        </style>
+        <div x-cloak x-data="{
             activeTab: @if (session('tabNum')) {{(int) session('tabNum')}} @else 1  @endif,
             active: 'mx-5 py-2 px-5 text-white rounded-t-lg bg-rclaro',
             inactive: 'mx-5 py-2 px-5 border-2 border-b-0 border-rclaro rounded-t-lg'

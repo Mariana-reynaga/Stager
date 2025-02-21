@@ -49,7 +49,7 @@ class TaskController extends Controller
 
         return view('espacioTrabajo.tasks.add-task', [
             'comision' => $comision
-        ]);
+        ])->with('tabNum', '2');
     }
 
     public function addTaskProcess(Request $req, int $id){
@@ -80,6 +80,8 @@ class TaskController extends Controller
         }
 
         $task_final = Str::replace('" ', '"', json_encode($tasks) );
+
+        dd($task_final);
 
         $com_info->update(['com_tasks' => $task_final]);
 

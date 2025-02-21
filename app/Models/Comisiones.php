@@ -10,17 +10,13 @@ class Comisiones extends Model
 
     protected $primaryKey = 'com_id';
 
-    protected $fillable = ['com_title', 'com_description', 'com_client', 'com_entrega', 'is_complete','social_fk', 'pagos_fk', 'user_id_fk', 'com_tasks'];
+    protected $fillable = ['com_title', 'com_description', 'com_client', 'com_entrega', 'is_complete','social_fk', 'pagos_fk', 'user_id_fk', 'com_tasks', 'com_notes'];
 
     public function casts(){
         return [
             'com_entrega' => 'date',
         ];
     }
-
-    protected $casts = [
-        'attributes' => 'json',
-    ];
 
     public function social(){
         return $this->belongsTo(RedesSociales::class, 'social_fk','id_social');

@@ -101,6 +101,22 @@ Route::controller(App\Http\Controllers\TaskController::class)->group( function()
         ->middleware('auth');
 });
 
+Route::controller(App\Http\Controllers\NoteController::class)->group( function(){
+    Route::get('/workspace/notes/add/{id}', 'addNote')
+    ->name('note.add')
+    ->whereNumber('id')
+    ->middleware('auth');
+
+    Route::post('/workspace/notes/add/{id}', 'addNoteProcess')
+    ->name('note.add.process')
+    ->whereNumber('id')
+    ->middleware('auth');
+
+    Route::delete('/workspace/notes/delete/{id}', 'deleteNote')
+    ->name('note.delete.process')
+    ->whereNumber('id')
+    ->middleware('auth');
+});
 
 Route::controller(App\Http\Controllers\AuthController::class)->group( function(){
         // Perfil
