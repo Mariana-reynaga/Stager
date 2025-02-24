@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('com_client');
             $table->date('com_entrega');
             $table->json('com_tasks');
-            $table->json('com_notes');
+            $table->json('com_notes')->default('[]');
             $table->boolean('is_complete')->default(false);
             $table->timestamps();
         });

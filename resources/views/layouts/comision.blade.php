@@ -27,10 +27,10 @@
         <div x-cloak x-data="{
             activeTab: @if (session('tabNum')) {{(int) session('tabNum')}} @else 1  @endif,
             active: 'mx-5 py-2 px-5 text-white rounded-t-lg bg-rclaro',
-            inactive: 'mx-5 py-2 px-5 border-2 border-b-0 border-rclaro rounded-t-lg'
+            inactive: 'mx-5 py-2 px-5 border-2 border-b-0 border-rclaro rounded-t-lg',
+            showMsg: @if(session('success.msg')) true @else false @endif,
         }">
             <div class="flex flex-col items-center mt-5">
-
                 <div class="w-4/5 flex justify-between border-b-2 border-rclaro">
                     @yield('content')
 
@@ -47,9 +47,32 @@
                         @yield('details')
                     </div>
                     <div x-show="activeTab === 2" x-transition>
+                        <div x-show="showMsg === true" class="flex justify-center">
+                            <div class="w-4/5 flex justify-center">
+                                <div class="flex justify-between items-center bg-green-500/30 p-6 rounded-md mt-3 font-outfit text-xl w-1/3">
+                                    {!! session()->get('success.msg') !!}
+
+                                    <div x-on:click="showMsg = false">
+                                        <img src="/images/task_icons/close.svg" alt="" class="w-5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         @yield('tasks')
                     </div>
                     <div x-show="activeTab === 3" x-transition>
+                        <div x-show="showMsg === true" class="flex justify-center">
+                            <div class="w-4/5 flex justify-center">
+                                <div class="flex justify-between items-center bg-green-500/30 p-6 rounded-md mt-3 font-outfit text-xl w-1/3">
+                                    {!! session()->get('success.msg') !!}
+
+                                    <div x-on:click="showMsg = false">
+                                        <img src="/images/task_icons/close.svg" alt="" class="w-5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @yield('notes')
                     </div>
                     <div x-show="activeTab === 4" x-transition>

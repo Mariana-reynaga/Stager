@@ -50,21 +50,17 @@
 
                 </div>
 
-                {{-- Eliminar --}}
                 <div class="flex justify-evenly mt-5">
-                    <form action="{{ route('espacio.details.delete',['id'=>$comision->com_id]) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn-secundario">Eliminar</button>
-                    </form>
+                    {{-- Eliminar --}}
+                    <x-confirm-modal title="¿Eliminar Comisión?" tagline="¿Esta seguro? Una vez eliminada, la comisión no puede recuperarse." route="espacio.details.delete" param="id" :paramValue="$comision->com_id"  method="DELETE" submitTxt="Eliminar">
+                        <button x-on:click="isModalOpen = true" class="btn-secundario">Eliminar</button>
+                    </x-confirm-modal>
 
+                    {{-- Marcar como completo --}}
                     @if ($comision->is_complete == false)
-                        <form action="{{ route('espacio.details.complete',['id'=>$comision->com_id]) }}" method="post">
-                            @csrf
-                            @method('PUT')
-                            <button class="btn-principal">Marcar como completado</button>
-                        </form>
-
+                        <x-confirm-modal title="¿Completar Comisión?" tagline="Una vez marcada como completa, la comisión no puede volver al estado de incompleta." route="espacio.details.complete" param="id" :paramValue="$comision->com_id"  method="PUT" submitTxt="Completar">
+                            <button x-on:click="isModalOpen = true" class="btn-principal">Marcar como completado</button>
+                        </x-confirm-modal>
                     @endif
                 </div>
             </div>
@@ -87,47 +83,8 @@
                     @endif
                 </div>
 
-                <div x-data="{isModalOpen: false, taskid: 0}" x-on:keydown.escape="isModalOpen=false" class="relative">
-                    {{-- Fondo --}}
-                    <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
+                <x-delete-one-of-many title="¿Eliminar la Tarea?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="task.delete.process" param="id" :paramValue="$comision->com_id" valueName="tasks_id">
 
-                    {{-- Modal --}}
-                    <div x-show="isModalOpen === true" x-on:click.away="isModalOpen = false" x-cloak x-transition class="w-4/5 fixed z-10" tabindex="-1">
-                        <div class="flex justify-center items-center">
-                            <div class="w-3/5 p-4 rounded-md shadow-md bg-white">
-                                <div class="pb-2 flex justify-between border-b-2 border-rclaro rounded-md">
-                                    <h1 class="font-kanit font-semibold text-xl text-roscuro">¿Eliminar la tarea?</h1>
-
-                                    <div x-on:click="isModalOpen = false">
-                                        <img src="/images/task_icons/close.svg" alt="" class="w-5">
-                                    </div>
-                                </div>
-
-                                <div class="ms-5 mt-5">
-                                    <p>Una vez eliminada no se puede recuperar ¿Estas seguro? </p>
-                                </div>
-
-                                <div class="mt-4 flex justify-center">
-                                    <div class="w-1/3">
-                                        <div class="flex justify-between">
-                                            <p x-on:click.away="isModalOpen = false">Cancelar</p>
-
-                                            <form action="{{ route('task.delete.process', ['id'=>$comision->com_id]) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="hidden" name="tasks_id" id="tasks_id" x-bind:value="taskid">
-                                                <button type="submit" class="text-roscuro">Eliminar</button>
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- foreach --}}
                     <div class="mt-5 grid grid-cols-3 gap-y-4">
                         @foreach ($tareas as $key => $tarea )
 
@@ -179,7 +136,7 @@
                                         @endif
                                     @endif
 
-                                    <div x-on:click="isModalOpen = true, taskid = {{$key}} " class="px-4 py-2 bg-red-500 rounded-md">
+                                    <div x-on:click="isModalOpen = true, objectId = {{$key}} " class="px-4 py-2 bg-red-500 rounded-md">
                                         <img src="{{url('/images/task_icons/trash.svg')}}" class="w-5">
                                     </div>
                                 @endif
@@ -187,7 +144,7 @@
                         </div>
                         @endforeach
                     </div>
-                </div>
+                </x-delete-one-of-many>
             </div>
         </div>
     </div>
@@ -203,43 +160,7 @@
                 @endif
             </div>
 
-            <div x-data="{isModalOpen: false, noteid: 0}" x-on:keydown.escape="isModalOpen=false" class="relative">
-                <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
-                {{-- Modal --}}
-                <div x-show="isModalOpen === true" x-on:click.away="isModalOpen = false" x-cloak x-transition class="w-4/5 fixed z-10" tabindex="-1">
-                    <div class="flex justify-center items-center">
-                        <div class="w-3/5 p-4 rounded-md shadow-md bg-white">
-                            <div class="pb-2 flex justify-between border-b-2 border-rclaro rounded-md">
-                                <h1 class="font-kanit font-semibold text-xl text-roscuro">¿Eliminar la nota?</h1>
-
-                                <div x-on:click="isModalOpen = false">
-                                    <img src="/images/task_icons/close.svg" alt="" class="w-5">
-                                </div>
-                            </div>
-
-                            <div class="ms-5 mt-5">
-                                <p>Una vez eliminada no se puede recuperar ¿Estas seguro? </p>
-                            </div>
-
-                            <div class="mt-4 flex justify-center">
-                                <div class="w-1/3">
-                                    <div class="flex justify-between">
-                                        <p x-on:click.away="isModalOpen = false">Cancelar</p>
-
-                                        <form action="{{ route('note.delete.process', ['id'=>$comision->com_id]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="note_id" id="note_id" x-bind:value="noteid">
-                                            <button type="submit" class="text-roscuro">Eliminar</button>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+            <x-delete-one-of-many title="¿Eliminar la Nota?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="note.delete.process" param="id" :paramValue="$comision->com_id" valueName="note_id">
 
                 <div class="mt-5 grid grid-cols-3 gap-x-3 gap-y-4">
                     @foreach ($notas as $key => $nota )
@@ -248,14 +169,13 @@
                             <p>{{ $nota->note }}</p>
 
                             <div class="mt-2">
-                                <button  x-on:click="isModalOpen = true, noteid = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
+                                <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
                             </div>
                         </div>
 
                     @endforeach
                 </div>
-
-            </div>
+            </x-delete-one-of-many>
         </div>
     </div>
 @endsection

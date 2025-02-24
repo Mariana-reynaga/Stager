@@ -103,7 +103,7 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => $tasks]);
 
-        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2')->with('success.msg', 'La tarea se elimino exitosamente.');
     }
 
     public function moveTaskUp(Request $req, int $id){

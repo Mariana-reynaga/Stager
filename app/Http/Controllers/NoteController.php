@@ -71,6 +71,6 @@ class NoteController extends Controller
 
         $com_info->update(['com_notes' => $notes]);
 
-        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '3');
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '3')->with('success.msg', 'La nota se elimino exitosamente.');
     }
 }

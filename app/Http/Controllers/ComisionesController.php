@@ -80,7 +80,7 @@ class ComisionesController extends Controller
                 'com_description'=>'required | max:150 | min:10',
                 'social_fk'=>'required',
                 'com_client'=>'required | max:30',
-                'com_entrega'=>'after_or_equal:tomorrow',
+                'com_entrega'=>'after_or_equal:'.now()->format('Y-m-d'),
                 'pagos_fk'=>'required',
                 'com_tasks'=>'required'
             ], #mensajes de error
@@ -141,7 +141,7 @@ class ComisionesController extends Controller
                 'com_description'=>'required | max:150 | min:10',
                 'social_fk'=>'required',
                 'com_client'=>'required | max:30',
-                'com_entrega'=>'after_or_equal:tomorrow',
+                'com_entrega'=>'after_or_equal:'.now()->format('Y-m-d'),
                 'pagos_fk'=>'required'
             ], #mensajes de error
             [
