@@ -41,9 +41,25 @@ class ComisionesController extends Controller
 
         $tasks = json_decode($comision_dets->com_tasks);
 
+        $task_completed = 0;
+        $tasks_length = count($tasks);
+
+        foreach($tasks as $item){
+            if($item->is_complete === true){
+                $task_completed ++;
+            }
+        }
+
+        if ($tasks_length === 0) {
+            $percent = 0;
+        }else{
+            $percent = ceil(($task_completed / $tasks_length) * 100);
+        }
+
         $notes = json_decode($comision_dets->com_notes);
 
         return view('espacioTrabajo.coms-detalles', [
+            'percent' => $percent,
             'comision'=> $comision_dets,
             'tareas'  => $tasks,
             'notas'   => $notes

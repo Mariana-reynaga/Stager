@@ -119,7 +119,6 @@ class TaskController extends Controller
 
         [$tasks[$currentTaskPosition], $tasks[$finalPosition]] = [$tasks[$finalPosition], $tasks[$currentTaskPosition]];
 
-
         $com_info->update(['com_tasks' => json_encode($tasks)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
