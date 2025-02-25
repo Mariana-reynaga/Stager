@@ -112,6 +112,16 @@ Route::controller(App\Http\Controllers\NoteController::class)->group( function()
     ->whereNumber('id')
     ->middleware('auth');
 
+    Route::get('/workspace/notes/edit/{id}', 'editNote')
+    ->name('note.edit')
+    ->whereNumber('id')
+    ->middleware('auth');
+
+    Route::put('/workspace/notes/edit/{id}', 'editNoteProcess')
+    ->name('note.edit.process')
+    ->whereNumber('id')
+    ->middleware('auth');
+
     Route::delete('/workspace/notes/delete/{id}', 'deleteNote')
     ->name('note.delete.process')
     ->whereNumber('id')

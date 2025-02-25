@@ -30,8 +30,9 @@ class NoteController extends Controller
                 'note_title.required' => 'El título es requerido.',
                 'note_title.max' => 'El título debe tener como maximo 30 caracteres.',
                 'note_title.min' => 'El título debe tener como minimo 5 caracteres.',
+                ///////////
                 'note_content.required'=>'La nota es requerida.',
-                'note_title.max' => 'La nota debe tener como maximo 150 caracteres.'
+                'note_content.max' => 'La nota debe tener como maximo 150 caracteres.'
             ]
         );
 
@@ -45,6 +46,55 @@ class NoteController extends Controller
         array_unshift($notes, $arr);
 
         $notes_final = json_encode($notes);
+
+        $com_info->update(['com_notes' => $notes_final]);
+
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '3');
+    }
+
+    public function editNote(Request $req, int $id){
+        $com_info = Comisiones::find($id);
+
+        $notes = json_decode($com_info->com_notes);
+
+        $noteID = $req->noteId;
+
+        $note2edit = $notes[$noteID];
+
+        return view('espacioTrabajo.notes.edit-note', [
+            'comision' => $com_info,
+            'noteId'   => $noteID,
+            'noteDets' => $note2edit
+        ]);
+    }
+
+    public function editNoteProcess(Request $req, int $id){
+        $com_info = Comisiones::find($id);
+
+        $notes = json_decode($com_info->com_notes);
+
+        $req->validate(
+            [
+                'title' => 'required | max:30 | min:5',
+                'note'  => 'required | max:150'
+            ],[
+                'title.required' => 'El título es requerido.',
+                'title.max' => 'El título debe tener como maximo 30 caracteres.',
+                'title.min' => 'El título debe tener como minimo 5 caracteres.',
+                //////////
+                'note.required'=>'La nota es requerida.',
+                'note.max' => 'La nota debe tener como maximo 150 caracteres.'
+            ]
+        );
+
+        $notes[$req->noteId] = [
+            'title' => $req->title,
+            'note'  => $req->note
+        ];
+
+        $notes_final = json_encode($notes);
+
+        // dd($notes_final);
 
         $com_info->update(['com_notes' => $notes_final]);
 

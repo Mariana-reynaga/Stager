@@ -168,9 +168,18 @@
                             <h3>{{ $nota->title }}</h3>
                             <p>{{ $nota->note }}</p>
 
-                            <div class="mt-2">
-                                <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
-                            </div>
+                            @if ($comision->is_complete == false)
+                                <div class="mt-2 flex justify-evenly">
+                                    <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
+
+                                    <form action="{{route('note.edit', ['id'=>$comision->com_id])}}">
+                                        @csrf
+                                        <input type="hidden" name="noteId" id="noteId" value="{{$key}}">
+                                        <button type="submit">Editar</button>
+                                    </form>
+
+                                </div>
+                            @endif
                         </div>
 
                     @endforeach
