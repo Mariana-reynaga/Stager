@@ -23,24 +23,24 @@ class NoteController extends Controller
 
         $req->validate(
             [
-                'note_title' =>'required | max:30 | min:5',
-                'note_content' => 'required | max:300'
+                'title' =>'required | max:30 | min:5',
+                'note' => 'required | max:300'
             ],
             [
-                'note_title.required' => 'El título es requerido.',
-                'note_title.max' => 'El título debe tener como maximo 30 caracteres.',
-                'note_title.min' => 'El título debe tener como minimo 5 caracteres.',
+                'title.required' => 'El título es requerido.',
+                'title.max' => 'El título debe tener como maximo 30 caracteres.',
+                'title.min' => 'El título debe tener como minimo 5 caracteres.',
                 ///////////
-                'note_content.required'=>'La nota es requerida.',
-                'note_content.max' => 'La nota debe tener como maximo 300 caracteres.'
+                'note.required'=>'La nota es requerida.',
+                'note.max' => 'La nota debe tener como maximo 300 caracteres.'
             ]
         );
 
         $arr = [];
 
         $arr = [
-            'title'=> $req->note_title,
-            'note'=> $req->note_content
+            'title'=> $req->title,
+            'note'=> $req->note
         ];
 
         array_unshift($notes, $arr);
@@ -94,8 +94,6 @@ class NoteController extends Controller
 
         $notes_final = json_encode($notes);
 
-        // dd($notes_final);
-
         $com_info->update(['com_notes' => $notes_final]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '3');
@@ -107,8 +105,6 @@ class NoteController extends Controller
         $notes = json_decode($com_info->com_notes);
 
         $note2delete = (int) $req->note_id;
-
-        // dd($notes);
 
         $notes = array_filter($notes, function($key) use ($note2delete) {
             return $key != $note2delete;

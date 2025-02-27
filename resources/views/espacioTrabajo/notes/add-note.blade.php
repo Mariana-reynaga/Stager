@@ -24,15 +24,15 @@
             <div class="w-4/5 mt-4">
                 <div class="">
                     <x-label-form>
-                        <x-slot name="forName">note_title</x-slot>
+                        <x-slot name="forName">title</x-slot>
                         <x-slot name="title">Titulo</x-slot>
                         título de la tarea
                     </x-label-form>
 
                     <input
                         type="text"
-                        name="note_title"
-                        id="note_title"
+                        name="title"
+                        id="title"
                         class="
                             border
                             border-solid
@@ -44,10 +44,10 @@
                             focus:outline-2
                             focus:outline-rclaro
                         "
-                        value="{{ old('note_title') }}"
+                        value="{{ old('title') }}"
                     >
 
-                    @error('note_title')
+                    @error('title')
                     <div class="text-rclaro">
                         {{ $message }}
                     </div>
@@ -59,7 +59,7 @@
 
                         <div class="flex justify-between items-center">
                             <x-label-form>
-                                <x-slot name="forName">note_content</x-slot>
+                                <x-slot name="forName">note</x-slot>
                                 <x-slot name="title">Nota</x-slot>
                                 ¿Que te gustaria guardar?
                             </x-label-form>
@@ -71,8 +71,8 @@
                         </div>
 
                         <textarea
-                            name="note_content"
-                            id="note_content"
+                            name="note"
+                            id="note"
                             cols="30"
                             rows="5"
                             class="
@@ -89,10 +89,10 @@
                             maxlength="300"
                             x-ref="textArea"
                             x-on:keyup="characters = $refs.textArea.value.length"
-                        >{{ old('note_content') }}</textarea>
+                        >{{ old('note') }}</textarea>
                     </div>
 
-                    @error('note_content')
+                    @error('note')
                     <div class="text-rclaro">
                         {{ $message }}
                     </div>

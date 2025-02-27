@@ -61,67 +61,18 @@
 
                     {{-- Descripción de la comisión --}}
                     <div class="w-4/5 mt-4">
-                        <x-label-form>
-                            <x-slot name="forName">com_description</x-slot>
-                            <x-slot name="title">Descripción de la comisión</x-slot>
-                            Describí la comisión en una oración
-                        </x-label-form>
-
-                        <textarea
-                            name="com_description"
-                            id="com_description"
-                            cols="30"
-                            rows="5"
-                            class="
-                                border
-                                border-solid
-                                border-gray-600
-                                rounded-md
-                                p-2
-                                w-full
-                                focus:outline
-                                focus:outline-2
-                                focus:outline-rclaro"
-                        >{{ old('com_description', $comision->com_description) }}</textarea>
-
-                        @error('com_description')
-                            <div class="text-rclaro">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
-                    {{-- Fecha de entrega --}}
-                    <div class="w-4/5 mt-4">
-                        <x-label-form>
-                            <x-slot name="forName">com_entrega</x-slot>
-                            <x-slot name="title">Fecha de entrega</x-slot>
-                            Cuando tenés que entregar el producto final
-                        </x-label-form>
-
-                        <input
-                            type="date"
-                            name="com_entrega"
-                            id="com_entrega"
-                            class="
-                                border
-                                border-solid
-                                border-gray-600
-                                rounded-md
-                                p-2
-                                w-full
-                                focus:outline
-                                focus:outline-2
-                                focus:outline-rclaro
-                            "
-                            value="{{ old('com_entrega', $comision->com_entrega->format('Y-m-d')) }}"
-                        >
-
-                        @error('com_entrega')
-                            <div class="text-rclaro">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        <x-edit-text-area
+                            colName="com_description"
+                            labelTitle="Descripción de la comisión"
+                            labelTagline="Describí la comisión brevemente"
+                            maxlength="150"
+                            :colPastData="$comision->com_description">
+                            @error('com_description')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </x-edit-text-area>
                     </div>
                 </div>
 
@@ -234,6 +185,39 @@
                         </select>
 
                         @error('pagos_fk')
+                            <div class="text-rclaro">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    {{-- Fecha de entrega --}}
+                    <div class="w-4/5 mt-4">
+                        <x-label-form>
+                            <x-slot name="forName">com_entrega</x-slot>
+                            <x-slot name="title">Fecha de entrega</x-slot>
+                            Cuando tenés que entregar el producto final
+                        </x-label-form>
+
+                        <input
+                            type="date"
+                            name="com_entrega"
+                            id="com_entrega"
+                            class="
+                                border
+                                border-solid
+                                border-gray-600
+                                rounded-md
+                                p-2
+                                w-full
+                                focus:outline
+                                focus:outline-2
+                                focus:outline-rclaro
+                            "
+                            value="{{ old('com_entrega', $comision->com_entrega->format('Y-m-d')) }}"
+                        >
+
+                        @error('com_entrega')
                             <div class="text-rclaro">
                                 {{ $message }}
                             </div>

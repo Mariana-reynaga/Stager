@@ -59,50 +59,18 @@
                 </div>
 
                 <div class="mt-3">
-                    <div x-data="{ characters: 0 }" x-init="characters = $refs.textArea.value.length">
-                        <div class="flex justify-between items-center">
-                            <x-label-form>
-                                <x-slot name="forName">note</x-slot>
-                                <x-slot name="title">Nota</x-slot>
-                                ¿Que te gustaria guardar?
-                            </x-label-form>
-
-                            <div class="p-2 rounded-md bg-roscuro text-white">
-                                <p>
-                                    <span x-html="characters"></span> /
-                                    <span x-html="$refs.textArea.maxLength"></span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <textarea
-                            name="note"
-                            id="note"
-                            cols="30"
-                            rows="5"
-                            class="
-                                border
-                                border-solid
-                                border-gray-600
-                                rounded-md
-                                p-2
-                                w-full
-                                focus:outline
-                                focus:outline-2
-                                focus:outline-rclaro
-                            "
+                    <x-edit-text-area
+                            colName="note"
+                            labelTitle="Nota"
+                            labelTagline="¿Que te gustaria guardar?"
                             maxlength="300"
-                            x-ref="textArea"
-                            x-on:keyup="characters = $refs.textArea.value.length"
-                        >{{ old('note_content', $noteDets->note) }}</textarea>
-                    </div>
-
-
-                    @error('note')
-                    <div class="text-rclaro">
-                        {{ $message }}
-                    </div>
-                    @enderror
+                            :colPastData="$noteDets->note">
+                            @error('note')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                    </x-edit-text-area>
                 </div>
             </div>
         </div>
