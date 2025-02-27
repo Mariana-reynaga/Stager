@@ -1,5 +1,5 @@
 <div>
-    <div class="flex flex-col justify-evenly min-h-72 h-fit w-64 font-kanit text-negro p-3 border-2 border-rclaro rounded-md">
+    <div class="h-80 w-80 p-5 flex flex-col justify-evenly font-kanit text-negro border-2 border-rclaro rounded-md">
         <p class="font-bold text-lg mb-2">{{ $titulo }}</p>
         <div class="break-words overflow-hidden">
             <p class="my-1">{{ $slot }}</p>

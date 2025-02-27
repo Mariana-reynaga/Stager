@@ -13,6 +13,7 @@
                 <x-slot name="fecha_entrega"> <span class="text-roscuro font-extrabold">Completada</span> </x-slot>
                 <x-slot name="id_ruta">{{$comision->com_id}}</x-slot>
                 {{ $comision->com_description }}
+                <x-progress-bar :percent="$comision->com_percent" />
             </x-tarjeta-comision>
         @endforeach
 

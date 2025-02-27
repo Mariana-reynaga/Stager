@@ -22,7 +22,26 @@ class TaskController extends Controller
             'is_complete' => true
         ];
 
-        $com_info->update(['com_tasks' => json_encode($tasks)]);
+        $task_completed = 0;
+        $tasks_length = count($tasks);
+
+        $tasks = json_encode($tasks);
+
+        $tasks = json_decode($tasks);
+
+        foreach($tasks as $item){
+            if($item->is_complete === true){
+                $task_completed ++;
+            }
+        }
+
+        if ($tasks_length === 0) {
+            $percent = 0;
+        }else{
+            $percent = ceil(($task_completed / $tasks_length) * 100);
+        }
+
+        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
@@ -38,8 +57,26 @@ class TaskController extends Controller
             'task' => $tasks[$taskComplete]->task,
             'is_complete' => false
         ];
+        $task_completed = 0;
+        $tasks_length = count($tasks);
 
-        $com_info->update(['com_tasks' => json_encode($tasks)]);
+        $tasks = json_encode($tasks);
+
+        $tasks = json_decode($tasks);
+
+        foreach($tasks as $item){
+            if($item->is_complete === true){
+                $task_completed ++;
+            }
+        }
+
+        if ($tasks_length === 0) {
+            $percent = 0;
+        }else{
+            $percent = ceil(($task_completed / $tasks_length) * 100);
+        }
+
+        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
@@ -81,7 +118,28 @@ class TaskController extends Controller
 
         $task_final = Str::replace('" ', '"', json_encode($tasks) );
 
-        $com_info->update(['com_tasks' => $task_final]);
+        $task_completed = 0;
+        $tasks_length = count($tasks);
+
+        $tasks = json_encode($tasks);
+
+        $tasks = json_decode($tasks);
+
+        foreach($tasks as $item){
+            if($item->is_complete === true){
+                $task_completed ++;
+            }
+        }
+
+        if ($tasks_length === 0) {
+            $percent = 0;
+        }else{
+            $percent = ceil(($task_completed / $tasks_length) * 100);
+        }
+
+        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
+
+        // $com_info->update(['com_tasks' => $task_final]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
@@ -99,9 +157,26 @@ class TaskController extends Controller
 
         $tasks = array_values($tasks);
 
+        $task_completed = 0;
+        $tasks_length = count($tasks);
+
         $tasks = json_encode($tasks);
 
-        $com_info->update(['com_tasks' => $tasks]);
+        $tasks = json_decode($tasks);
+
+        foreach($tasks as $item){
+            if($item->is_complete === true){
+                $task_completed ++;
+            }
+        }
+
+        if ($tasks_length === 0) {
+            $percent = 0;
+        }else{
+            $percent = ceil(($task_completed / $tasks_length) * 100);
+        }
+
+        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2')->with('success.msg', 'La tarea se elimino exitosamente.');
     }

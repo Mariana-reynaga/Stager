@@ -11,8 +11,9 @@
                 <x-slot name="titulo">{{ $comision->com_title }}</x-slot>
                 <x-slot name="fecha_entrega">{{ $comision->com_entrega->format('d/m/Y') }}</x-slot>
                 <x-slot name="id_ruta">{{$comision->com_id}}</x-slot>
-                {{ $comision->com_description }}
 
+                {{ $comision->com_description }}
+                <x-progress-bar :percent="$comision->com_percent" />
             </x-tarjeta-comision>
 
         @endforeach

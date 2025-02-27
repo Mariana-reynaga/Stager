@@ -10,7 +10,7 @@ class Comisiones extends Model
 
     protected $primaryKey = 'com_id';
 
-    protected $fillable = ['com_title', 'com_description', 'com_client', 'com_entrega', 'is_complete','social_fk', 'pagos_fk', 'user_id_fk', 'com_tasks', 'com_notes'];
+    protected $fillable = ['com_title', 'com_description', 'com_client', 'com_entrega', 'is_complete','social_fk', 'pagos_fk', 'user_id_fk', 'com_tasks', 'com_notes', 'com_percent'];
 
     public function casts(){
         return [

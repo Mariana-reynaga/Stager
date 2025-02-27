@@ -41,25 +41,9 @@ class ComisionesController extends Controller
 
         $tasks = json_decode($comision_dets->com_tasks);
 
-        $task_completed = 0;
-        $tasks_length = count($tasks);
-
-        foreach($tasks as $item){
-            if($item->is_complete === true){
-                $task_completed ++;
-            }
-        }
-
-        if ($tasks_length === 0) {
-            $percent = 0;
-        }else{
-            $percent = ceil(($task_completed / $tasks_length) * 100);
-        }
-
         $notes = json_decode($comision_dets->com_notes);
 
         return view('espacioTrabajo.coms-detalles', [
-            'percent' => $percent,
             'comision'=> $comision_dets,
             'tareas'  => $tasks,
             'notas'   => $notes
@@ -202,7 +186,7 @@ class ComisionesController extends Controller
             ];
         }
 
-        $comision->update(['is_complete'=>true, 'com_tasks' => json_encode($tasks)]);
+        $comision->update(['is_complete'=>true, 'com_tasks' => json_encode($tasks), 'com_percent'=>100]);
 
         return redirect()->route('espacio.completas', ['user_id'=>auth()->user()->user_id]);
     }
