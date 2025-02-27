@@ -23,11 +23,11 @@
         <div class="flex w-full justify-center">
             <div class="w-4/5 mt-4">
                 <div class="">
-                    <x-label-form>
+                    <x-inputs.label-form>
                         <x-slot name="forName">com_tasks</x-slot>
                         <x-slot name="title">Nueva Tarea</x-slot>
                         Separar con comas sin espacios
-                    </x-label-form>
+                    </x-inputs.label-form>
 
                     <input
                         type="text"

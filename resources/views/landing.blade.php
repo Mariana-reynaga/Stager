@@ -35,25 +35,25 @@
         {{-- beneficios --}}
         <div class="flex flex-col md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 xl:flex xl:flex-row xl:justify-evenly xl:w-full mt-12">
 
-            <x-beneficio-card>
+            <x-landing.beneficio-card>
                 <x-slot name="titulo">Conveniencia</x-slot>
                 Todos los detalles en un lugar
-            </x-beneficio-card>
+            </x-landing.beneficio-card>
 
-            <x-beneficio-card>
+            <x-landing.beneficio-card>
                 <x-slot name="titulo">Simpleza</x-slot>
                 Todos los detalles en un lugar
-            </x-beneficio-card>
+            </x-landing.beneficio-card>
 
-            <x-beneficio-card>
+            <x-landing.beneficio-card>
                 <x-slot name="titulo">Para artistas</x-slot>
                 Todos los detalles en un lugar
-            </x-beneficio-card>
+            </x-landing.beneficio-card>
 
-            <x-beneficio-card>
+            <x-landing.beneficio-card>
                 <x-slot name="titulo">Gran comunidad</x-slot>
                 Todos los detalles en un lugar
-            </x-beneficio-card>
+            </x-landing.beneficio-card>
 
 
         </div>

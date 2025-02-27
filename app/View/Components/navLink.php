@@ -23,6 +23,6 @@ class navLink extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.nav-link');
+        return view('components.links.nav-link');
     }
 }

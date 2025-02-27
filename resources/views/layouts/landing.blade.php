@@ -11,7 +11,7 @@
 </head>
 <body>
     <main>
-        <x-landing-nav-bar />
+        <x-landing.landing-nav-bar />
 
         @yield('content')
 

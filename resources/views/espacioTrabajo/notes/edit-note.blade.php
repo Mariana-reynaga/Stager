@@ -27,11 +27,11 @@
         <div class="flex w-full justify-center">
             <div class="w-4/5 mt-4">
                 <div class="mt-3">
-                    <x-label-form>
+                    <x-inputs.label-form>
                         <x-slot name="forName">title</x-slot>
                         <x-slot name="title">Titulo</x-slot>
                         título de la nota
-                    </x-label-form>
+                    </x-inputs.label-form>
 
                     <input
                         type="text"
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <x-edit-text-area
+                    <x-inputs.edit-text-area
                             colName="note"
                             labelTitle="Nota"
                             labelTagline="¿Que te gustaria guardar?"
@@ -70,7 +70,7 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                    </x-edit-text-area>
+                    </x-inputs.edit-text-area>
                 </div>
             </div>
         </div>

@@ -1,11 +1,11 @@
 <div>
     <div x-data="{ characters: 0 }" x-init="characters = $refs.textArea.value.length">
         <div class="flex justify-between items-center">
-            <x-label-form>
+            <x-inputs.label-form>
                 <x-slot name="forName">{{ $colName }}</x-slot>
                 <x-slot name="title">{{$labelTitle}}</x-slot>
                 {{$labelTagline}}
-            </x-label-form>
+            </x-inputs.label-form>
 
             <div class="p-2 rounded-md bg-roscuro text-white">
                 <p>

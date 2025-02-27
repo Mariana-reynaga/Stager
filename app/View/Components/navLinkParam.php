@@ -27,6 +27,6 @@ class navLinkParam extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.nav-link-param');
+        return view('components.links.nav-link-param');
     }
 }

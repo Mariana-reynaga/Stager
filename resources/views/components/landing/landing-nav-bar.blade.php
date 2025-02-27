@@ -13,10 +13,10 @@
 
             <div class="w-1/3 flex justify-end text-blanco font-kanit">
                 @guest
-                        <x-nav-link route="login">Iniciar Sesión</x-nav-link>
+                        <x-links.nav-link route="login">Iniciar Sesión</x-links.nav-link>
                 @else
                     <div class="w-3/5 flex justify-between">
-                        <x-nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones</x-nav-link-param>
+                        <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones</x-links.nav-link-param>
 
                         <form action="{{ route('auth.logout.process') }}" method="POST">
                             @csrf

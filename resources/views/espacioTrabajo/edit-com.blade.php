@@ -29,11 +29,11 @@
                 <div class="flex flex-col w-1/2">
                     {{-- Título de la comisión --}}
                     <div class="w-4/5">
-                        <x-label-form>
+                        <x-inputs.label-form>
                             <x-slot name="forName">com_title</x-slot>
                             <x-slot name="title">Título de la Comisión</x-slot>
                             Intenta que sea descriptivo y conciso
-                        </x-label-form>
+                        </x-inputs.label-form>
 
                         <input
                             type="text"
@@ -61,7 +61,7 @@
 
                     {{-- Descripción de la comisión --}}
                     <div class="w-4/5 mt-4">
-                        <x-edit-text-area
+                        <x-inputs.edit-text-area
                             colName="com_description"
                             labelTitle="Descripción de la comisión"
                             labelTagline="Describí la comisión brevemente"
@@ -72,7 +72,7 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </x-edit-text-area>
+                        </x-inputs.edit-text-area>
                     </div>
                 </div>
 
@@ -80,11 +80,11 @@
                     <div class="flex justify-between">
                         {{-- Red social del cliente --}}
                         <div class="w-1/3">
-                            <x-label-form>
+                            <x-inputs.label-form>
                                 <x-slot name="forName">social_fk</x-slot>
                                 <x-slot name="title">Red social</x-slot>
                                 Método de comunicación con el cliente
-                            </x-label-form>
+                            </x-inputs.label-form>
 
                             <select
                                 name="social_fk"
@@ -119,11 +119,11 @@
 
                         {{-- Username del cliente --}}
                         <div class="w-2/3 flex flex-col justify-between ms-3">
-                            <x-label-form>
+                            <x-inputs.label-form>
                                 <x-slot name="forName">com_client</x-slot>
                                 <x-slot name="title">Nombre de usuario</x-slot>
                                 Nombre de usuario del cliente
-                            </x-label-form>
+                            </x-inputs.label-form>
 
                             <input
                                 type="text"
@@ -153,11 +153,11 @@
 
                     {{-- Método de pago --}}
                     <div class="w-2/3 mt-4">
-                        <x-label-form>
+                        <x-inputs.label-form>
                             <x-slot name="forName">pagos_fk</x-slot>
                             <x-slot name="title">Método de pago</x-slot>
                             Método de pago del cliente
-                        </x-label-form>
+                        </x-inputs.label-form>
 
                         <select
                             name="pagos_fk"
@@ -193,11 +193,11 @@
 
                     {{-- Fecha de entrega --}}
                     <div class="w-4/5 mt-4">
-                        <x-label-form>
+                        <x-inputs.label-form>
                             <x-slot name="forName">com_entrega</x-slot>
                             <x-slot name="title">Fecha de entrega</x-slot>
                             Cuando tenés que entregar el producto final
-                        </x-label-form>
+                        </x-inputs.label-form>
 
                         <input
                             type="date"

@@ -70,15 +70,15 @@
 
                 <div class="flex justify-evenly mt-5">
                     {{-- Eliminar --}}
-                    <x-confirm-modal title="¿Eliminar Comisión?" tagline="¿Esta seguro? Una vez eliminada, la comisión no puede recuperarse." route="espacio.details.delete" param="id" :paramValue="$comision->com_id"  method="DELETE" submitTxt="Eliminar">
+                    <x-modals.confirm-modal title="¿Eliminar Comisión?" tagline="¿Esta seguro? Una vez eliminada, la comisión no puede recuperarse." route="espacio.details.delete" param="id" :paramValue="$comision->com_id"  method="DELETE" submitTxt="Eliminar">
                         <button x-on:click="isModalOpen = true" class="btn-secundario">Eliminar</button>
-                    </x-confirm-modal>
+                    </x-modals.confirm-modal>
 
                     {{-- Marcar como completo --}}
                     @if ($comision->is_complete == false)
-                        <x-confirm-modal title="¿Completar Comisión?" tagline="Una vez marcada como completa, la comisión no puede volver al estado de incompleta." route="espacio.details.complete" param="id" :paramValue="$comision->com_id"  method="PUT" submitTxt="Completar">
+                        <x-modals.confirm-modal title="¿Completar Comisión?" tagline="Una vez marcada como completa, la comisión no puede volver al estado de incompleta." route="espacio.details.complete" param="id" :paramValue="$comision->com_id"  method="PUT" submitTxt="Completar">
                             <button x-on:click="isModalOpen = true" class="btn-principal">Marcar como completado</button>
-                        </x-confirm-modal>
+                        </x-modals.confirm-modal>
                     @endif
                 </div>
             </div>
@@ -101,7 +101,7 @@
                     @endif
                 </div>
 
-                <x-delete-one-of-many title="¿Eliminar la Tarea?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="task.delete.process" param="id" :paramValue="$comision->com_id" valueName="tasks_id">
+                <x-modals.delete-one-of-many-modal title="¿Eliminar la Tarea?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="task.delete.process" param="id" :paramValue="$comision->com_id" valueName="tasks_id">
 
                     <div class="mt-5 grid grid-cols-3 gap-y-4">
                         @foreach ($tareas as $key => $tarea )
@@ -162,7 +162,7 @@
                         </div>
                         @endforeach
                     </div>
-                </x-delete-one-of-many>
+                </x-modals.delete-one-of-many-modal>
             </div>
         </div>
     </div>
@@ -178,7 +178,7 @@
                 @endif
             </div>
 
-            <x-delete-one-of-many title="¿Eliminar la Nota?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="note.delete.process" param="id" :paramValue="$comision->com_id" valueName="note_id">
+            <x-modals.delete-one-of-many-modal title="¿Eliminar la Nota?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="note.delete.process" param="id" :paramValue="$comision->com_id" valueName="note_id">
 
                 <div class="mt-5 grid grid-cols-3 gap-x-3 gap-y-4">
                     @foreach ($notas as $key => $nota )
@@ -209,7 +209,7 @@
 
                     @endforeach
                 </div>
-            </x-delete-one-of-many>
+            </x-modals.delete-one-of-many-modal>
         </div>
     </div>
 @endsection

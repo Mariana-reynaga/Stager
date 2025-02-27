@@ -19,10 +19,10 @@
                     <div class="mt-5">
                         {{-- Email --}}
                         <div class="flex flex-col">
-                            <x-label-auth>
+                            <x-inputs.label-auth>
                                 <x-slot name="forName">email</x-slot>
                                 Email
-                            </x-label-auth>
+                            </x-inputs.label-auth>
 
                             <input
                                 name="email"
@@ -45,10 +45,10 @@
 
                         {{-- Contraseña --}}
                         <div class="flex flex-col mt-5">
-                            <x-label-auth>
+                            <x-inputs.label-auth>
                                 <x-slot name="forName">password</x-slot>
                                 Contraseña
-                            </x-label-auth>
+                            </x-inputs.label-auth>
 
                             <input
                                 name="password"
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="mt-6 flex justify-center text-negro font-kanit">
-                        <x-nav-link route="auth.register.form">¿No tenés cuenta? Registrate ahora</x-nav-link>
+                        <x-links.nav-link route="auth.register.form">¿No tenés cuenta? Registrate ahora</x-links.nav-link>
                     </div>
                 </form>
 

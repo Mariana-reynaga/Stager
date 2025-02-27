@@ -33,6 +33,6 @@ class DeleteOneOfMany extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.delete-one-of-many-modal');
+        return view('components.modals.delete-one-of-many-modal-modal');
     }
 }

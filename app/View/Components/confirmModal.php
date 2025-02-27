@@ -35,6 +35,6 @@ class confirmModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.confirm-modal');
+        return view('components.modals.confirm-modal');
     }
 }

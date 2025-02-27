@@ -23,11 +23,11 @@
         <div class="flex w-full justify-center">
             <div class="w-4/5 mt-4">
                 <div class="">
-                    <x-label-form>
+                    <x-inputs.label-form>
                         <x-slot name="forName">title</x-slot>
                         <x-slot name="title">Titulo</x-slot>
                         título de la tarea
-                    </x-label-form>
+                    </x-inputs.label-form>
 
                     <input
                         type="text"
@@ -58,11 +58,11 @@
                     <div x-data="{characters: 0}" x-init="characters = $refs.textArea.value.length">
 
                         <div class="flex justify-between items-center">
-                            <x-label-form>
+                            <x-inputs.label-form>
                                 <x-slot name="forName">note</x-slot>
                                 <x-slot name="title">Nota</x-slot>
                                 ¿Que te gustaria guardar?
-                            </x-label-form>
+                            </x-inputs.label-form>
 
                             <div class="p-2 rounded-md bg-roscuro text-white">
                                 <span x-html="characters"></span> /

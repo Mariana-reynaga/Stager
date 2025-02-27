@@ -31,6 +31,6 @@ class editTextArea extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.edit-text-area');
+        return view('components.inputs.edit-text-area');
     }
 }
