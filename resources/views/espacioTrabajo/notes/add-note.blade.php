@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <div x-data="{characters: ''}">
+                    <div x-data="{characters: 0}" x-init="characters = $refs.textArea.value.length">
 
                         <div class="flex justify-between items-center">
                             <x-label-form>
@@ -64,8 +64,9 @@
                                 ¿Que te gustaria guardar?
                             </x-label-form>
 
-                            <div class="p-2 rounded-md bg-roscuro">
-                                <p class="text-white" x-text="$refs.characters.getAttribute('maxlength') - characters.length"></p>
+                            <div class="p-2 rounded-md bg-roscuro text-white">
+                                <span x-html="characters"></span> /
+                                <span x-html="$refs.textArea.maxLength"></span>
                             </div>
                         </div>
 
@@ -86,7 +87,8 @@
                                 focus:outline-rclaro
                             "
                             maxlength="300"
-                            x-model="characters" x-ref="characters"
+                            x-ref="textArea"
+                            x-on:keyup="characters = $refs.textArea.value.length"
                         >{{ old('note_content') }}</textarea>
                     </div>
 
