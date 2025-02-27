@@ -14,7 +14,8 @@
 </head>
 <body>
     <main>
-        <div class="mt-10 ms-10">
+
+        <div class="w-fit mt-10 ms-10">
             <a href="{{ route('espacio.trabajo', ['user_id'=>auth()->user()->user_id] ) }}" class="flex items-center">
                 <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
                 <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>

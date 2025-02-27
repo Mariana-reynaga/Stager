@@ -182,22 +182,29 @@
 
                 <div class="mt-5 grid grid-cols-3 gap-x-3 gap-y-4">
                     @foreach ($notas as $key => $nota )
-                        <div class="p-4 border border-rclaro rounded-md">
-                            <h3>{{ $nota->title }}</h3>
-                            <p>{{ $nota->note }}</p>
+                        <div class="min-h-52 border border-rclaro rounded-md">
+                            <div class="py-2 px-3 bg-rclaro text-white">
+                                <h3 class="font-kanit text-lg">{{ $nota->title }}</h3>
+                            </div>
 
-                            @if ($comision->is_complete == false)
-                                <div class="mt-2 flex justify-evenly">
-                                    <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
-
-                                    <form action="{{route('note.edit', ['id'=>$comision->com_id])}}">
-                                        @csrf
-                                        <input type="hidden" name="noteId" id="noteId" value="{{$key}}">
-                                        <button type="submit">Editar</button>
-                                    </form>
-
+                            <div class="flex flex-col justify-between">
+                                <div class="h-48 px-4 py-2 break-words overflow-hidden">
+                                    <p class="mt-3">{{ $nota->note }}</p>
                                 </div>
-                            @endif
+
+                                @if ($comision->is_complete == false)
+                                    <div class="my-5 flex justify-evenly">
+                                        <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
+
+                                        <form action="{{route('note.edit', ['id'=>$comision->com_id])}}">
+                                            @csrf
+                                            <input type="hidden" name="noteId" id="noteId" value="{{$key}}">
+                                            <button type="submit">Editar</button>
+                                        </form>
+
+                                    </div>
+                                @endif
+                            </div>
                         </div>
 
                     @endforeach
