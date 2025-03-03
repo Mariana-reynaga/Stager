@@ -41,6 +41,12 @@
                                 "
                                 value="{{ old('email') }}"
                             >
+
+                            @error('email')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         {{-- Contraseña --}}
@@ -50,22 +56,36 @@
                                 Contraseña
                             </x-inputs.label-auth>
 
-                            <input
-                                name="password"
-                                id="password"
-                                type="password"
-                                class="
-                                    border
-                                    border-solid
-                                    border-gray-600
-                                    rounded-md
-                                    p-2
-                                    w-full
-                                    focus:outline
-                                    focus:outline-2
-                                    focus:outline-blanco
-                                "
-                            >
+
+                            <div x-data="{type: true, hide: 'images/password_eyes/eye_closed.svg' , show:'images/password_eyes/eye_open.svg' }" class="flex">
+                                <input
+                                    name="password"
+                                    id="password"
+                                    x-bind:type="type ? 'password' : 'text'"
+                                    class="
+                                        w-5/6
+                                        border
+                                        border-solid
+                                        border-gray-600
+                                        rounded-md
+                                        p-2
+
+                                        focus:outline
+                                        focus:outline-2
+                                        focus:outline-blanco
+                                    "
+                                >
+
+                                <div class="w-1/6 flex justify-end" x-on:click="type ? type = false : type = true">
+                                    <img x-bind:src="type ? hide : show" alt="" class="w-1/2 p-2 bg-slate-400 rounded-md">
+                                </div>
+                            </div>
+
+                            @error('password')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
 

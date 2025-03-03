@@ -15,6 +15,17 @@ class AuthController extends Controller
     }
 
     public function loginProcess(Request $req){
+        $req->validate(
+            [
+                'email' => 'required | email:rfc,dns',
+                'password' => 'required'
+            ],
+            [
+                'email.required' => 'El email es requerido.',
+                'password.required' => 'La contraseña es requerida.'
+            ]
+        );
+
         $credentials = $req->only('email', 'password');
 
         if (!auth()->attempt($credentials)) {
@@ -45,8 +56,20 @@ class AuthController extends Controller
         $req->validate(
             [
                 'name' => 'required | min: 4 | max: 10',
-                'email' => 'required | max:50 |unique:users,email',
+                'email' => 'required | max:50 | unique:users,email',
                 'password'=> 'required | min: 8'
+            ],
+            [
+                'name.required'     => 'El nombre es requerido.',
+                'name.min'          => 'El nombre debe tener un minimo de 4 caracteres.',
+                'name.max'          => 'El nombre debe tener un maximo de 10 caracteres.',
+                /////////
+                'email.required'    => 'El email es requerido.',
+                'email.max'         => 'El email debe tener un maximo de 50 caracteres.',
+                'email.unique'      => 'El email ya esta registrado.',
+                /////////
+                'password.required' => 'La contraseña es requerida.',
+                'password.min' => 'La contraseña debe tener un minimo de 8 caracteres.',
             ]
         );
 
