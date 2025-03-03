@@ -31,22 +31,10 @@
                             Intenta que sea descriptivo y conciso
                         </x-inputs.label-form>
 
-                        <input
-                            type="text"
-                            name="com_title"
-                            id="com_title"
-                            class="
-                                border
-                                border-solid
-                                border-gray-600
-                                rounded-md
-                                p-2
-                                w-full
-                                focus:outline
-                                focus:outline-2
-                                focus:outline-rclaro"
-                            value={{ old('com_title') }}
-                        >
+                        <x-inputs.form-input
+                                type="text"
+                                inputName="com_title"
+                        />
 
                         @error('com_title')
                             <div class="text-rclaro">
@@ -80,23 +68,10 @@
                             Cuando tenés que entregar el producto final
                         </x-inputs.label-form>
 
-                        <input
-                            type="date"
-                            name="com_entrega"
-                            id="com_entrega"
-                            class="
-                                border
-                                border-solid
-                                border-gray-600
-                                rounded-md
-                                p-2
-                                w-full
-                                focus:outline
-                                focus:outline-2
-                                focus:outline-rclaro
-                            "
-                            value={{ old('com_entrega') }}
-                        >
+                        <x-inputs.form-input
+                                type="date"
+                                inputName="com_entrega"
+                        />
 
                         @error('com_entrega')
                             <div class="text-rclaro">
@@ -130,11 +105,10 @@
                                     focus:outline-2
                                     focus:outline-rclaro
                                 "
-                                value={{ old('social_fk') }}
                             >
                                 <option value="">Elija una opción</option>
                                 @foreach ( $redes_sociales as $red )
-                                    <option value="{{ $red->id_social }}">{{ $red->red_social }}</option>
+                                    <option value="{{ $red->id_social }}" @selected( $red->id_social == old('social_fk')) >{{ $red->red_social }}</option>
                                 @endforeach
                             </select>
 
@@ -153,23 +127,10 @@
                                 Nombre de usuario del cliente
                             </x-inputs.label-form>
 
-                            <input
+                            <x-inputs.form-input
                                 type="text"
-                                name="com_client"
-                                id="com_client"
-                                class="
-                                    border
-                                    border-solid
-                                    border-gray-600
-                                    rounded-md
-                                    p-2
-                                    w-full
-                                    focus:outline
-                                    focus:outline-2
-                                    focus:outline-rclaro
-                                "
-                                value={{ old('com_client') }}
-                            >
+                                inputName="com_client"
+                            />
 
                             @error('com_client')
                                 <div class="text-rclaro">
@@ -201,11 +162,10 @@
                                 focus:outline-2
                                 focus:outline-rclaro
                             "
-                            value={{ old('pagos_fk') }}
                         >
                             <option value="">Elija una opción</option>
                             @foreach ($metodos_pagos as $metodo)
-                                <option value="{{ $metodo->id_metodo_pago }}">{{ $metodo->metodo_pago }}</option>
+                                <option value="{{ $metodo->id_metodo_pago }}" @selected( $metodo->id_metodo_pago == old('pagos_fk'))>{{ $metodo->metodo_pago }}</option>
                             @endforeach
                         </select>
 
@@ -224,29 +184,16 @@
                             Los pasos a completar, separar con comas sin espacios
                         </x-inputs.label-form>
 
-                        <input
+                        <x-inputs.form-input
                                 type="text"
-                                name="com_tasks"
-                                id="com_tasks"
-                                class="
-                                    border
-                                    border-solid
-                                    border-gray-600
-                                    rounded-md
-                                    p-2
-                                    w-full
-                                    focus:outline
-                                    focus:outline-2
-                                    focus:outline-rclaro
-                                "
-                                value={{ old('com_tasks') }}
-                            >
-
-                            @error('com_tasks')
-                            <div class="text-rclaro">
-                                {{ $message }}
-                            </div>
-                            @enderror
+                                inputName="com_tasks"
+                        />
+                        
+                        @error('com_tasks')
+                        <div class="text-rclaro">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 </div>
 

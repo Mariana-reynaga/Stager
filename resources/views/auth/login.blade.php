@@ -24,23 +24,10 @@
                                 Email
                             </x-inputs.label-auth>
 
-                            <input
-                                name="email"
-                                id="email"
+                            <x-inputs.form-input
                                 type="email"
-                                class="
-                                    border
-                                    border-solid
-                                    border-gray-600
-                                    rounded-md
-                                    p-2
-                                    w-full
-                                    focus:outline
-                                    focus:outline-2
-                                    focus:outline-blanco
-                                "
-                                value="{{ old('email') }}"
-                            >
+                                inputName="email"
+                            />
 
                             @error('email')
                                 <div class="text-rclaro">
@@ -64,16 +51,14 @@
                                     x-bind:type="type ? 'password' : 'text'"
                                     class="
                                         w-5/6
+                                        p-2
                                         border
                                         border-solid
                                         border-gray-600
                                         rounded-md
-                                        p-2
-
                                         focus:outline
                                         focus:outline-2
-                                        focus:outline-blanco
-                                    "
+                                        focus:outline-rclaro"
                                 >
 
                                 <div class="w-1/6 flex justify-end" x-on:click="type ? type = false : type = true">

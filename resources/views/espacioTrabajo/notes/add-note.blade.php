@@ -29,23 +29,10 @@
                         título de la tarea
                     </x-inputs.label-form>
 
-                    <input
+                    <x-inputs.form-input
                         type="text"
-                        name="title"
-                        id="title"
-                        class="
-                            border
-                            border-solid
-                            border-gray-600
-                            rounded-md
-                            p-2
-                            w-full
-                            focus:outline
-                            focus:outline-2
-                            focus:outline-rclaro
-                        "
-                        value="{{ old('title') }}"
-                    >
+                        inputName="title"
+                    />
 
                     @error('title')
                     <div class="text-rclaro">
@@ -55,48 +42,19 @@
                 </div>
 
                 <div class="mt-3">
-                    <div x-data="{characters: 0}" x-init="characters = $refs.textArea.value.length">
+                    <x-inputs.new-text-area
+                        colName="note"
+                        labelTitle="Nota"
+                        labelTagline="¿Que te gustaria guardar?"
+                        maxlength="300">
 
-                        <div class="flex justify-between items-center">
-                            <x-inputs.label-form>
-                                <x-slot name="forName">note</x-slot>
-                                <x-slot name="title">Nota</x-slot>
-                                ¿Que te gustaria guardar?
-                            </x-inputs.label-form>
-
-                            <div class="p-2 rounded-md bg-roscuro text-white">
-                                <span x-html="characters"></span> /
-                                <span x-html="$refs.textArea.maxLength"></span>
+                        @error('note')
+                            <div class="text-rclaro">
+                                {{ $message }}
                             </div>
-                        </div>
+                        @enderror
 
-                        <textarea
-                            name="note"
-                            id="note"
-                            cols="30"
-                            rows="5"
-                            class="
-                                border
-                                border-solid
-                                border-gray-600
-                                rounded-md
-                                p-2
-                                w-full
-                                focus:outline
-                                focus:outline-2
-                                focus:outline-rclaro
-                            "
-                            maxlength="300"
-                            x-ref="textArea"
-                            x-on:keyup="characters = $refs.textArea.value.length"
-                        >{{ old('note') }}</textarea>
-                    </div>
-
-                    @error('note')
-                    <div class="text-rclaro">
-                        {{ $message }}
-                    </div>
-                    @enderror
+                    </x-inputs.new-text-area>
                 </div>
             </div>
         </div>

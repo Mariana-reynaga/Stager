@@ -24,23 +24,11 @@
                                 Nombre de usuario
                             </x-inputs.label-auth>
 
-                            <input
-                                name="name"
-                                id="name"
-                                type="string"
-                                class="
-                                    border
-                                    border-solid
-                                    border-gray-600
-                                    rounded-md
-                                    p-2
-                                    w-full
-                                    focus:outline
-                                    focus:outline-2
-                                    focus:outline-blanco
-                                "
-                                value="{{old('name')}}"
-                            >
+                            <x-inputs.form-input
+                                type="text"
+                                inputName="name"
+                            />
+
                             @error('name')
                                 <div class="text-rclaro">
                                     {{ $message }}
@@ -55,24 +43,11 @@
                                 Email
                             </x-inputs.label-auth>
 
-                            <input
-                                name="email"
-                                id="email"
+                            <x-inputs.form-input
                                 type="email"
-                                class="
-                                    border
-                                    border-solid
-                                    border-gray-600
-                                    rounded-md
-                                    p-2
-                                    w-full
-                                    focus:outline
-                                    focus:outline-2
-                                    focus:outline-blanco
-                                "
+                                inputName="email"
+                            />
 
-                                value="{{old('email')}}"
-                            >
                             @error('email')
                                 <div class="text-rclaro">
                                     {{ $message }}
@@ -99,12 +74,10 @@
                                         w-full
                                         focus:outline
                                         focus:outline-2
-                                        focus:outline-blanco
-                                    "
+                                        focus:outline-rclaro"
                                     name="password"
                                     id="password"
                                 >
-                                
                                 <div class="w-1/6 flex justify-end" x-on:click="type ? type = false : type = true">
                                     <img x-bind:src="type ? hide : show" alt="" class="w-1/2 p-2 bg-slate-400 rounded-md">
                                 </div>

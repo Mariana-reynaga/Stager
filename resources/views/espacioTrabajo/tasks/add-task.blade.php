@@ -29,22 +29,10 @@
                         Separar con comas sin espacios
                     </x-inputs.label-form>
 
-                    <input
+                    <x-inputs.form-input
                         type="text"
-                        name="com_tasks"
-                        id="com_tasks"
-                        class="
-                            border
-                            border-solid
-                            border-gray-600
-                            rounded-md
-                            p-2
-                            w-full
-                            focus:outline
-                            focus:outline-2
-                            focus:outline-rclaro
-                        "
-                    >
+                        inputName="com_tasks"
+                    />
 
                     @error('com_tasks')
                     <div class="text-rclaro">
