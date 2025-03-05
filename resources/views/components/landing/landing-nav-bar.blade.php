@@ -1,17 +1,14 @@
-<div>
-    <div class="bg-rclaro p-3 min-h-20">
-        <div class="flex mx-4 min-h-12 items-center">
+<div class="w-full fixed top-0" x-data="{showBar: false}">
+    <div class="p-3 min-h-20"
+        :class="{ 'bg-white shadow-lg shadow-rclaro/50 transition duration-100' : showBar }"
+        @scroll.window="showBar = (window.pageYOffset > 20) ? true : false"
+    >
+        <div class="flex justify-between mx-4 min-h-12 items-center">
             <div class="w-1/3">
-                <h1>stager</h1>
+                <img src="images/logo/stager_navbar_logo.png" alt="Logotipo de Stager en letras blancas" class="w-2/5">
             </div>
 
-            <ul class="flex flex-row w-2/3 justify-evenly">
-                <li><a href="#descripcion" class="text-blanco font-kanit">Que es Stager</a></li>
-                <li><a href="#beneficios" class="text-blanco font-kanit">Beneficios</a></li>
-                {{-- <li><a href="" class="text-blanco font-kanit">Preguntas</a></li> --}}
-            </ul>
-
-            <div class="w-1/3 flex justify-end text-blanco font-kanit">
+            <div class="w-1/3 flex justify-end text-negro font-kanit">
                 @guest
                         <x-links.nav-link route="login">Iniciar Sesión</x-links.nav-link>
                 @else

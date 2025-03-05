@@ -7,6 +7,7 @@ use App\Models\Comisiones;
 use App\Models\MetodoPago;
 use App\Models\RedesSociales;
 use App\Models\User;
+use App\Models\Gallery;
 
 use Illuminate\Support\Str;
 
@@ -43,10 +44,15 @@ class ComisionesController extends Controller
 
         $notes = json_decode($comision_dets->com_notes);
 
+        $gallery_imgs = Gallery::all()->where('com_id_fk', $id);
+
+        // dd($gallery_imgs);
+
         return view('espacioTrabajo.coms-detalles', [
             'comision'=> $comision_dets,
             'tareas'  => $tasks,
-            'notas'   => $notes
+            'notas'   => $notes,
+            'gallery' => $gallery_imgs
         ]);
     }
 

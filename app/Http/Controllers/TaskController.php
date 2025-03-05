@@ -139,8 +139,6 @@ class TaskController extends Controller
 
         $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
 
-        // $com_info->update(['com_tasks' => $task_final]);
-
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 

@@ -7,7 +7,7 @@
 
     {{-- tailwind --}}
     @vite('resources/css/app.css')
-    
+
     {{-- Alpine --}}
     @vite(['resources/js/app.js'])
 

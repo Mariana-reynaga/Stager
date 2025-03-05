@@ -5,8 +5,8 @@
 @section('content')
     {{-- banner the stager --}}
     <div class="flex items-center flex-col p-3 my-4 min-h-52">
-    <div class=""></div>
-    <p class="text-negro text-xl"><strong class="font-normal">organización</strong> para artistas</p>
+        <div class="w-4/5 h-52 bg-slate-500">.</div>
+        <p class="text-negro text-xl"><strong class="font-normal">organización</strong> para artistas</p>
     </div>
 
     {{-- que es stager --}}
@@ -29,62 +29,61 @@
 
     {{-- beneficios de stager --}}
     <div class="flex justify-center my-20" id="beneficios">
-    <div class="w-4/5 flex flex-col items-center">
+        <div class="w-4/5 flex flex-col items-center">
         <h2 class="text-negro text-3xl font-kanit font-bold">Beneficios</h2>
 
-        {{-- beneficios --}}
-        <div class="flex flex-col md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 xl:flex xl:flex-row xl:justify-evenly xl:w-full mt-12">
+            {{-- beneficios --}}
+            <div class="flex flex-col md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 xl:flex xl:flex-row xl:justify-evenly xl:w-full mt-12">
 
-            <x-landing.beneficio-card>
-                <x-slot name="titulo">Conveniencia</x-slot>
-                Todos los detalles en un lugar
-            </x-landing.beneficio-card>
+                <x-landing.beneficio-card>
+                    <x-slot name="titulo">Conveniencia</x-slot>
+                    Todos los detalles en un lugar
+                </x-landing.beneficio-card>
 
-            <x-landing.beneficio-card>
-                <x-slot name="titulo">Simpleza</x-slot>
-                Todos los detalles en un lugar
-            </x-landing.beneficio-card>
+                <x-landing.beneficio-card>
+                    <x-slot name="titulo">Simpleza</x-slot>
+                    Todos los detalles en un lugar
+                </x-landing.beneficio-card>
 
-            <x-landing.beneficio-card>
-                <x-slot name="titulo">Para artistas</x-slot>
-                Todos los detalles en un lugar
-            </x-landing.beneficio-card>
+                <x-landing.beneficio-card>
+                    <x-slot name="titulo">Para artistas</x-slot>
+                    Todos los detalles en un lugar
+                </x-landing.beneficio-card>
 
-            <x-landing.beneficio-card>
-                <x-slot name="titulo">Gran comunidad</x-slot>
-                Todos los detalles en un lugar
-            </x-landing.beneficio-card>
+                <x-landing.beneficio-card>
+                    <x-slot name="titulo">Gran comunidad</x-slot>
+                    Todos los detalles en un lugar
+                </x-landing.beneficio-card>
 
+            </div>
 
         </div>
-
-    </div>
     </div>
 
     {{-- call to action --}}
     <div class="my-16 flex justify-center">
-    <div class="w-4/5 bg-roscuro p-6">
-        <div class="flex justify-center">
-            <div class="flex flex-col items-center w-1/2">
-                <h3 class="text-blanco font-kanit font-bold text-xl">¡Toma control del show!</h3>
-                <a
-                    href="{{ route('auth.register.form') }}"
-                    class="
-                        px-6 py-3
-                        bg-blanco
-                        text-negro
-                        rounded-lg
-                        font-kanit
-                        font-extrabold
-                        my-3"
-                >Crea tu cuenta</a>
-            </div>
+        <div class="w-4/5 bg-roscuro p-6">
+            <div class="flex justify-center">
+                <div class="flex flex-col items-center w-1/2">
+                    <h3 class="text-blanco font-kanit font-bold text-xl">¡Toma control del show!</h3>
+                    <a
+                        href="{{ route('auth.register.form') }}"
+                        class="
+                            px-6 py-3
+                            bg-blanco
+                            text-negro
+                            rounded-lg
+                            font-kanit
+                            font-extrabold
+                            my-3"
+                    >Crea tu cuenta</a>
+                </div>
 
-            <div class="w-1/2 flex justify-center">
-                <div class="bg-slate-200 w-4/5 h-full"></div>
+                <div class="w-1/2 flex justify-center">
+                    <div class="bg-slate-200 w-4/5 h-full"></div>
+                </div>
             </div>
         </div>
-    </div>
 
     </div>
 

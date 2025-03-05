@@ -35,6 +35,6 @@ class TaskButton extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.task-button');
+        return view('components.com_elements.task-button');
     }
 }

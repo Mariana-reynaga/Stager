@@ -52,7 +52,10 @@
         </div>
 
         <div class="lg:w-4/5 md:ms-48 lg:ms-52 me-3 pt-3 2xl:ms-80">
-            <h1 class="font-kanit text-xl font-semibold text-negro mt-5 ms-5">@yield('section')</h1>
+            <div class="pb-2 border-b-2 border-rclaro">
+                <h1 class="font-kanit text-3xl font-semibold text-negro mt-5 ms-5">@yield('sectionTitle')</h1>
+            </div>
+
             @yield('content')
         </div>
 

@@ -7,13 +7,20 @@
     {{-- tailwind --}}
     @vite('resources/css/app.css')
 
+    {{-- Alpine --}}
+    @vite(['resources/js/app.js'])
+
     <title>@yield('title')</title>
 </head>
 <body>
     <main>
-        <x-landing.landing-nav-bar />
+        <div class="relative mb-10">
+            <x-landing.landing-nav-bar />
+        </div>
 
-        @yield('content')
+        <div class="pt-20">
+            @yield('content')
+        </div>
 
         <footer class="bg-negro w-full min-h-40 p-5 flex flex-col items-center inset-x-0 bottom-0">
             <div class="w-4/5 flex">

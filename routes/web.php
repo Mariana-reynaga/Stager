@@ -128,6 +128,18 @@ Route::controller(App\Http\Controllers\NoteController::class)->group( function()
     ->middleware('auth');
 });
 
+Route::controller(App\Http\Controllers\GalleryController::class)->group( function(){
+    Route::get('/workspace/gallery/add/{id}', 'addPicture')
+    ->name('picture.add')
+    ->whereNumber('id')
+    ->middleware('auth');
+
+    Route::post('/workspace/gallery/add/{id}', 'addPictureProcess')
+    ->name('picture.add.process')
+    ->whereNumber('id')
+    ->middleware('auth');
+});
+
 Route::controller(App\Http\Controllers\AuthController::class)->group( function(){
         // Perfil
     Route::get('/profile/{user_id}', 'profile')

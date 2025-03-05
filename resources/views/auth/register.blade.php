@@ -6,7 +6,7 @@
     <div class="w-full flex justify-center mt-20">
         <div class="h-fit">
             <a href="/">
-                <div class="bg-slate-200 w-16 h-16 rounded-3xl"></div>
+                <img src="images/back_arrow.svg" class="w-20">
             </a>
         </div>
 

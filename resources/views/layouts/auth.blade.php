@@ -14,12 +14,7 @@
 </head>
 <body>
     <main class="h-fit">
-
         @yield('content')
-
-        {{-- <footer class="bg-negro w-full min-h-20 p-5 flex flex-col items-center absolute inset-x-0 bottom-0">
-
-        </footer> --}}
     </main>
 
 </body>

@@ -6,9 +6,10 @@
     <div class="w-full flex justify-center mt-20">
         <div class="h-fit">
             <a href="/">
-                <div class="bg-slate-200 w-16 h-16 rounded-3xl"></div>
+                <img src="images/back_arrow.svg" class="w-20">
             </a>
         </div>
+
         <div class="w-1/2 flex flex-col items-center">
             <div class="border-solid border-2 border-negro p-3 rounded-md min-w-80 w-3/5">
                 <h2 class="font-kanit text-xl text-negro ">Iniciar sesión</h2>
