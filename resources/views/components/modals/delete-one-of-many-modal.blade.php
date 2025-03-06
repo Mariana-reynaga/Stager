@@ -1,9 +1,18 @@
 <div>
-    <div x-data="{isModalOpen: false, objectId: 0}" x-on:keydown.escape="isModalOpen=false" class="relative">
+    <div x-data="{isModalOpen: false, objectId: 0, imageSrc: {{ 0 }}, lightbox: false }" x-on:keydown.escape="isModalOpen=false" class="relative">
         {{-- Fondo --}}
-        <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
+        <div x-show="isModalOpen === true || lightbox === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
 
-        {{-- Modal --}}
+        {{-- Imagen expandida modal --}}
+        <div x-show="lightbox === true" x-on:click.away="lightbox = false" x-cloak x-transition class="w-4/5 fixed top-10 z-10" tabindex="-1">
+            <div class="flex justify-center items-center">
+                <div class="w-4/5 h-full p-4 rounded-md shadow-md bg-white" x-on:click.away="lightbox = false">
+                    <img :src='imageSrc' class="h-full w-full">
+                </div>
+            </div>
+        </div>
+
+        {{-- Modal confirm --}}
         <div x-show="isModalOpen === true" x-on:click.away="isModalOpen = false" x-cloak x-transition class="w-4/5 fixed z-10" tabindex="-1">
             <div class="flex justify-center items-center">
                 <div class="w-3/5 p-4 rounded-md shadow-md bg-white">

@@ -217,26 +217,29 @@
 
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
-            <div x-data="{isModalOpen: false, imageSrc: {{ $gallery[0] }} }" x-on:keydown.escape="isModalOpen=false" class="relative">
-                {{-- Fondo --}}
-                <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
-
-                <div x-show="isModalOpen === true" x-on:click.away="isModalOpen = false" x-cloak x-transition class="w-4/5 fixed top-10 z-10" tabindex="-1">
-                    <div class="flex justify-center items-center">
-                        <div class="w-4/5 h-full p-4 rounded-md shadow-md bg-white" x-on:click.away="isModalOpen = false">
-                            <img :src='imageSrc' class="h-full w-full">
-                        </div>
-                    </div>
-                </div>
-
+            <x-modals.delete-one-of-many-modal
+                    title="¿Eliminar la Imagen?"
+                    tagline="¿Esta seguro? Una vez eliminada no se puede recuperar."
+                    route="picture.delete"
+                    param="id"
+                    :paramValue="$comision->com_id"
+                    valueName="pic_id"
+                >
                 <div class="grid grid-cols-3 gap-x-3 gap-y-4">
-
                     @foreach ($gallery as $key => $image )
-                        <div class="p-2 h-64 border-2 border-rclaro rounded-md" x-on:click="isModalOpen = true, imageSrc = '{{ Storage::url($gallery[$key]->pic_route)}}' ">
-                            <img src="{{ Storage::url($image->pic_route) }}" class="h-full w-full object-cover">
+                        <div class="p-2 h-64 border-2 border-rclaro rounded-md">
+                            <img src="{{ Storage::url($image->pic_route) }}" class="h-full w-full object-cover" x-on:click="lightbox = true, imageSrc = '{{ Storage::url($gallery[$key]->pic_route)}}'">
+
+                            <div class="relative">
+                                <div class="absolute bottom-3 right-3 bg-roscuro rounded-md" x-on:click="isModalOpen = true, objectId = {{$gallery[$key]->pic_id}}">
+
+                                    <img src="/images/task_icons/trash.svg" class="w-10">
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 </div>
+            </x-modals.delete-one-of-many-modal>
         </div>
     </div>
 @endsection

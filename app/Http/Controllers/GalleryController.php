@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Gallery;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -43,6 +44,18 @@ class GalleryController extends Controller
                 $gallery->com_id_fk = $com_id_fk;
             $gallery->save();
         }
+
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '4');
+    }
+
+    public function deletePicture(Request $req, int $id){
+        $pic_id = $req->pic_id;
+
+        $image = Gallery::findOrFail($pic_id);
+
+        $image->delete($image);
+
+        Storage::disk('public')->delete($image->pic_route);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '4');
     }

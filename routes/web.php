@@ -138,6 +138,11 @@ Route::controller(App\Http\Controllers\GalleryController::class)->group( functio
     ->name('picture.add.process')
     ->whereNumber('id')
     ->middleware('auth');
+
+    Route::delete('/workspace/gallery/delete/{id}', 'deletePicture')
+    ->name('picture.delete')
+    ->whereNumber('id')
+    ->middleware('auth');
 });
 
 Route::controller(App\Http\Controllers\AuthController::class)->group( function(){
