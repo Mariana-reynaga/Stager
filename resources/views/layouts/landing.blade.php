@@ -18,6 +18,7 @@
             <x-landing.landing-nav-bar />
         </div>
 
+
         <div class="pt-20">
             @yield('content')
         </div>
@@ -28,7 +29,7 @@
                     <p class="text-blanco font-kanit font-bold text-xl">Stager</p>
 
                     <ul >
-                        <li><a href="" class="text-blanco font-kanit">Crear una cuenta</a></li>
+                        <li><a href="{{ route('auth.register.form') }}" class="text-blanco font-kanit">Crear una cuenta</a></li>
                         <li><a href="" class="text-blanco font-kanit">Quienes somos</a></li>
                         <li><a href="" class="text-blanco font-kanit">Caja de sugerencias</a></li>
                     </ul>

@@ -21,7 +21,6 @@ export default {
                 'roscuro': '#9A031E',
                 'negro': '#0A100D',
                 'blanco': '#FEF9EF',
-
             },
         },
     },
