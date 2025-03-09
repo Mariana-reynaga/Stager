@@ -46,7 +46,6 @@ class ComisionesController extends Controller
 
         $gallery_imgs = Gallery::all()->where('com_id_fk', $id);
 
-
         return view('espacioTrabajo.coms-detalles', [
             'comision'=> $comision_dets,
             'tareas'  => $tasks,

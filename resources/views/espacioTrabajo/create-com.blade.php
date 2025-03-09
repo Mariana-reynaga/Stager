@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <form action="{{ route('espacio.crear.process') }}" method="POST">
+    <form action="{{ route('espacio.crear.process') }}" method="POST" x-data="formSubmit" @submit.prevent="submit">
         @csrf
         <div class="flex w-full justify-center">
             <div class="flex justify-evenly w-4/5 mt-4">
@@ -188,7 +188,7 @@
                                 type="text"
                                 inputName="com_tasks"
                         />
-                        
+
                         @error('com_tasks')
                         <div class="text-rclaro">
                             {{ $message }}
@@ -204,7 +204,7 @@
             <div class="w-4/5 flex justify-center">
                 <button
                 class="btn-principal w-1/3"
-                >Crear</button>
+                x-ref="btn">Crear</button>
             </div>
         </div>
     </form>

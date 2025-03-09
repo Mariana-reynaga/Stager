@@ -16,6 +16,7 @@ class UserUrlCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         if ($request->user()->user_id === (int)$request->route('user_id')) {
             return $next($request);
         }else{

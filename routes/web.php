@@ -24,7 +24,7 @@ Route::controller(App\Http\Controllers\ComisionesController::class)->group( func
     Route::get('/workspace/comision/{id}', 'comisionDetail')
         ->name('espacio.details')
         ->whereNumber('id')
-        ->middleware(['auth', 'UserUrlCheck', 'verified']);
+        ->middleware(['auth', 'verified', 'ComissionUrlCheck']);
 
             // Crear
     Route::get('/workspace/create', 'createComision')
@@ -154,11 +154,21 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
         ->middleware('auth')
         ->middleware('UserUrlCheck');
 
+        // Editar Datos
     Route::get('/profile/edit/{user_id}', 'editProfile')
         ->name('user.edit')
         ->whereNumber('user_id')
-        ->middleware('auth')
-        ->middleware('UserUrlCheck');
+        ->middleware(['auth', 'UserUrlCheck']);
+
+    Route::put('/profile/edit/user/{user_id}', 'editUser')
+        ->name('user.edit.process')
+        ->whereNumber('user_id')
+        ->middleware(['auth', 'UserUrlCheck']);
+
+    Route::put('/profile/edit/password/{user_id}', 'editPassword')
+        ->name('password.edit.process')
+        ->whereNumber('user_id')
+        ->middleware(['auth', 'UserUrlCheck']);
 
         // Login
     Route::get('/login', 'loginForm')
@@ -189,5 +199,8 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
     ->middleware(['auth', 'signed']);
 
         // Re-enviar verificación de email
-    Route::post('/email/verification-notification', 'resendVerify')->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+    Route::post('/email/verification-notification', 'resendVerify')
+    ->name('verification.send')
+    ->middleware(['auth', 'throttle:6,1']);
+
 });
