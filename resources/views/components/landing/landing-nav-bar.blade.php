@@ -1,6 +1,6 @@
 <div class="w-full fixed top-0" x-data="{showBar: false}">
     <div class="p-3 min-h-20"
-        :class="{ 'bg-white shadow-lg shadow-rclaro/50 transition duration-100' : showBar }"
+        :class="{ 'bg-white shadow-lg transition duration-100' : showBar }"
         @scroll.window="showBar = (window.pageYOffset > 20) ? true : false"
     >
         <div class="flex justify-between mx-4 min-h-12 items-center">
@@ -10,7 +10,10 @@
 
             <div class="w-2/3 lg:w-1/3 flex justify-end text-xl text-negro font-kanit">
                 @guest
+                    <div class="w-1/2 flex justify-between">
                         <x-links.nav-link route="login">Iniciar Sesión</x-links.nav-link>
+                        <x-links.nav-link route="auth.register.form">Crear Cuenta</x-links.nav-link>
+                    </div>
                 @else
                     <div class="w-2/3 lg:w-full xl:w-3/4 flex justify-between">
                         <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones</x-links.nav-link-param>

@@ -6,32 +6,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\LandingController::class, "landingPage" ])
     ->name('landing.page');
 
+    // Comisiones
 Route::controller(App\Http\Controllers\ComisionesController::class)->group( function(){
         // Areas de Trabajo
     Route::get('/workspace/{user_id}', "workspace")
         ->name('espacio.trabajo')
         ->whereNumber('user_id')
-        ->middleware('auth')
-        ->middleware('UserUrlCheck');
+        ->middleware(['auth', 'UserUrlCheck', 'verified']);
 
     Route::get('/workspace/{user_id}/complete', 'workspaceComplete')
         ->name('espacio.completas')
         ->whereNumber('user_id')
-        ->middleware('auth')
-        ->middleware('UserUrlCheck');
+        ->middleware(['auth', 'UserUrlCheck', 'verified']);
 
         // Comisiones
              // Ver
     Route::get('/workspace/comision/{id}', 'comisionDetail')
         ->name('espacio.details')
         ->whereNumber('id')
-        ->middleware('auth')
-        ->middleware('ComissionUrlCheck');
+        ->middleware(['auth', 'UserUrlCheck', 'verified']);
 
             // Crear
     Route::get('/workspace/create', 'createComision')
         ->name('espacio.crear.form')
-        ->middleware('auth');
+        ->middleware(['auth', 'verified']);
 
     Route::post('/workspace/create', 'createComisionProcess')
         ->name('espacio.crear.process')
@@ -41,8 +39,7 @@ Route::controller(App\Http\Controllers\ComisionesController::class)->group( func
     Route::get('/workspace/comision/editar/{id}', 'editComision')
         ->name('espacio.edit')
         ->whereNumber('id')
-        ->middleware('auth')
-        ->middleware('ComissionUrlCheck');
+        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
 
     Route::put('/workspace/comision/editar/{id}', 'editComisionProcess')
         ->name('espacio.edit.process')
@@ -63,6 +60,7 @@ Route::controller(App\Http\Controllers\ComisionesController::class)->group( func
 
 });
 
+    // Tareas
 Route::controller(App\Http\Controllers\TaskController::class)->group( function(){
     // Tareas
     Route::put('/workspace/tasks/complete/{id}', 'markTaskComplete')
@@ -101,6 +99,7 @@ Route::controller(App\Http\Controllers\TaskController::class)->group( function()
         ->middleware('auth');
 });
 
+    // Notas
 Route::controller(App\Http\Controllers\NoteController::class)->group( function(){
     Route::get('/workspace/notes/add/{id}', 'addNote')
     ->name('note.add')
@@ -128,6 +127,7 @@ Route::controller(App\Http\Controllers\NoteController::class)->group( function()
     ->middleware('auth');
 });
 
+    // Galeria
 Route::controller(App\Http\Controllers\GalleryController::class)->group( function(){
     Route::get('/workspace/gallery/add/{id}', 'addPicture')
     ->name('picture.add')
@@ -145,10 +145,17 @@ Route::controller(App\Http\Controllers\GalleryController::class)->group( functio
     ->middleware('auth');
 });
 
+    // Autentificación
 Route::controller(App\Http\Controllers\AuthController::class)->group( function(){
         // Perfil
     Route::get('/profile/{user_id}', 'profile')
         ->name('user.profile')
+        ->whereNumber('user_id')
+        ->middleware('auth')
+        ->middleware('UserUrlCheck');
+
+    Route::get('/profile/edit/{user_id}', 'editProfile')
+        ->name('user.edit')
         ->whereNumber('user_id')
         ->middleware('auth')
         ->middleware('UserUrlCheck');
@@ -170,4 +177,17 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
 
     Route::post('/register', "registerProcess")
         ->name('auth.register.process');
+
+        // Alerta Verificar email
+    Route::get('/email/notice', 'verifyNotice')
+        ->name('verification.notice')
+        ->middleware('auth');
+
+        // Verificador de email
+    Route::get('/email/{id}/{hash}', 'verifyEmail')
+    ->name('verification.verify')
+    ->middleware(['auth', 'signed']);
+
+        // Re-enviar verificación de email
+    Route::post('/email/verification-notification', 'resendVerify')->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 });

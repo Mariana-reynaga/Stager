@@ -13,7 +13,7 @@
         <div class="w-1/2 flex flex-col items-center">
             <div class="border-solid border-2 border-negro p-3 rounded-md min-w-80 w-3/5">
                 <h2 class="font-kanit text-xl text-negro ">Crear Cuenta</h2>
-                <form action="{{ route('auth.register.process') }}" method="POST">
+                <form action="{{ route('auth.register.process') }}" method="POST" x-data="formSubmit" @submit.prevent="submit">
                     @csrf
 
                     <div class="mt-5">
@@ -93,13 +93,13 @@
                     </div>
 
                     <div class="mt-6 flex justify-center">
-                        <button type="submit" class="btn-principal">Crear cuenta</button>
-                    </div>
-
-                    <div class="mt-6 flex justify-center text-negro font-kanit">
-                        <x-links.nav-link route="login">¿Ya tenés cuenta? Inicia sesión</x-links.nav-link>
+                        <button type="submit" class="btn-principal" x-ref="btn">Crear cuenta</button>
                     </div>
                 </form>
+
+                <div class="mt-6 flex justify-center text-negro font-kanit">
+                    <x-links.nav-link route="login">¿Ya tenés cuenta? Inicia sesión</x-links.nav-link>
+                </div>
 
             </div>
         </div>

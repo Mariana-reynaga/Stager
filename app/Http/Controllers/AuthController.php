@@ -8,6 +8,8 @@ use App\Models\Comisiones;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -83,8 +85,28 @@ class AuthController extends Controller
         $creds = $req->only('email', 'password');
 
         Auth::attempt($creds);
+
+        event(new Registered($newUser));
+
         $req->session()->regenerate();
+
         return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
+    }
+
+    public function verifyNotice(){
+        return view('auth.verify_email_notice');
+    }
+
+    public function verifyEmail(EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
+    }
+
+    public function resendVerify(Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
     }
 
     public function profile(int $user_id){
@@ -95,6 +117,14 @@ class AuthController extends Controller
         return view('perfil.index', [
             "user" => $user,
             "comision" => $comision
+        ]);
+    }
+
+    public function editProfile(int $user_id){
+        $user = User::find($user_id);
+
+        return view('perfil.edit_profile', [
+            "user" => $user
         ]);
     }
 }

@@ -9,7 +9,7 @@
             <p class="font-kanit font-semibold text-2xl text-negro">{{ auth()->user()->name }}</p>
         </div>
 
-        <a href="" class="text-roscuro underline underline-offset-4">Editar perfil</a>
+        <a href="{{route('user.edit', ['user_id'=>$user->user_id])}}" class="text-roscuro underline underline-offset-4">Editar perfil</a>
     </div>
 
     <div class="mt-10 flex justify-center">
@@ -36,8 +36,8 @@
                                     labels: ['Completa', 'No completa'],
                                     datasets: [{
                                         data: [
-                                            {{count($comision->where('is_complete', true))}},
-                                            {{count($comision->where('is_complete', false))}}
+                                            {{ count($comision->where('is_complete', true)) != 0 ? ( count($comision->where('is_complete', true)) ) : 1 }},
+                                            {{ count($comision->where('is_complete', false)) != 0 ? ( count($comision->where('is_complete', false)) ) : 1 }}
                                         ],
                                         backgroundColor: [
                                             '#CC0428',

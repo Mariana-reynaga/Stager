@@ -14,7 +14,7 @@
             <div class="border-solid border-2 border-negro p-3 rounded-md min-w-80 w-3/5">
                 <h2 class="font-kanit text-xl text-negro ">Iniciar sesión</h2>
 
-                <form action="{{ route('auth.login.process') }}" method="post">
+                <form action="{{ route('auth.login.process') }}" method="post" x-data="formSubmit" @submit.prevent="submit">
                     @csrf
 
                     <div class="mt-5">
@@ -76,13 +76,13 @@
                     </div>
 
                     <div class="mt-6 flex justify-center">
-                        <button type="submit" class="btn-principal">Iniciar Sesión</button>
-                    </div>
-
-                    <div class="mt-6 flex justify-center text-negro font-kanit">
-                        <x-links.nav-link route="auth.register.form">¿No tenés cuenta? Registrate ahora</x-links.nav-link>
+                        <button type="submit" class="btn-principal" x-ref="btn">Iniciar Sesión</button>
                     </div>
                 </form>
+
+                <div class="mt-6 flex justify-center text-negro font-kanit">
+                    <x-links.nav-link route="auth.register.form">¿No tenés cuenta? Registrate ahora</x-links.nav-link>
+                </div>
 
             </div>
         </div>
