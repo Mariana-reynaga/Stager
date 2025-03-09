@@ -38,9 +38,11 @@ return new class extends Migration
         });
 
         DB::table('users')->insert([
-            'name' => 'web master',
+            'name' => 'Tilla',
             'email'=> 'test@admin.com',
             'password'=> \Hash::make('admin123'),
+            'user_image'=>'users/N9FPwL1jAeksNoITU9veQsRu2bHg3zIP3snUor21.png',
+            'email_verified_at' => '2025-03-09 19:00:26',
             'created_at'=>now()
         ]);
         DB::table('users')->insert([

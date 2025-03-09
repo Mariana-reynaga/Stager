@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
                 RedesSocialesSeeder::class,
                 MetodoPagoSeeder::class,
                 ComisionesSeeder::class,
+                GallerySeeder::class,
             ]);
     }
 }
