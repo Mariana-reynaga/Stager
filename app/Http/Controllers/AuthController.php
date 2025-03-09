@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Comisiones;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -89,8 +90,11 @@ class AuthController extends Controller
     public function profile(int $user_id){
         $user = User::find($user_id);
 
+        $comision = Comisiones::all()->where('user_id_fk', $user_id );
+
         return view('perfil.index', [
-            "user" => $user
+            "user" => $user,
+            "comision" => $comision
         ]);
     }
 }
