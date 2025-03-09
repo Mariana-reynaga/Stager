@@ -5,7 +5,14 @@
 @section('content')
     <div class="flex justify-between items-center">
         <div class="ms-10 flex flex-wrap items-center gap-x-6 gap-y-8">
-            <div class="h-20 w-20 bg-slate-400 rounded-full"></div>
+            @if(!auth()->user()->user_image)
+                <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full"></div>
+            @else
+                <div class="w-10 h-10 2xl:w-20 2xl:h-20">
+                    <img src='/storage/{{ auth()->user()->user_image }}' class="w-full h-full object-cover rounded-full">
+                </div>
+
+            @endif
             <p class="font-kanit font-semibold text-2xl text-negro">{{ auth()->user()->name }}</p>
         </div>
 

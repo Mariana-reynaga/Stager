@@ -6,8 +6,8 @@
         {{-- Imagen expandida modal --}}
         <div x-show="lightbox === true" x-on:click.away="lightbox = false" x-cloak x-transition class="w-4/5 fixed top-10 z-10" tabindex="-1">
             <div class="flex justify-center items-center">
-                <div class="w-4/5 h-full p-4 rounded-md shadow-md bg-white" x-on:click.away="lightbox = false">
-                    <img :src='imageSrc' class="h-full w-full">
+                <div class="w-4/5 h-4/5 flex justify-center">
+                    <img :src='imageSrc' class="w-[500px] p-4 rounded-md shadow-md bg-white" x-on:click.away="lightbox = false">
                 </div>
             </div>
         </div>

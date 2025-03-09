@@ -170,6 +170,11 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
         ->whereNumber('user_id')
         ->middleware(['auth', 'UserUrlCheck']);
 
+    Route::put('/profile/edit/image/{user_id}', 'editImage')
+        ->name('user.image.edit')
+        ->whereNumber('user_id')
+        ->middleware(['auth', 'UserUrlCheck']);
+
         // Login
     Route::get('/login', 'loginForm')
         ->name('login');

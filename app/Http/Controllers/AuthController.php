@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -167,8 +168,39 @@ class AuthController extends Controller
                 'password.min' => 'La contraseña debe tener un minimo de 8 caracteres.',
             ]
         );
-        
+
         $user->update(['password'=>Hash::make($req->password)]);
+
+        return redirect()->route('user.profile', ['user_id'=>$user_id]);
+    }
+
+    public function editImage(int $user_id, Request $req){
+
+        $user = User::findOrFail($user_id);
+
+        $pfp = $req->user_image;
+
+        $req->validate(
+            [
+                'user_image' => 'required',
+                'user_image.*'=>'mimes:png,jpg,jpeg | max:2048'
+            ],
+            [
+                'user_image.required'=>'La imagen es requerida.',
+                'user_image.*.mimes'=>'La imagen debe ser de tipo png, jpg o jpeg.',
+                'user_image.*.max'=>'La imagen debe ser como maximo 2MB.'
+            ]
+        );
+
+        if($user->user_image != null){
+
+            $oldImage = $user->user_image;
+            Storage::disk('public')->delete($oldImage);
+        }
+
+        $path = $pfp->store('users', 'public');
+
+        $user->update(['user_image' => $path]);
 
         return redirect()->route('user.profile', ['user_id'=>$user_id]);
     }

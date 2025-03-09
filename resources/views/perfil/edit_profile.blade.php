@@ -106,7 +106,6 @@
                         @method('PUT')
                         @csrf
                         <div class="flex gap-x-3">
-                            {{-- Contraseña 1 --}}
                             <div class="w-1/2">
                                 <x-inputs.label-form>
                                     <x-slot name="forName">password</x-slot>
@@ -144,6 +143,50 @@
                             </div>
 
 
+                        </div>
+
+                        <div class="mt-5">
+                            <button type="submit" class="btn-principal" x-ref="btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-5 flex justify-evenly">
+                <h2 class="w-1/5 font-kanit font-semibold text-xl">Foto de perfil:</h2>
+                <div class="w-4/5 p-6 border-2 border-rclaro rounded-md">
+                    <form action="{{ route('user.image.edit', ['user_id'=>$user->user_id]) }}" method="POST" x-data="formSubmit" @submit.prevent="submit" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                        <div class="">
+                            <x-inputs.label-form>
+                                <x-slot name="forName">user_image</x-slot>
+                                <x-slot name="title">Foto de perfil</x-slot>
+
+                            </x-inputs.label-form>
+
+                            @if ($user->user_image)
+                                <div class="my-5">
+                                    <img src="/storage/{{ $user->user_image }}" alt="">
+                                </div>
+                            @endif
+
+                            <input class="
+                                file:bg-rclaro
+                                file:text-white
+                                file:border-0
+                                file:rounded-l-md
+                                file:py-2
+                                file:px-3
+                                file:me-10
+                                w-full text-lg text-gray-900 border border-gray-300 rounded-md focus:outline-none"
+                                type="file" name="user_image" id="user_image">
+
+                            @error('user_image')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mt-5">

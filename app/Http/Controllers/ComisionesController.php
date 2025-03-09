@@ -21,7 +21,8 @@ class ComisionesController extends Controller
         $incompletas = Comisiones::all()->where('user_id_fk', $user_id )->where('is_complete', false)->sortBy('com_entrega');
 
         return view('espacioTrabajo.index',[
-            'coms_incompletas' => $incompletas
+            'coms_incompletas' => $incompletas,
+            'user' => $user
         ]);
     }
 
@@ -33,7 +34,8 @@ class ComisionesController extends Controller
         $completas = Comisiones::all()->where('user_id_fk', $user_id )->where('is_complete', true);
 
         return view('espacioTrabajo.coms-completas', [
-            'coms_completas' => $completas
+            'coms_completas' => $completas,
+            'user' => $user
         ]);
     }
 

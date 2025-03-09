@@ -22,7 +22,9 @@
                 <div class="w-4/5">
                     {{-- nombre y foto usuario --}}
                     <div class="flex items-center justify-between 2xl:justify-start">
-                        <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full  "></div>
+                        <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full">
+                            <img src='/storage/{{ $user->user_image }}' class="w-full h-full object-cover rounded-full">
+                        </div>
 
                         <x-links.nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id"> <span class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span></x-links.nav-link-param>
                     </div>
