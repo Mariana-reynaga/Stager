@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('metodo_pagos', function (Blueprint $table) {
-            $table->tinyIncrements('id_metodo_pago');
-            $table->string('metodo_pago');
-            $table->timestamps();
+        Schema::table('comissions', function (Blueprint $table) {
+            $table->unsignedTinyInteger('payment_fk');
+            $table->foreign('payment_fk')->references('id_payment_method')->on('payment_methods');
         });
     }
 
@@ -23,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('metodo_pagos');
+        Schema::table('comissions', function (Blueprint $table) {
+            $table->dropColumn('payment_fk');
+        });
     }
 };

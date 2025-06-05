@@ -9,7 +9,7 @@
         @foreach ($coms_incompletas as $comision)
             <x-com_elements.tarjeta-comision>
                 <x-slot name="titulo">{{ $comision->com_title }}</x-slot>
-                <x-slot name="fecha_entrega">{{ $comision->com_entrega->format('d/m/Y') }}</x-slot>
+                <x-slot name="fecha_entrega">{{ $comision->com_due->format('d/m/Y') }}</x-slot>
                 <x-slot name="id_ruta">{{$comision->com_id}}</x-slot>
 
                 {{ $comision->com_description }}

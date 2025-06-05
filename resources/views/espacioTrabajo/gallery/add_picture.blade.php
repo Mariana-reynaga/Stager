@@ -26,7 +26,7 @@
                 <x-inputs.label-form>
                     <x-slot name="forName">pic_route[]</x-slot>
                     <x-slot name="title">Subir fotos</x-slot>
-                    Subi las fotos que necesites como referencias
+                    Subí las fotos que necesites como referencias. Solo podés subir formatos PNG, JPG y JPEG y pueden ser como máximo 2 MB.
                 </x-inputs.label-form>
 
                 <input class="

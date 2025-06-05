@@ -6,51 +6,51 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RedesSocialesSeeder extends Seeder
+class SocialMediaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('redes_sociales')->insert([
+        DB::table('social_media')->insert([
             [
-                'red_social' => 'Instagram',
+                'social_media_name' => 'Instagram',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'red_social' => 'Twitter / X',
+                'social_media_name' => 'Twitter / X',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'red_social' => 'Bluesky',
+                'social_media_name' => 'Bluesky',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'red_social' => 'Facebook',
+                'social_media_name' => 'Facebook',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'red_social' => 'Ko-fi',
+                'social_media_name' => 'Ko-fi',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'red_social' => 'Etsy',
+                'social_media_name' => 'Etsy',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'red_social' => 'V-Gen',
+                'social_media_name' => 'V-Gen',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'red_social' => 'Email',
+                'social_media_name' => 'Email',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

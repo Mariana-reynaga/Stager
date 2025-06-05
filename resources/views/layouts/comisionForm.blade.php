@@ -11,7 +11,7 @@
     {{-- Alpine --}}
     @vite(['resources/js/app.js'])
 
-    <title>@yield('title')</title>
+    <title>Stager - @yield('title')</title>
 </head>
 <body>
     <main>

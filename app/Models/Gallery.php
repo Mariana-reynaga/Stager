@@ -13,6 +13,6 @@ class Gallery extends Model
     protected $fillable = ['pic_route', 'com_id_fk'];
 
     public function comission(){
-        return $this->belongsTo(Comisiones::class, 'com_id_fk', 'com_id');
+        return $this->belongsTo(Comissions::class, 'com_id_fk', 'com_id');
     }
 }

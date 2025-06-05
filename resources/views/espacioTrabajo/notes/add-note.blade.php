@@ -25,7 +25,7 @@
                 <div class="">
                     <x-inputs.label-form>
                         <x-slot name="forName">title</x-slot>
-                        <x-slot name="title">Titulo</x-slot>
+                        <x-slot name="title">título</x-slot>
                         título de la tarea
                     </x-inputs.label-form>
 

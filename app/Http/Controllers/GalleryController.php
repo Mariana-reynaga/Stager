@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comisiones;
+use App\Models\Comissions;
 use App\Models\User;
 use App\Models\Gallery;
 
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class GalleryController extends Controller
 {
     public function addPicture(int $id){
-        $comision = Comisiones::findOrFail($id);
+        $comision = Comissions::findOrFail($id);
 
         return view('espacioTrabajo.gallery.add_picture', [
             'comision' => $comision

@@ -17,13 +17,37 @@
     /* .btn-principal{
         @apply font-kanit text-xl bg-[#39010B] text-blanco border border-[#39010B] px-5 py-2 rounded-md;
     } */
-    
+
     .btn-principal{
-        @apply font-kanit text-xl text-[#39010B] border border-[#39010B] px-5 py-2 rounded-md;
+        @apply px-5 py-2 font-kanit text-xl text-[#39010B] border border-[#39010B] rounded-md
+            transition delay-150 duration-100 ease-in-out hover:-translate-y-1
+                hover:shadow-lg
+                hover:border-roscuro
+                hover:text-roscuro
+
+                focus:-translate-y-1
+                focus:shadow-lg
+                focus:outline-2
+                focus:outline-roscuro
+                focus:outline-offset-4
+                focus:text-roscuro
+                focus:border-roscuro
+                ;
     }
 
     .btn-secundario{
-        @apply font-kanit text-xl bg-roscuro text-blanco border border-roscuro px-5 py-2 rounded-md;
+        @apply px-5 py-2 font-kanit text-xl bg-roscuro text-blanco border-2 border-roscuro rounded-md
+            transition delay-150 duration-100 ease-in-out hover:-translate-y-1
+                hover:shadow-lg
+                hover:border-negro
+
+                focus:-translate-y-1
+                focus:shadow-lg
+                focus:outline-2
+                focus:outline-negro
+                focus:outline-offset-4
+                focus:border-negro
+            ;
     }
 
     @font-face {

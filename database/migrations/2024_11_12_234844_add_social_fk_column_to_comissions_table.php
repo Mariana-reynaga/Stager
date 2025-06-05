@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('comisiones', function (Blueprint $table) {
-            $table->unsignedTinyInteger('pagos_fk');
-            $table->foreign('pagos_fk')->references('id_metodo_pago')->on('metodo_pagos');
+        Schema::table('comissions', function (Blueprint $table) {
+            $table->unsignedTinyInteger('social_fk');
+            $table->foreign('social_fk')->references('id_social')->on('social_media');
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('comisiones', function (Blueprint $table) {
-            $table->dropColumn('pagos_fk');
+        Schema::table('comissions', function (Blueprint $table) {
+            $table->dropColumn('social_fk');
         });
     }
 };

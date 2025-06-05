@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('redes_sociales', function (Blueprint $table) {
+        Schema::create('social_media', function (Blueprint $table) {
             $table->tinyIncrements('id_social');
-            $table->string('red_social');
+            $table->string('social_media_name');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('redes_sociales');
+        Schema::dropIfExists('social_media');
     }
 };

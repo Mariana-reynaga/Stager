@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Comisiones;
-use App\Models\MetodoPago;
-use App\Models\RedesSociales;
+use App\Models\Comissions;
+use App\Models\PaymentMethod;
+use App\Models\SocialMedia;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(
             [
-                RedesSocialesSeeder::class,
-                MetodoPagoSeeder::class,
-                ComisionesSeeder::class,
+                SocialMediaSeeder::class,
+                PaymentMethodSeeder::class,
+                ComissionsSeeder::class,
                 GallerySeeder::class,
             ]);
     }

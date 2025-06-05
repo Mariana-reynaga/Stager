@@ -102,11 +102,11 @@
                                 "
                             >
                                 <option value="">Elija una opción</option>
-                                @foreach ( $redes_sociales as $red )
+                                @foreach ( $social_media as $red )
                                     <option
                                         value="{{ $red->id_social }}"
                                         @selected($red->id_social == old('social_fk', $comision->social_fk))
-                                    >{{ $red->red_social }}</option>
+                                    >{{ $red->social_media_name }}</option>
                                 @endforeach
                             </select>
 
@@ -154,14 +154,14 @@
                     {{-- Método de pago --}}
                     <div class="w-2/3 mt-4">
                         <x-inputs.label-form>
-                            <x-slot name="forName">pagos_fk</x-slot>
+                            <x-slot name="forName">payment_fk</x-slot>
                             <x-slot name="title">Método de pago</x-slot>
                             Método de pago del cliente
                         </x-inputs.label-form>
 
                         <select
-                            name="pagos_fk"
-                            id="pagos_fk"
+                            name="payment_fk"
+                            id="payment_fk"
                             class="
                                 border
                                 border-solid
@@ -178,13 +178,13 @@
                             <option value="">Elija una opción</option>
                             @foreach ($metodos_pagos as $metodo)
                                 <option
-                                    value="{{ $metodo->id_metodo_pago }}"
-                                    @selected($metodo->id_metodo_pago == old('pagos_fk', $comision->pagos_fk))
-                                >{{ $metodo->metodo_pago }}</option>
+                                    value="{{ $metodo->id_payment_method }}"
+                                    @selected($metodo->id_payment_method == old('payment_fk', $comision->payment_fk))
+                                >{{ $metodo->payment_method_name }}</option>
                             @endforeach
                         </select>
 
-                        @error('pagos_fk')
+                        @error('payment_fk')
                             <div class="text-rclaro">
                                 {{ $message }}
                             </div>
@@ -194,15 +194,15 @@
                     {{-- Fecha de entrega --}}
                     <div class="w-4/5 mt-4">
                         <x-inputs.label-form>
-                            <x-slot name="forName">com_entrega</x-slot>
+                            <x-slot name="forName">com_due</x-slot>
                             <x-slot name="title">Fecha de entrega</x-slot>
                             Cuando tenés que entregar el producto final
                         </x-inputs.label-form>
 
                         <input
                             type="date"
-                            name="com_entrega"
-                            id="com_entrega"
+                            name="com_due"
+                            id="com_due"
                             class="
                                 border
                                 border-solid
@@ -214,10 +214,10 @@
                                 focus:outline-2
                                 focus:outline-rclaro
                             "
-                            value="{{ old('com_entrega', $comision->com_entrega->format('Y-m-d')) }}"
+                            value="{{ old('com_due', $comision->com_due->format('Y-m-d')) }}"
                         >
 
-                        @error('com_entrega')
+                        @error('com_due')
                             <div class="text-rclaro">
                                 {{ $message }}
                             </div>

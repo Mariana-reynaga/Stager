@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comisiones', function (Blueprint $table) {
+        Schema::create('comissions', function (Blueprint $table) {
             $table->id('com_id');
             $table->string('com_title');
             $table->text('com_description');
             $table->string('com_client');
-            $table->date('com_entrega');
+            $table->date('com_due');
             $table->json('com_tasks');
             $table->json('com_notes')->default('[]');
             $table->boolean('is_complete')->default(false);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comisiones');
+        Schema::dropIfExists('comissions');
     }
 };

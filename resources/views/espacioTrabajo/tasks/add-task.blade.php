@@ -26,7 +26,7 @@
                     <x-inputs.label-form>
                         <x-slot name="forName">com_tasks</x-slot>
                         <x-slot name="title">Nueva Tarea</x-slot>
-                        Separar con comas sin espacios
+                        Los pasos a completar, separar con comas
                     </x-inputs.label-form>
 
                     <x-inputs.form-input

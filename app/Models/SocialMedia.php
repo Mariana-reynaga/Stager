@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MetodoPago extends Model
+class SocialMedia extends Model
 {
-    // protected $table = 'metodo_pagos';
+    // protected $table = 'social_media';
 
-    protected $primaryKey = 'id_metodo_pago';
+    protected $primaryKey = 'id_social';
 }

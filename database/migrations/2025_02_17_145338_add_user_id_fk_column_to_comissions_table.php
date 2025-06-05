@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('comisiones', function (Blueprint $table) {
-            $table->unsignedTinyInteger('social_fk');
-            $table->foreign('social_fk')->references('id_social')->on('redes_sociales');
+        Schema::table('comissions', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id_fk');
+            $table->foreign('user_id_fk')->references('user_id')->on('users');
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('comisiones', function (Blueprint $table) {
-            $table->dropColumn('social_fk');
+        Schema::table('comissions', function (Blueprint $table) {
+            $table->dropColumn('user_id_fk');
         });
     }
 };

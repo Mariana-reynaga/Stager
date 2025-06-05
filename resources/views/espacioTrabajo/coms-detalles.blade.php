@@ -39,7 +39,7 @@
                 <div class="h-fit flex items-center">
                     <h2 class="text-xl font-bold text-rclaro me-2">Fecha de entrega:</h2>
                     @if ($comision->is_complete == false)
-                        <p>{{ $comision->com_entrega->format('d/m/Y') }}</p>
+                        <p>{{ $comision->com_due->format('d/m/Y') }}</p>
                     @else
                         <p>Completada</p>
                     @endif
@@ -51,8 +51,8 @@
 
                     <ul class="min-h-24 flex flex-col justify-evenly">
                         <li><span class="text-roscuro" >Contacto:</span> {{ $comision->com_client }}</li>
-                        <li><span class="text-roscuro" >Método:</span> {{ $comision->social->red_social }}</li>
-                        <li><span class="text-roscuro" >Método de pago:</span> {{ $comision->pago->metodo_pago }}</li>
+                        <li><span class="text-roscuro" >Método:</span> {{ $comision->social->social_media_name }}</li>
+                        <li><span class="text-roscuro" >Método de pago:</span> {{ $comision->payment->payment_method_name }}</li>
                     </ul>
 
                 </div>
@@ -83,12 +83,55 @@
         <div class="w-4/5">
             {{-- Tareas --}}
             <div class="flex flex-col">
-                <x-comision-details-title
-                    title="Tareas"
-                    route="task.add"
-                    :status='$comision->is_complete'
-                    :param='$comision->com_id'
-                />
+                <div x-data="{addOpen: false}" class="relative">
+                    {{-- Fondo --}}
+                    <div x-show="addOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
+
+                    {{-- Modal agregar tarea --}}
+                    <div x-show="addOpen === true" x-cloak x-transition class="w-4/5 fixed z-10" tabindex="-1">
+                        <div class="flex justify-center items-center">
+                            <div class="w-3/5 p-4 rounded-md shadow-md bg-white">
+                                <div class="pb-2 flex justify-between items-center border-b-2 border-rclaro rounded-md">
+                                    <h1 class="font-kanit font-semibold text-xl text-roscuro">Agregar Tareas</h1>
+
+                                    <div x-on:click="addOpen = false">
+                                        <img src="/images/task_icons/close.svg" alt="" class="w-10">
+                                    </div>
+                                </div>
+
+                                <div class="ms-5 mt-5">
+                                    <form action="{{ route('task.add.process', ['id'=>$comision->com_id]) }}" method="POST">
+                                        @csrf
+                                        <x-inputs.label-form>
+                                            <x-slot name="forName">com_tasks</x-slot>
+                                            <x-slot name="title">Nueva Tarea</x-slot>
+                                            Los pasos a completar, separar con comas
+                                        </x-inputs.label-form>
+
+                                        <x-inputs.form-input
+                                            type="text"
+                                            inputName="com_tasks"
+                                        />
+
+                                        @error('com_tasks')
+                                        <div class="text-rclaro">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+
+                                        <div class="my-3">
+                                            <button type="submit" class="btn-principal">Agregar</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <p x-on:click="addOpen = true">Agregar</p>
+
+                </div>
 
                 <x-modals.delete-one-of-many-modal title="¿Eliminar la Tarea?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="task.delete.process" param="id" :paramValue="$comision->com_id" valueName="tasks_id">
 
@@ -207,7 +250,7 @@
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
             <x-comision-details-title
-                    title="Galeria"
+                    title="Galería"
                     route="picture.add"
                     :status='$comision->is_complete'
                     :param='$comision->com_id'

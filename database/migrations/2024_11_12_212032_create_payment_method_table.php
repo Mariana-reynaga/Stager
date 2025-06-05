@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('comisiones', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id_fk');
-            $table->foreign('user_id_fk')->references('user_id')->on('users');
+        Schema::create('payment_methods', function (Blueprint $table) {
+            $table->tinyIncrements('id_payment_method');
+            $table->string('payment_method_name');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('comisiones', function (Blueprint $table) {
-            $table->dropColumn('user_id_fk');
-        });
+        Schema::dropIfExists('payment_methods');
     }
 };

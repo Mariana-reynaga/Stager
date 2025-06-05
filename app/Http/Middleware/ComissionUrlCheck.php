@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Comisiones;
+use App\Models\Comissions;
 
 class ComissionUrlCheck
 {
@@ -16,7 +16,7 @@ class ComissionUrlCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $comision = Comisiones::find((int)$request->route('id'));
+        $comision = Comissions::find((int)$request->route('id'));
 
         // dd($comision->user_id_fk);
 

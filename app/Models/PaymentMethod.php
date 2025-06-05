@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RedesSociales extends Model
+class PaymentMethod extends Model
 {
-    // protected $table = 'redes_sociales';
+    // protected $table = 'payment_methods';
 
-    protected $primaryKey = 'id_social';
+    protected $primaryKey = 'id_payment_method';
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Comisiones;
+use App\Models\Comissions;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -74,7 +74,7 @@ class AuthController extends Controller
                 'email.unique'      => 'El email ya esta registrado.',
                 /////////
                 'password.required' => 'La contraseña es requerida.',
-                'password.min' => 'La contraseña debe tener un minimo de 8 caracteres.',
+                'password.min' => 'La contraseña debe tener un mínimo de 8 caracteres.',
             ]
         );
 
@@ -114,7 +114,7 @@ class AuthController extends Controller
     public function profile(int $user_id){
         $user = User::find($user_id);
 
-        $comision = Comisiones::all()->where('user_id_fk', $user_id );
+        $comision = Comissions::all()->where('user_id_fk', $user_id );
 
         return view('perfil.index', [
             "user" => $user,

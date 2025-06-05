@@ -3,17 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comisiones;
+use App\Models\Comissions;
 use App\Models\User;
 
 use Illuminate\Support\Str;
 
 class TaskController extends Controller
 {
-    public function markTaskComplete(Request $req, int $id){
-        $com_info = Comisiones::find($id);
 
-        $tasks = json_decode($com_info->com_tasks);
+    public function findComission(int $id){
+        $com_info = Comissions::find($id);
+
+        return $com_info;
+    }
+
+    public function updatePercent(int $id){
+        $task_completed = 0;
+
+        $tasks = json_decode($this->findComission($id)->com_tasks);
+
+        $tasks_length = count($tasks);
+
+        foreach($tasks as $item){
+            if($item->is_complete === true){
+                $task_completed ++;
+            }
+        }
+
+        if ($tasks_length === 0) {
+            $percent = 0;
+        }else{
+            $percent = ceil(($task_completed / $tasks_length) * 100);
+        }
+
+        return $percent;
+    }
+
+    public function markTaskComplete(Request $req, int $id){
+        $tasks = json_decode($this->findComission($id)->com_tasks);
 
         $taskComplete = (int) $req->tasks_id; //id of the task i wanna complete
 
@@ -22,34 +49,13 @@ class TaskController extends Controller
             'is_complete' => true
         ];
 
-        $task_completed = 0;
-        $tasks_length = count($tasks);
-
-        $tasks = json_encode($tasks);
-
-        $tasks = json_decode($tasks);
-
-        foreach($tasks as $item){
-            if($item->is_complete === true){
-                $task_completed ++;
-            }
-        }
-
-        if ($tasks_length === 0) {
-            $percent = 0;
-        }else{
-            $percent = ceil(($task_completed / $tasks_length) * 100);
-        }
-
-        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks), 'com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function markTaskIncomplete(Request $req, int $id){
-        $com_info = Comisiones::find($id);
-
-        $tasks = json_decode($com_info->com_tasks);
+        $tasks = json_decode($this->findComission($id)->com_tasks);
 
         $taskComplete = (int) $req->tasks_id; //id of the task i wanna complete
 
@@ -57,44 +63,14 @@ class TaskController extends Controller
             'task' => $tasks[$taskComplete]->task,
             'is_complete' => false
         ];
-        $task_completed = 0;
-        $tasks_length = count($tasks);
 
-        $tasks = json_encode($tasks);
-
-        $tasks = json_decode($tasks);
-
-        foreach($tasks as $item){
-            if($item->is_complete === true){
-                $task_completed ++;
-            }
-        }
-
-        if ($tasks_length === 0) {
-            $percent = 0;
-        }else{
-            $percent = ceil(($task_completed / $tasks_length) * 100);
-        }
-
-        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks), 'com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
-    public function addTask(int $id){
-        $comision = Comisiones::findOrFail($id);
-
-        return view('espacioTrabajo.tasks.add-task', [
-            'comision' => $comision
-        ])->with('tabNum', '2');
-    }
-
     public function addTaskProcess(Request $req, int $id){
-        $com_info = Comisiones::find($id);
-
-        $tasks = json_decode($com_info->com_tasks);
-
-        $new_tasks = [];
+        $tasks = json_decode($this->findComission($id)->com_tasks);
 
         $req->validate(
             [
@@ -105,7 +81,7 @@ class TaskController extends Controller
             ]
         );
 
-        $newTasks = collect(explode(',' , $req->com_tasks ) );
+        $newTasks = collect(explode(', ' , $req->com_tasks ) );
 
         foreach( $newTasks as $item ){
             $arr = [
@@ -118,34 +94,13 @@ class TaskController extends Controller
 
         $task_final = Str::replace('" ', '"', json_encode($tasks) );
 
-        $task_completed = 0;
-        $tasks_length = count($tasks);
-
-        $tasks = json_encode($tasks);
-
-        $tasks = json_decode($tasks);
-
-        foreach($tasks as $item){
-            if($item->is_complete === true){
-                $task_completed ++;
-            }
-        }
-
-        if ($tasks_length === 0) {
-            $percent = 0;
-        }else{
-            $percent = ceil(($task_completed / $tasks_length) * 100);
-        }
-
-        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
+        $this->findComission($id)->update(['com_tasks' => $task_final, 'com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function deleteTask(Request $req, int $id){
-        $com_info = Comisiones::find($id);
-
-        $tasks = json_decode($com_info->com_tasks);
+        $tasks = json_decode($this->findComission($id)->com_tasks);
 
         $task2delete = (int) $req->tasks_id;
 
@@ -155,34 +110,13 @@ class TaskController extends Controller
 
         $tasks = array_values($tasks);
 
-        $task_completed = 0;
-        $tasks_length = count($tasks);
-
-        $tasks = json_encode($tasks);
-
-        $tasks = json_decode($tasks);
-
-        foreach($tasks as $item){
-            if($item->is_complete === true){
-                $task_completed ++;
-            }
-        }
-
-        if ($tasks_length === 0) {
-            $percent = 0;
-        }else{
-            $percent = ceil(($task_completed / $tasks_length) * 100);
-        }
-
-        $com_info->update(['com_tasks' => json_encode($tasks), 'com_percent' => $percent]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks), 'com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2')->with('success.msg', 'La tarea se elimino exitosamente.');
     }
 
     public function moveTaskUp(Request $req, int $id){
-        $com_info = Comisiones::find($id);
-
-        $tasks = json_decode($com_info->com_tasks);
+        $tasks = json_decode($this->findComission($id)->com_tasks);
 
         $taskToMove = (int) $req->tasks_id;
 
@@ -192,15 +126,13 @@ class TaskController extends Controller
 
         [$tasks[$currentTaskPosition], $tasks[$finalPosition]] = [$tasks[$finalPosition], $tasks[$currentTaskPosition]];
 
-        $com_info->update(['com_tasks' => json_encode($tasks)]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
 
     public function moveTaskDown(Request $req, int $id){
-        $com_info = Comisiones::find($id);
-
-        $tasks = json_decode($com_info->com_tasks);
+        $tasks = json_decode($this->findComission($id)->com_tasks);
 
         $taskToMove = (int) $req->tasks_id;
 
@@ -210,7 +142,7 @@ class TaskController extends Controller
 
         [$tasks[$currentTaskPosition], $tasks[$finalPosition]] = [$tasks[$finalPosition], $tasks[$currentTaskPosition]];
 
-        $com_info->update(['com_tasks' => json_encode($tasks)]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }

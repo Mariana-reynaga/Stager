@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comisiones;
+use App\Models\Comissions;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
     public function addNote(int $id){
-        $comision = Comisiones::findOrFail($id);
+        $comision = Comissions::findOrFail($id);
 
         return view('espacioTrabajo.notes.add-note', [
             'comision' => $comision
@@ -17,7 +17,7 @@ class NoteController extends Controller
     }
 
     public function addNoteProcess(Request $req, int $id){
-        $com_info = Comisiones::find($id);
+        $com_info = Comissions::find($id);
 
         $notes = json_decode($com_info->com_notes);
 
@@ -53,7 +53,7 @@ class NoteController extends Controller
     }
 
     public function editNote(Request $req, int $id){
-        $com_info = Comisiones::find($id);
+        $com_info = Comissions::find($id);
 
         $notes = json_decode($com_info->com_notes);
 
@@ -69,7 +69,7 @@ class NoteController extends Controller
     }
 
     public function editNoteProcess(Request $req, int $id){
-        $com_info = Comisiones::find($id);
+        $com_info = Comissions::find($id);
 
         $notes = json_decode($com_info->com_notes);
 
@@ -100,7 +100,7 @@ class NoteController extends Controller
     }
 
     public function deleteNote(Request $req, int $id){
-        $com_info = Comisiones::find($id);
+        $com_info = Comissions::find($id);
 
         $notes = json_decode($com_info->com_notes);
 

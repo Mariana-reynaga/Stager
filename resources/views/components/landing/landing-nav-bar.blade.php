@@ -5,7 +5,7 @@
     >
         <div class="flex justify-between mx-4 min-h-12 items-center">
             <div class="w-1/3 md:w-1/4 lg:w-1/3 xl:w-1/4">
-                <img src="images/logo/stager_navbar_logo.png" alt="Logotipo de Stager en letras blancas" class="lg:w-2/3 2xl:1/6">
+                <img src="images/logo/stager_navbar_logo_colors.png" alt="Logotipo de Stager en letras blancas" class="lg:w-2/3 2xl:1/6">
             </div>
 
             <div class="w-2/3 lg:w-1/3 flex justify-end text-xl text-negro font-kanit">

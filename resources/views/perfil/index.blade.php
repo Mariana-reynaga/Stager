@@ -11,7 +11,6 @@
                 <div class="w-10 h-10 2xl:w-20 2xl:h-20">
                     <img src='/storage/{{ auth()->user()->user_image }}' class="w-full h-full object-cover rounded-full">
                 </div>
-
             @endif
             <p class="font-kanit font-semibold text-2xl text-negro">{{ auth()->user()->name }}</p>
         </div>
@@ -60,12 +59,9 @@
                                 options: {
                                     responsive: true,
                                     maintainAspectRatio: false,
-                                    legend: {
-                                        position: 'bottom',
-                                        labels: {
-                                            fontColor: 'black',
-                                            fontSize: 16,
-                                            padding: 20
+                                    plugins: {
+                                        legend: {
+                                            display: false
                                         }
                                     }
                                 }

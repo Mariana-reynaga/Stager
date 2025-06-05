@@ -10,7 +10,7 @@
     {{-- Alpine --}}
     @vite(['resources/js/app.js'])
 
-    <title>@yield('title')</title>
+    <title>Stager - @yield('title')</title>
 </head>
 <body>
     <main>
@@ -39,7 +39,7 @@
                         <p x-on:click="activeTab = 1" :class="activeTab === 1 ? active : inactive">Detalles</p>
                         <p x-on:click="activeTab = 2" :class="activeTab === 2 ? active : inactive">Tareas</p>
                         <p x-on:click="activeTab = 3" :class="activeTab === 3 ? active : inactive">Notas</p>
-                        <p x-on:click="activeTab = 4" :class="activeTab === 4 ? active : inactive">Galeria</p>
+                        <p x-on:click="activeTab = 4" :class="activeTab === 4 ? active : inactive">Galería</p>
                     </div>
                 </div>
 

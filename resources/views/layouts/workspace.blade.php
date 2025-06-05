@@ -10,7 +10,7 @@
     {{-- Alpine --}}
     @vite(['resources/js/app.js'])
 
-    <title>@yield('title')</title>
+    <title>Stager - @yield('title')</title>
 </head>
 <body>
     <main class="flex w-full">
@@ -18,14 +18,16 @@
             <div class="flex justify-center mt-5">
                 <div class="w-4/5">
                     {{-- nombre y foto usuario --}}
-                    <div class="flex items-center justify-between 2xl:justify-start">
+                    <x-links.nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id">
+                        <div class="flex items-center justify-between 2xl:justify-start">
 
-                        <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full">
-                            <img src='/storage/{{ $user->user_image }}' class="w-full h-full object-cover rounded-full">
+                            <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full">
+                                <img src='/storage/{{ $user->user_image }}' class="w-full h-full object-cover rounded-full">
+                            </div>
+
+                            <span class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span>
                         </div>
-
-                        <x-links.nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id"> <span class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span></x-links.nav-link-param>
-                    </div>
+                    </x-links.nav-link-param>
 
                     {{-- links --}}
                     <ul class="text-blanco font-kanit text-sm 2xl:text-lg mt-10 h-40 2xl:h-52 flex flex-col justify-between">
@@ -34,7 +36,7 @@
                         </li>
 
                         <li>
-                            <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones en progreso</x-links.nav-link-param>
+                            <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones en proceso</x-links.nav-link-param>
                         </li>
 
                         <li>

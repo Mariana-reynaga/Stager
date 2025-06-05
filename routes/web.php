@@ -7,7 +7,7 @@ Route::get('/', [App\Http\Controllers\LandingController::class, "landingPage" ])
     ->name('landing.page');
 
     // Comisiones
-Route::controller(App\Http\Controllers\ComisionesController::class)->group( function(){
+Route::controller(App\Http\Controllers\ComissionsController::class)->group( function(){
         // Areas de Trabajo
     Route::get('/workspace/{user_id}', "workspace")
         ->name('espacio.trabajo')
@@ -19,7 +19,7 @@ Route::controller(App\Http\Controllers\ComisionesController::class)->group( func
         ->whereNumber('user_id')
         ->middleware(['auth', 'UserUrlCheck', 'verified']);
 
-        // Comisiones
+        // Comissions
              // Ver
     Route::get('/workspace/comision/{id}', 'comisionDetail')
         ->name('espacio.details')
@@ -70,11 +70,6 @@ Route::controller(App\Http\Controllers\TaskController::class)->group( function()
 
     Route::put('/workspace/tasks/incomplete/{id}', 'markTaskIncomplete')
     ->name('task.incomplete')
-    ->whereNumber('id')
-    ->middleware('auth');
-
-    Route::get('/workspace/tasks/add/{id}', 'addTask')
-    ->name('task.add')
     ->whereNumber('id')
     ->middleware('auth');
 
