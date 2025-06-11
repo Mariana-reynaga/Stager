@@ -1,22 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@font-face {
+      font-family: caramel;
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("/fonts/Super-Caramel.ttf");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
-    /* .btn-principal{
-        @apply font-kanit text-xl text-blanco bg-rclaro px-5 py-2 rounded-md hover:bg-roscuro focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-roscuro active:bg-blanco active:text-roscuro;
-    } */
-
-    /* .btn-secundario{
-        @apply font-kanit text-xl text-negro bg-slate-300 px-5 py-2 rounded-md shadow-md shadow-slate-600/40 hover:shadow hover:bg-slate-600 hover:text-blanco focus:shadow-none focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-roscuro active:shadow-none active:bg-slate-800 active:text-blanco;
-    } */
-
-    /* .btn-principal{
-        @apply font-kanit text-xl bg-[#39010B] text-blanco border border-[#39010B] px-5 py-2 rounded-md;
-    } */
+    .benefit-card{
+        @apply p-8 shadow-lg shadow-negro/30 rounded-md transition duration-300 ease-in-out
+            hover:bg-roscuro
+    } .benefit-card p{
+        @apply mt-3 text-xl lg:text-lg
+    } .benefit-card h2{
+        @apply font-bold text-2xl
+    }
 
     .btn-principal{
         @apply px-5 py-2 font-kanit text-xl text-[#39010B] border border-[#39010B] rounded-md
@@ -40,7 +44,6 @@
             transition delay-150 duration-100 ease-in-out hover:-translate-y-1
                 hover:shadow-lg
                 hover:border-negro
-
                 focus:-translate-y-1
                 focus:shadow-lg
                 focus:outline-2
@@ -49,13 +52,4 @@
                 focus:border-negro
             ;
     }
-
-    @font-face {
-      font-family: 'Caramel';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url(/fonts/Super-Caramel.ttf) format('ttf');
-    }
-
 }

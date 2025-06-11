@@ -42,8 +42,6 @@ class ComissionsController extends Controller
     public function comisionDetail(int $id){
         $comision_dets = Comissions::find($id);
 
-        // dd($comision_dets);
-
         $tasks = json_decode($comision_dets->com_tasks);
 
         $notes = json_decode($comision_dets->com_notes);

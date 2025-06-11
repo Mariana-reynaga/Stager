@@ -14,7 +14,7 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 kanit: ['Kanit', 'sans'],
-                caramel: ['Caramel', 'cursive'],
+                caramel: ['caramel', 'cursive'],
             },
             colors:{
                 'rclaro': '#CC0428',
