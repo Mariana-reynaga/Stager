@@ -10,12 +10,12 @@
 
             <div class="w-2/3 lg:w-1/3 xl:w-1/2 flex justify-end text-xl text-negro font-kanit">
                 @guest
-                    <div class="w-2/3 lg:w-full xl:w-1/2 flex justify-between">
+                    <div class="w-2/3 lg:w-full xl:w-1/2 2xl:w-1/3 flex justify-between">
                         <x-links.nav-link route="login">Iniciar Sesión</x-links.nav-link>
                         <x-links.nav-link route="auth.register.form">Crear Cuenta</x-links.nav-link>
                     </div>
                 @else
-                    <div class="w-2/3 lg:w-full xl:w-1/2 flex justify-between">
+                    <div class="w-2/3 lg:w-full xl:w-1/2 2xl:w-1/3 flex justify-between">
                         <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones</x-links.nav-link-param>
 
                         <form action="{{ route('auth.logout.process') }}" method="POST">

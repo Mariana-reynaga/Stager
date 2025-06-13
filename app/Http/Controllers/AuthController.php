@@ -36,7 +36,8 @@ class AuthController extends Controller
         if (!auth()->attempt($credentials)) {
             return redirect()
                    ->back(fallback: route('login'))
-                   ->withInput();
+                   ->withInput()
+                   ->withErrors(['wrongpass'=>'La contraseña no es correcta.']);
         }else{
 
             return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);

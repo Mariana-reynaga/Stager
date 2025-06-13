@@ -29,8 +29,8 @@
             activeTab: @if (session('tabNum')) {{(int) session('tabNum')}} @else 1  @endif,
             active: 'mx-5 py-2 px-5 text-white rounded-t-lg bg-rclaro',
             inactive: 'mx-5 py-2 px-5 border-2 border-b-0 border-rclaro rounded-t-lg',
-            showMsg: @if(session('success.msg')) true @else false @endif,
-        }">
+            showMsg: @if(session('success.msg')) true @else false @endif,}">
+            
             <div class="flex flex-col items-center mt-5">
                 <div class="w-4/5 flex justify-between border-b-2 border-rclaro">
                     @yield('content')
