@@ -34,8 +34,7 @@
                         Contraseña
                     </x-inputs.label-auth>
 
-
-                    <div x-data="{type: true, hide: 'images/password_eyes/eye_closed.svg' , show:'images/password_eyes/eye_open.svg' }" class="flex h-12">
+                    <div x-data="{type: true, hide: 'images/password_eyes/eye_closed.svg' , show:'images/password_eyes/eye_open.svg' }" class="h-12 flex">
                         <input
                             name="password"
                             id="password"

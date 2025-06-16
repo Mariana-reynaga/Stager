@@ -18,7 +18,6 @@
             <x-landing.landing-nav-bar />
         </div>
 
-
         <div class="pt-20">
             @yield('content')
         </div>

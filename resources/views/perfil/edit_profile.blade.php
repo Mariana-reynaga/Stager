@@ -2,27 +2,20 @@
 
 @section('title', 'Editar Perfil')
 
-@section('back')
-    <div class="mt-10 ms-10">
-        <a href="{{ route('user.profile', ['user_id'=>auth()->user()->user_id] ) }}" class="flex items-center">
-            <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
-            <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>
-        </a>
-    </div>
-@endsection
+@section('back', route('user.profile', ['user_id'=>auth()->user()->user_id]))
 
 @section('content')
-    <div class="flex justify-center mt-5">
+    <div class="mt-20 flex justify-center">
         <div class="w-4/5 py-2 border-b-2 border-rclaro">
             <h1 class="font-kanit font-semibold text-2xl text-negro">Editar Perfil</h1>
         </div>
     </div>
 
-    <div class="flex justify-center">
-        <div class="w-4/5">
-            <div class="mt-5 flex justify-evenly">
+    <div class="mb-5 flex justify-center">
+        <div class="w-4/5 flex flex-col gap-y-5">
+            <div class="mt-5 flex flex-col lg:flex-row lg:justify-evenly">
                 <h2 class="w-1/5 font-kanit font-semibold text-xl">Usuario:</h2>
-                <div class="w-4/5 p-6 border-2 border-rclaro rounded-md">
+                <div class="mt-2 lg:w-4/5 p-6 border-2 border-rclaro rounded-md">
                     <form action="{{ route('user.edit.process', ['user_id'=>$user->user_id]) }}" method="POST" x-data="formSubmit" @submit.prevent="submit">
                         @method('PUT')
                         @csrf
@@ -99,50 +92,47 @@
                 </div>
             </div>
 
-            <div class="mt-5 flex justify-evenly">
+            <div class="flex flex-col lg:flex-row lg:justify-evenly">
                 <h2 class="w-1/5 font-kanit font-semibold text-xl">Contraseña:</h2>
-                <div class="w-4/5 p-6 border-2 border-rclaro rounded-md">
+                <div class="mt-2 lg:w-4/5 p-6 border-2 border-rclaro rounded-md">
                     <form action="{{ route('password.edit.process', ['user_id'=>$user->user_id]) }}" method="POST" x-data="formSubmit" @submit.prevent="submit">
                         @method('PUT')
                         @csrf
-                        <div class="flex gap-x-3">
-                            <div class="w-1/2">
-                                <x-inputs.label-form>
-                                    <x-slot name="forName">password</x-slot>
-                                    <x-slot name="title">Contraseña</x-slot>
+                        <div class="flex flex-col gap-x-3">
+                            <x-inputs.label-form>
+                                <x-slot name="forName">password</x-slot>
+                                <x-slot name="title">Contraseña</x-slot>
 
-                                </x-inputs.label-form>
+                            </x-inputs.label-form>
 
-                                <div x-data="{type: true, hide: '/images/password_eyes/eye_closed.svg' , show:'/images/password_eyes/eye_open.svg' }" class="flex">
-                                    <input
-                                        name="password"
-                                        id="password"
-                                        x-bind:type="type ? 'password' : 'text'"
-                                        class="
-                                            w-5/6
-                                            p-2
-                                            border
-                                            border-solid
-                                            border-gray-600
-                                            rounded-md
-                                            focus:outline
-                                            focus:outline-2
-                                            focus:outline-rclaro"
-                                    >
+                            <div x-data="{type: true, hide: '/images/password_eyes/eye_closed.svg' , show:'/images/password_eyes/eye_open.svg' }" class="xl:w-2/3 2xl:w-3/5 flex justify-between">
+                                <input
+                                    name="password"
+                                    id="password"
+                                    x-bind:type="type ? 'password' : 'text'"
+                                    class="
+                                        h-12
+                                        w-5/6
+                                        p-2
+                                        border
+                                        border-solid
+                                        border-gray-600
+                                        rounded-md
+                                        focus:outline
+                                        focus:outline-2
+                                        focus:outline-rclaro"
+                                >
 
-                                    <div class="w-1/6 flex justify-end" x-on:click="type ? type = false : type = true">
-                                        <img x-bind:src="type ? hide : show" alt="" class="w-1/2 p-2 bg-slate-400 rounded-md">
-                                    </div>
+                                <div class="w-1/6 h-12 md:w-12 flex justify-end" x-on:click="type ? type = false : type = true">
+                                    <img x-bind:src="type ? hide : show" alt="" class=" p-2 bg-rclaro rounded-md">
                                 </div>
-
-                                @error('password')
-                                    <div class="text-rclaro">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                             </div>
 
-
+                            @error('password')
+                                <div class="text-rclaro">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mt-5">
@@ -152,9 +142,9 @@
                 </div>
             </div>
 
-            <div class="mt-5 flex justify-evenly">
-                <h2 class="w-1/5 font-kanit font-semibold text-xl">Foto de perfil:</h2>
-                <div class="w-4/5 p-6 border-2 border-rclaro rounded-md">
+            <div class="flex flex-col lg:flex-row lg:justify-evenly">
+                <h2 class="w-2/3 lg:w-1/5 font-kanit font-semibold text-xl">Foto de perfil:</h2>
+                <div class="lg:w-4/5 mt-2 p-6 border-2 border-rclaro rounded-md">
                     <form action="{{ route('user.image.edit', ['user_id'=>$user->user_id]) }}" method="POST" x-data="formSubmit" @submit.prevent="submit" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf

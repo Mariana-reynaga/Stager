@@ -5,7 +5,7 @@
 @section('sectionTitle', 'Comisiones en Proceso')
 
 @section('content')
-    <div class="mt-10 ms-10 flex flex-wrap gap-x-6 gap-y-8">
+    <div class="mb-5 mt-52 md:mt-20 lg:ms-10 flex justify-center lg:justify-start flex-wrap gap-x-6 gap-y-8">
         @foreach ($coms_incompletas as $comision)
             <x-com_elements.tarjeta-comision>
                 <x-slot name="titulo">{{ $comision->com_title }}</x-slot>
@@ -19,4 +19,6 @@
         @endforeach
 
     </div>
+
+
 @endsection

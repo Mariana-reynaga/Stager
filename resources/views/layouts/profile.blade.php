@@ -16,34 +16,34 @@
     <title>Stager - @yield('title')</title>
 </head>
 <body>
-    <main class="flex w-full">
-        <div class="bg-rclaro h-full md:w-40 lg:w-48 fixed pt-3 pe-3 2xl:w-80">
-            <div class="flex justify-center mt-5">
-                <div class="w-4/5">
+    <main>
+        <div class="md:h-full w-full md:w-48 lg:w-48 2xl:w-80 md:pt-3 md:px-3 fixed bg-rclaro">
+            <div class="md:mt-5 flex justify-center">
+                <div class="w-4/5 my-3">
                     {{-- nombre y foto usuario --}}
                     <x-links.nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id">
-                        <div class="flex items-center justify-between 2xl:justify-start">
-                            <div class="w-10 h-10 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full">
+                        <div class="w-1/4 md:w-full flex items-center 2xl:justify-start">
+
+                            <div class="w-12 h-12 md:w-14 md:h-14 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full">
                                 <img src='/storage/{{ $user->user_image }}' class="w-full h-full object-cover rounded-full">
                             </div>
 
-                            <span class="text-blanco font-kanit 2xl:ms-5">{{ auth()->user()->name }}</span>
+                            <span class="ms-5 2xl:ms-5 md:text-lg text-blanco font-kanit">{{ auth()->user()->name }}</span>
                         </div>
                     </x-links.nav-link-param>
 
                     {{-- links --}}
-                    <ul class="text-blanco font-kanit text-sm 2xl:text-lg mt-10 h-40 2xl:h-52 flex flex-col justify-between">
+                    <ul class="h-fit md:h-60 2xl:h-52 mt-3 md:mt-10 flex md:flex-col justify-between text-blanco font-kanit text-md text-center md:text-start md:text-base 2xl:text-lg">
                         <li>
                             <x-links.nav-link route="espacio.crear.form">Cargar comisión</x-links.nav-link>
                         </li>
 
                         <li>
-                            <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones en progreso</x-links.nav-link-param>
+                            <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones en proceso</x-links.nav-link-param>
                         </li>
 
                         <li>
                             <x-links.nav-link-param route="espacio.completas" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones completas</x-links.nav-link-param>
-
                         </li>
 
                         <li>
@@ -51,7 +51,6 @@
                                 @csrf
                                 <button type="submit">Cerrar sesión</button>
                             </form>
-
                         </li>
                     </ul>
                 </div>
