@@ -46,7 +46,7 @@
                                 >
 
                                 @error('name')
-                                    <div class="text-rclaro">
+                                    <div class="mt-2 font-kanit text-rclaro">
                                         {{ $message }}
                                     </div>
                                 @enderror
@@ -78,7 +78,7 @@
                                 >
 
                                 @error('email')
-                                    <div class="text-rclaro">
+                                    <div class="mt-2 font-kanit text-rclaro">
                                         {{ $message }}
                                     </div>
                                 @enderror
@@ -129,7 +129,7 @@
                             </div>
 
                             @error('password')
-                                <div class="text-rclaro">
+                                <div class="mt-2 font-kanit text-rclaro">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -173,7 +173,7 @@
                                 type="file" name="user_image" id="user_image">
 
                             @error('user_image')
-                                <div class="text-rclaro">
+                                <div class="mt-2 font-kanit text-rclaro">
                                     {{ $message }}
                                 </div>
                             @enderror

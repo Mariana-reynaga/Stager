@@ -14,24 +14,29 @@
 </head>
 <body>
     <main>
-        <div class="w-fit mt-10 ms-10">
-            <a href="{{ route('espacio.trabajo', ['user_id'=>auth()->user()->user_id] ) }}" class="flex items-center">
-                <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
-                <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>
-            </a>
+        <div class="w-full shadow-md flex justify-center fixed top-0">
+            <div class="w-5/6 p-3 flex justify-between bg-white">
+                <a href="{{ route('espacio.trabajo', ['user_id'=>auth()->user()->user_id] ) }}" class="flex items-center">
+                    <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
+                    <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>
+                </a>
+
+                <img src="/../images/logo/icon_black.svg" alt="" class="w-12">
+            </div>
         </div>
+
 
         <style>
             [x-cloak] { display: none !important; }
         </style>
         <div x-cloak x-data="{
             activeTab: @if (session('tabNum')) {{(int) session('tabNum')}} @else 1  @endif,
-            active: 'mx-5 py-2 px-5 text-white rounded-t-lg bg-rclaro',
-            inactive: 'mx-5 py-2 px-5 border-2 border-b-0 border-rclaro rounded-t-lg',
+            active: 'mx-5 lg:mx-3 py-2 px-5 font-kanit text-white rounded-t-lg bg-rclaro',
+            inactive: 'mx-5 lg:mx-3 py-2 px-5 font-kanit border-2 border-b-0 border-rclaro rounded-t-lg',
             showMsg: @if(session('success.msg')) true @else false @endif,}">
 
-            <div class="flex flex-col items-center mt-5">
-                <div class="w-4/5 flex justify-between border-b-2 border-rclaro">
+            <div class="mt-24 flex flex-col items-center">
+                <div class="w-4/5 flex flex-col lg:flex-row justify-between border-b-2 border-rclaro">
                     @yield('content')
 
                     <div class="flex">

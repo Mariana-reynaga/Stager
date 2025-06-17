@@ -5,20 +5,19 @@
 @section('section', $comision->com_title)
 
 @section('content')
-    <div class="flex justify-between items-center">
+    <div class="mb-5 lg:mb-0 flex justify-between items-center">
         <h1 class="font-kanit font-semibold text-2xl text-negro">{{$comision->com_title}}</h1>
         @if ($comision->is_complete == false)
-            <a href="{{ route('espacio.edit', ['id'=>$comision->com_id]) }}" class="ms-10 text-rclaro" >Editar comisión</a>
+            <a href="{{ route('espacio.edit', ['id'=>$comision->com_id]) }}" class="ms-10 link-style" >Editar comisión</a>
         @endif
     </div>
 
 @endsection
 
 @section('details')
-    <div class="flex flex-col items-center w-full mt-5">
-        <div class="flex justify-between font-kanit text-negro w-4/5 pt-5 min-h-80">
-            <div class="w-2/5 flex flex-col">
-
+    <div class="w-full mt-5 flex flex-col items-center">
+        <div class="w-4/5 min-h-80 pt-5 flex flex-col lg:flex-row justify-between gap-y-10 gap-x-10 font-kanit text-negro">
+            <div class="w-1/2  flex flex-col">
                 {{-- Descripción --}}
                 <div class="flex flex-col break-words overflow-hidden">
                     <h2 class="text-xl font-bold text-rclaro">Descripción:</h2>
@@ -34,7 +33,7 @@
 
             </div>
 
-            <div class="w-2/5 flex flex-col justify-between">
+            <div class="w-1/2  flex flex-col justify-between">
                 {{-- Fecha de entrega --}}
                 <div class="h-fit flex items-center">
                     <h2 class="text-xl font-bold text-rclaro me-2">Fecha de entrega:</h2>
@@ -46,7 +45,7 @@
                 </div>
 
                 {{-- Cliente --}}
-                <div class="flex flex-col mt-5">
+                <div class="flex flex-col">
                     <h2 class="text-xl font-bold text-rclaro me-2">Cliente</h2>
 
                     <ul class="min-h-24 flex flex-col justify-evenly">
@@ -57,7 +56,7 @@
 
                 </div>
 
-                <div class="flex justify-evenly mt-5">
+                <div class="flex justify-evenly gap-x-3">
                     {{-- Eliminar --}}
                     <x-modals.confirm-modal title="¿Eliminar Comisión?" tagline="¿Esta seguro? Una vez eliminada, la comisión no puede recuperarse." route="espacio.details.delete" param="id" :paramValue="$comision->com_id"  method="DELETE" submitTxt="Eliminar">
                         <button x-on:click="isModalOpen = true" class="btn-secundario">Eliminar</button>
@@ -66,16 +65,13 @@
                     {{-- Marcar como completo --}}
                     @if ($comision->is_complete == false)
                         <x-modals.confirm-modal title="¿Completar Comisión?" tagline="Una vez marcada como completa, la comisión no puede volver al estado de incompleta." route="espacio.details.complete" param="id" :paramValue="$comision->com_id"  method="PUT" submitTxt="Completar">
-                            <button x-on:click="isModalOpen = true" class="btn-principal">Marcar como completado</button>
+                            <button x-on:click="isModalOpen = true" class="btn-principal text-lg">Marcar como completado</button>
                         </x-modals.confirm-modal>
                     @endif
                 </div>
             </div>
-
         </div>
-
     </div>
-
 @endsection
 
 @section('tasks')

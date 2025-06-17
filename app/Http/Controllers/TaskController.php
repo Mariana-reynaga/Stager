@@ -49,7 +49,9 @@ class TaskController extends Controller
             'is_complete' => true
         ];
 
-        $this->findComission($id)->update(['com_tasks' => json_encode($tasks), 'com_percent' => $this->updatePercent($id)]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks)]);
+
+        $this->findComission($id)->update(['com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
@@ -64,7 +66,9 @@ class TaskController extends Controller
             'is_complete' => false
         ];
 
-        $this->findComission($id)->update(['com_tasks' => json_encode($tasks), 'com_percent' => $this->updatePercent($id)]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks)]);
+
+        $this->findComission($id)->update(['com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }

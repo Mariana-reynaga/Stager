@@ -16,7 +16,7 @@
                 <p class="font-kanit font-semibold text-2xl text-negro">{{ auth()->user()->name }}</p>
             </div>
 
-            <a href="{{route('user.edit', ['user_id'=>$user->user_id])}}" class="font-kanit text-roscuro underline underline-offset-4">Editar perfil</a>
+            <a href="{{route('user.edit', ['user_id'=>$user->user_id])}}" class="link-style">Editar perfil</a>
         </div>
     </div>
 
@@ -33,7 +33,7 @@
                         <p><span class="text-roscuro font-semibold">Plan:</span> {{ $user->email }}</p>
                         <p><span class="text-roscuro font-semibold">Fin de suscripción:</span> {{ $user->created_at->format('d/m/Y') }}</p>
 
-                        <a href="" class="mt-3 text-roscuro underline underline-offset-4">Renovar Subscripción</a>
+                        <a href="" class="mt-3 link-style">Renovar Subscripción</a>
                     </div>
                 </div>
 

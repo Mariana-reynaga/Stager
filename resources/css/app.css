@@ -22,6 +22,10 @@
         @apply font-bold text-2xl
     }
 
+    .link-style{
+        @apply font-kanit text-roscuro underline underline-offset-4
+    }
+
     .btn-principal{
         @apply px-5 py-2 font-kanit text-xl text-[#39010B] border border-[#39010B] rounded-md
             transition delay-150 duration-100 ease-in-out hover:-translate-y-1

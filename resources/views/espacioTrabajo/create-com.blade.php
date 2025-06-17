@@ -5,12 +5,12 @@
 @section('back', route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]))
 
 @section('content')
-    <div class="flex justify-center mt-5">
+    <div class="mt-20 flex justify-center">
         <div class="w-4/5 py-2 border-b-2 border-rclaro">
             <h1 class="font-kanit font-semibold text-2xl text-negro">Crear comisión</h1>
         </div>
     </div>
-
+    
     <form action="{{ route('espacio.crear.process') }}" method="POST" x-data="formSubmit" @submit.prevent="submit">
         @csrf
         <div class="flex w-full justify-center">
