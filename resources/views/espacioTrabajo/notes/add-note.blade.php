@@ -2,14 +2,7 @@
 
 @section('title', 'Añadir Notas')
 
-@section('back')
-    <div class="mt-10 ms-10 w-fit">
-        <a href="{{ route('espacio.details', ['id'=>$comision->com_id] ) }}" class="flex items-center">
-            <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
-            <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>
-        </a>
-    </div>
-@endsection
+@section('back', route('espacio.details', ['id'=>$comision->com_id]) )
 
 @section('content')
     <div class="flex justify-center mt-5">

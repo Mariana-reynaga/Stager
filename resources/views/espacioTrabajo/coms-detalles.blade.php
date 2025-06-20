@@ -17,7 +17,7 @@
 @section('details')
     <div class="w-full mt-5 flex flex-col items-center">
         <div class="w-4/5 min-h-80 pt-5 flex flex-col lg:flex-row justify-between gap-y-10 gap-x-10 font-kanit text-negro">
-            <div class="w-1/2  flex flex-col">
+            <div class="lg:w-1/2 flex flex-col">
                 {{-- Descripción --}}
                 <div class="flex flex-col break-words overflow-hidden">
                     <h2 class="text-xl font-bold text-rclaro">Descripción:</h2>
@@ -25,7 +25,7 @@
                 </div>
 
                 {{-- Progreso --}}
-                <div class="mt-5 flex flex-col break-words overflow-hidden">
+                <div class="mt-5 xl:w-2/3 flex flex-col break-words overflow-hidden">
                     <h2 class="text-xl font-bold text-rclaro">Progreso:</h2>
 
                     <x-com_elements.progress-bar :percent="$comision->com_percent" />
@@ -33,7 +33,7 @@
 
             </div>
 
-            <div class="w-1/2  flex flex-col justify-between">
+            <div class="lg:w-1/2 flex flex-col gap-y-6">
                 {{-- Fecha de entrega --}}
                 <div class="h-fit flex items-center">
                     <h2 class="text-xl font-bold text-rclaro me-2">Fecha de entrega:</h2>
@@ -75,20 +75,20 @@
 @endsection
 
 @section('tasks')
-    <div class="mt-5 flex justify-center">
+    <div class="mt-5 flex justify-center z-0">
         <div class="w-4/5">
             {{-- Tareas --}}
             <div class="flex flex-col">
                 <div x-data="{addOpen: false}" class="relative">
                     {{-- Fondo --}}
-                    <div x-show="addOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
+                    <div x-show="addOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20 z-20"></div>
 
                     {{-- Modal agregar tarea --}}
-                    <div x-show="addOpen === true" x-cloak x-transition class="w-4/5 fixed z-10" tabindex="-1">
+                    <div x-show="addOpen === true" x-cloak x-transition class="w-4/5 fixed z-30" tabindex="-1">
                         <div class="flex justify-center items-center">
-                            <div class="w-3/5 p-4 rounded-md shadow-md bg-white">
-                                <div class="pb-2 flex justify-between items-center border-b-2 border-rclaro rounded-md">
-                                    <h1 class="font-kanit font-semibold text-xl text-roscuro">Agregar Tareas</h1>
+                            <div class="w-full lg:w-3/5 p-4 rounded-md shadow-md bg-white">
+                                <div class="pb-2 flex justify-between items-center border-b-2 border-rclaro">
+                                    <h2 class="font-kanit font-semibold text-xl text-roscuro">Agregar Tareas</h2>
 
                                     <div x-on:click="addOpen = false">
                                         <img src="/images/task_icons/close.svg" alt="" class="w-10">
@@ -109,12 +109,6 @@
                                             inputName="com_tasks"
                                         />
 
-                                        @error('com_tasks')
-                                        <div class="text-rclaro">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-
                                         <div class="my-3">
                                             <button type="submit" class="btn-principal">Agregar</button>
                                         </div>
@@ -125,69 +119,79 @@
                         </div>
                     </div>
 
-                    <p x-on:click="addOpen = true">Agregar</p>
+                    <p x-on:click="addOpen = true" class="w-fit link-style">Agregar Tarea</p>
 
                 </div>
 
                 <x-modals.delete-one-of-many-modal title="¿Eliminar la Tarea?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="task.delete.process" param="id" :paramValue="$comision->com_id" valueName="tasks_id">
 
-                    <div class="mt-5 grid grid-cols-3 gap-y-4">
+                    <div class="mt-5 flex flex-col gap-y-4">
                         @foreach ($tareas as $key => $tarea )
-
-                        <div class="">
-                            @if ($comision->is_complete == false)
-                                @if ($tarea->is_complete === false)
-                                    <p class="me-5">"{{ $tarea->task }}"</p>
-                                @else
-                                    <p class="me-5 text-slate-500 line-through">"{{ $tarea->task }}"</p>
-                                @endif
-                            @else
-                                <p class="me-5 text-slate-500 line-through">"{{ $tarea->task }}"</p>
-                            @endif
-                        </div>
-
-                        <div class="col-span-2">
-                            <div class="flex justify-between">
-                                @if ($comision->is_complete == false)
-
-                                    @if ($tarea->is_complete === false)
-                                        <x-com_elements.task-button route="task.complete" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-green-500 rounded-md">
-                                            <img src="{{url('/images/task_icons/check.svg')}}" class="w-5" alt="">
-                                        </x-com_elements.task-button>
-                                    @else
-                                        <x-com_elements.task-button route="task.incomplete" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-red-500 rounded-md">
-                                            <img src="{{url('/images/task_icons/close.svg')}}" class="w-5" alt="">
-                                        </x-com_elements.task-button>
-                                    @endif
-
-                                    @if (count($tareas) > 1 )
-                                        @if ($key != 0 && $key != count($tareas)-1 )
-                                            <x-com_elements.task-button route="task.moveUP" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-blue-500 rounded-md">
-                                                <img src="{{url('/images/task_icons/up.svg')}}" class="w-5" alt="">
-                                            </x-com_elements.task-button>
-
-                                            <x-com_elements.task-button route="task.moveDOWN" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-sky-500 rounded-md">
-                                                <img src="{{url('/images/task_icons/down.svg')}}" class="w-5" alt="">
-                                            </x-com_elements.task-button>
-
-                                        @elseif ($key === 0)
-                                            <x-com_elements.task-button route="task.moveDOWN" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-sky-500 rounded-md">
-                                                <img src="{{url('/images/task_icons/down.svg')}}" class="w-5" alt="">
-                                            </x-com_elements.task-button>
-
-                                        @elseif ($key === count($tareas)-1)
-                                            <x-com_elements.task-button route="task.moveUP" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="px-4 py-2 bg-blue-500 rounded-md">
-                                                <img src="{{url('/images/task_icons/up.svg')}}" class="w-5" alt="">
-                                            </x-com_elements.task-button>
+                            <div class="p-3 flex justify-between items-center border-2 border-rclaro rounded-md shadow-md">
+                                <div class="w-1/2 lg:w-3/5 xl:w-2/3 font-kanit">
+                                    @if ($comision->is_complete == false)
+                                        @if ($tarea->is_complete === false)
+                                            <p class="me-5">"{{ $tarea->task }}"</p>
+                                        @else
+                                            <p class="me-5 text-slate-500 line-through">"{{ $tarea->task }}"</p>
                                         @endif
+                                    @else
+                                        <p class="me-5 text-slate-500 line-through">"{{ $tarea->task }}"</p>
                                     @endif
+                                </div>
 
-                                    <div x-on:click="isModalOpen = true, objectId = {{$key}} " class="px-4 py-2 bg-red-500 rounded-md">
-                                        <img src="{{url('/images/task_icons/trash.svg')}}" class="w-5">
+                                <div class="w-1/2 lg:w-1/3">
+                                    <div class="grid grid-cols-4 gap-x-5">
+                                        @if ($comision->is_complete == false)
+                                            {{-- Marcar Tarea completa/Incompleta --}}
+                                            @if ($tarea->is_complete === false)
+                                                <x-com_elements.task-button route="task.complete" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="border-2 border-rclaro rounded-md">
+                                                    <img src="{{url('/images/task_icons/check.svg')}}" class="w-10" alt="">
+                                                </x-com_elements.task-button>
+                                            @else
+                                                <x-com_elements.task-button route="task.incomplete" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="border-2 border-rclaro bg-rclaro rounded-md">
+                                                    <img src="{{url('/images/task_icons/close_white.svg')}}" class="w-10" alt="">
+                                                </x-com_elements.task-button>
+                                            @endif
+
+                                            {{-- Mover la tarea arriba/abajo --}}
+                                            @if (count($tareas) > 1 )
+                                                @if ($key != 0 && $key != count($tareas)-1 )
+                                                    <x-com_elements.task-button route="task.moveUP" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="border-2 border-rclaro rounded-md">
+                                                        <img src="{{url('/images/task_icons/up.svg')}}" class="w-10" alt="">
+                                                    </x-com_elements.task-button>
+
+                                                    <x-com_elements.task-button route="task.moveDOWN" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="border-2 border-rclaro rounded-md">
+                                                        <img src="{{url('/images/task_icons/down.svg')}}" class="w-10" alt="">
+                                                    </x-com_elements.task-button>
+
+                                                @elseif ($key === 0)
+                                                    <div class="col-start-3">
+                                                        <x-com_elements.task-button route="task.moveDOWN" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="border-2 border-rclaro rounded-md">
+                                                            <img src="{{url('/images/task_icons/down.svg')}}" class="w-10" alt="">
+                                                        </x-com_elements.task-button>
+                                                    </div>
+
+                                                @elseif ($key === count($tareas)-1)
+                                                    <x-com_elements.task-button route="task.moveUP" param="id" :paramValue="$comision->com_id" :valueKey="$key" inputName="tasks_id" method="PUT" classes="col-span-2 border-2 border-rclaro rounded-md">
+                                                        <img src="{{url('/images/task_icons/up.svg')}}" class="w-10" alt="">
+                                                    </x-com_elements.task-button>
+                                                @endif
+                                            @endif
+
+                                            {{-- Eliminar la tarea --}}
+                                            <div x-on:click="isModalOpen = true, objectId = {{$key}} " class="w-12 col-start-4 flex justify-center border-2 border-rclaro bg-rclaro rounded-md">
+                                                <img src="{{url('/images/task_icons/trash.svg')}}" class="w-10">
+                                            </div>
+                                        @endif
                                     </div>
-                                @endif
+                                </div>
                             </div>
-                        </div>
+
+
+                            <div class="">
+                            </div>
+
                         @endforeach
                     </div>
                 </x-modals.delete-one-of-many-modal>
@@ -199,16 +203,13 @@
 @section('notes')
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
-            <x-comision-details-title
-                    title="Notas"
-                    route="note.add"
-                    :status='$comision->is_complete'
-                    :param='$comision->com_id'
-            />
+            <a href="{{ route('note.add', ['id'=>$comision->com_id]) }}">
+                <h2 class="link-style">Agregar Nota</h2>
+            </a>
 
             <x-modals.delete-one-of-many-modal title="¿Eliminar la Nota?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="note.delete.process" param="id" :paramValue="$comision->com_id" valueName="note_id">
 
-                <div class="mt-5 grid grid-cols-3 gap-x-3 gap-y-4">
+                <div class="my-5 flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-3 gap-y-4">
                     @foreach ($notas as $key => $nota )
                         <div class="min-h-52 border border-rclaro rounded-md">
                             <div class="py-2 px-3 bg-rclaro text-white">
@@ -216,18 +217,18 @@
                             </div>
 
                             <div class="flex flex-col justify-between">
-                                <div class="h-48 px-4 py-2 break-words overflow-hidden">
-                                    <p class="mt-3">{{ $nota->note }}</p>
+                                <div class="h-48 md:h-56 lg:h-40 xl:h-52 2xl:h-40 mt-3 px-4 py-2 break-words overflow-hidden font-kanit">
+                                    <p>{{ $nota->note }}</p>
                                 </div>
 
                                 @if ($comision->is_complete == false)
                                     <div class="my-5 flex justify-evenly">
-                                        <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="font-semibold text-roscuro">Eliminar</button>
+                                        <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="btn-secundario">Eliminar</button>
 
                                         <form action="{{route('note.edit', ['id'=>$comision->com_id])}}">
                                             @csrf
                                             <input type="hidden" name="noteId" id="noteId" value="{{$key}}">
-                                            <button type="submit">Editar</button>
+                                            <button type="submit" class="btn-principal">Editar</button>
                                         </form>
 
                                     </div>

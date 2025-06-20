@@ -74,6 +74,7 @@ class TaskController extends Controller
     }
 
     public function addTaskProcess(Request $req, int $id){
+
         $tasks = json_decode($this->findComission($id)->com_tasks);
 
         $req->validate(
@@ -98,7 +99,9 @@ class TaskController extends Controller
 
         $task_final = Str::replace('" ', '"', json_encode($tasks) );
 
-        $this->findComission($id)->update(['com_tasks' => $task_final, 'com_percent' => $this->updatePercent($id)]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks)]);
+
+        $this->findComission($id)->update(['com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2');
     }
@@ -114,7 +117,9 @@ class TaskController extends Controller
 
         $tasks = array_values($tasks);
 
-        $this->findComission($id)->update(['com_tasks' => json_encode($tasks), 'com_percent' => $this->updatePercent($id)]);
+        $this->findComission($id)->update(['com_tasks' => json_encode($tasks)]);
+
+        $this->findComission($id)->update(['com_percent' => $this->updatePercent($id)]);
 
         return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '2')->with('success.msg', 'La tarea se elimino exitosamente.');
     }
