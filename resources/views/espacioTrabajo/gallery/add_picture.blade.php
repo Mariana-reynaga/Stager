@@ -41,12 +41,12 @@
                     type="file" name="pic_route[]" multiple>
 
                 @error('pic_route')
-                <div class="text-rclaro">
+                <div class="error-notice">
                     {{ $message }}
                 </div>
                 @enderror
                 @error('pic_route.*')
-                <div class="text-rclaro">
+                <div class="error-notice">
                     {{ $message }}
                 </div>
                 @enderror

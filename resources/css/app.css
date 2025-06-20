@@ -26,6 +26,10 @@
         @apply font-kanit text-roscuro underline underline-offset-4
     }
 
+    .error-notice{
+        @apply mt-3 font-kanit text-rclaro
+    }
+
     .btn-principal{
         @apply px-5 py-2 font-kanit text-xl text-[#39010B] border border-[#39010B] rounded-md
             transition delay-150 duration-100 ease-in-out hover:-translate-y-1

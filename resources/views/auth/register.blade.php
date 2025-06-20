@@ -21,7 +21,7 @@
                     />
 
                     @error('name')
-                        <div class="text-rclaro">
+                        <div class="error-notice">
                             {{ $message }}
                         </div>
                     @enderror
@@ -40,7 +40,7 @@
                     />
 
                     @error('email')
-                        <div class="text-rclaro">
+                        <div class="error-notice">
                             {{ $message }}
                         </div>
                     @enderror
@@ -76,7 +76,7 @@
 
 
                     @error('password')
-                        <div class="text-rclaro">
+                        <div class="error-notice">
                             {{ $message }}
                         </div>
                     @enderror

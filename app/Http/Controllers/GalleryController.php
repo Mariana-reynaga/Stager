@@ -57,6 +57,6 @@ class GalleryController extends Controller
 
         Storage::disk('public')->delete($image->pic_route);
 
-        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '4');
+        return redirect()->route('espacio.details', ['id'=>$id])->with('tabNum', '4')->with('success.msg', 'La Imagen se elimino exitosamente.');
     }
 }

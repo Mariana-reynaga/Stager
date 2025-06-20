@@ -7,7 +7,7 @@
                 {{$labelTagline}}
             </x-inputs.label-form>
 
-            <div class="p-2 rounded-md bg-roscuro text-white">
+            <div class="p-2 rounded-md bg-roscuro font-kanit text-white">
                 <p>
                     <span x-html="characters"></span> /
                     <span x-html="$refs.textArea.maxLength"></span>

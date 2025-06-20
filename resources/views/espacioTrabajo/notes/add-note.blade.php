@@ -5,7 +5,7 @@
 @section('back', route('espacio.details', ['id'=>$comision->com_id]) )
 
 @section('content')
-    <div class="flex justify-center mt-5">
+    <div class="mt-20 flex justify-center">
         <div class="w-4/5 border-b-2 border-rclaro">
             <h1 class="font-kanit font-semibold text-2xl text-negro">Añadir Nota</h1>
         </div>
@@ -28,7 +28,7 @@
                     />
 
                     @error('title')
-                    <div class="text-rclaro">
+                    <div class="error-notice">
                         {{ $message }}
                     </div>
                     @enderror
@@ -42,7 +42,7 @@
                         maxlength="300">
 
                         @error('note')
-                            <div class="text-rclaro">
+                            <div class="error-notice">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -52,11 +52,9 @@
             </div>
         </div>
 
-        <div class="flex w-full justify-center my-10 ">
+        <div class="my-10 flex w-full justify-center">
             <div class="w-4/5">
-                <button
-                class="btn-principal w-1/3"
-                >Crear</button>
+                <button class="w-1/3 btn-principal" x-ref="btn">Crear</button>
             </div>
         </div>
     </form>

@@ -53,7 +53,7 @@
                         >
 
                         @error('com_title')
-                            <div class="text-rclaro">
+                            <div class="error-notice">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -68,7 +68,7 @@
                             maxlength="150"
                             :colPastData="$comision->com_description">
                             @error('com_description')
-                                <div class="text-rclaro">
+                                <div class="error-notice">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -111,7 +111,7 @@
                             </select>
 
                             @error('social_fk')
-                                <div class="text-rclaro">
+                                <div class="error-notice">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -144,7 +144,7 @@
                             >
 
                             @error('com_client')
-                                <div class="text-rclaro">
+                                <div class="error-notice">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -185,7 +185,7 @@
                         </select>
 
                         @error('payment_fk')
-                            <div class="text-rclaro">
+                            <div class="error-notice">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -218,7 +218,7 @@
                         >
 
                         @error('com_due')
-                            <div class="text-rclaro">
+                            <div class="error-notice">
                                 {{ $message }}
                             </div>
                         @enderror

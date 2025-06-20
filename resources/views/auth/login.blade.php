@@ -21,7 +21,7 @@
                     />
 
                     @error('email')
-                        <div class="mt-3 font-kanit text-rclaro">
+                        <div class="error-notice">
                             {{ $message }}
                         </div>
                     @enderror
@@ -57,13 +57,13 @@
                     </div>
 
                     @error('password')
-                        <div class="mt-3 font-kanit text-rclaro">
+                        <div class="error-notice">
                             {{ $message }}
                         </div>
                     @enderror
 
                     @error('wrongpass')
-                        <div class="mt-3 font-kanit text-rclaro">
+                        <div class="error-notice">
                             {{ $message }}
                         </div>
                     @enderror

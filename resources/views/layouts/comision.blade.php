@@ -67,7 +67,7 @@
                     <div x-show="activeTab === 3" x-transition>
                         <div x-show="showMsg === true" class="flex justify-center">
                             <div class="w-4/5 flex justify-center">
-                                <div class="flex justify-between items-center bg-green-500/30 p-6 rounded-md mt-3 font-outfit text-xl w-1/3">
+                                <div class="w-4/5 lg:w-1/2 2xl:w-1/3 mt-5 p-6 flex justify-between items-center bg-green-500/30 shadow-md font-kanit text-xl rounded-md">
                                     {!! session()->get('success.msg') !!}
 
                                     <div x-on:click="showMsg = false">
@@ -79,6 +79,18 @@
                         @yield('notes')
                     </div>
                     <div x-show="activeTab === 4" x-transition>
+                        <div x-show="showMsg === true" class="flex justify-center">
+                            <div class="w-4/5 flex justify-center">
+                                <div class="w-4/5 lg:w-1/2 2xl:w-1/3 mt-5 p-6 flex justify-between items-center bg-green-500/30 shadow-md font-kanit text-xl rounded-md">
+                                    {!! session()->get('success.msg') !!}
+
+                                    <div x-on:click="showMsg = false">
+                                        <img src="/images/task_icons/close.svg" alt="" class="w-5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         @yield('gallery')
                     </div>
                 </div>

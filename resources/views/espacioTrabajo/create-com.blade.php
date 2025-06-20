@@ -10,7 +10,7 @@
             <h1 class="font-kanit font-semibold text-2xl text-negro">Crear comisión</h1>
         </div>
     </div>
-    
+
     <form action="{{ route('espacio.crear.process') }}" method="POST" x-data="formSubmit" @submit.prevent="submit">
         @csrf
         <div class="flex w-full justify-center">
@@ -30,7 +30,7 @@
                         />
 
                         @error('com_title')
-                            <div class="text-rclaro">
+                            <div class="error-notice">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -45,7 +45,7 @@
                             maxlength="150">
 
                             @error('com_description')
-                                <div class="text-rclaro">
+                                <div class="error-notice">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -67,7 +67,7 @@
                         />
 
                         @error('com_due')
-                            <div class="text-rclaro">
+                            <div class="error-notice">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -106,7 +106,7 @@
                             </select>
 
                             @error('social_fk')
-                                <div class="text-rclaro">
+                                <div class="error-notice">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -126,7 +126,7 @@
                             />
 
                             @error('com_client')
-                                <div class="text-rclaro">
+                                <div class="error-notice">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -163,7 +163,7 @@
                         </select>
 
                         @error('payment_fk')
-                            <div class="text-rclaro">
+                            <div class="error-notice">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -183,7 +183,7 @@
                         />
 
                         @error('com_tasks')
-                        <div class="text-rclaro">
+                        <div class="error-notice">
                             {{ $message }}
                         </div>
                         @enderror
