@@ -1,5 +1,5 @@
 
-![Logo](/public/images/logo/stager_navbar_logo.png)
+![Logo](/public/images/logo/logo_white.png)
 
 <!-- <img src="/public/images/logo/stager_navbar_logo.png"> -->
 # Stager

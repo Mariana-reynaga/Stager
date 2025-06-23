@@ -62,8 +62,6 @@
                             @if ($comision->com_reciept == null)
                                 <a href="{{ route('reciept.upload', ['id'=>$comision->com_id] ) }}" class="link-style">Subir comprobante de pago</a>
                             @else
-                                {{-- <a href="{{ route('reciept.download', ['id'=>$comision->com_id]) }}" class="link-style" target="_blank" ta>Descargar comprobante de pago</a> --}}
-
                                 <div class="flex justify-center">
                                     <div
                                         x-data="{
@@ -90,7 +88,6 @@
                                         x-id="['dropdown-button']"
                                         class="relative"
                                     >
-                                        <!-- Button -->
                                         <button
                                             x-ref="button"
                                             x-on:click="toggle()"
@@ -101,8 +98,6 @@
                                         >
                                             <span>Opciones</span>
                                         </button>
-
-                                        <!-- Panel -->
                                         <div
                                             x-ref="panel"
                                             x-show="open"
