@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 
 class TaskController extends Controller
 {
-
     public function findComission(int $id){
         $com_info = Comissions::find($id);
 

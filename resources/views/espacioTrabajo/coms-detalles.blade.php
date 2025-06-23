@@ -21,7 +21,7 @@
                 {{-- Descripción --}}
                 <div class="flex flex-col break-words overflow-hidden">
                     <h2 class="text-xl font-bold text-rclaro">Descripción:</h2>
-                    <p>{{ $comision->com_description }}</p>
+                    <p class="mt-2">{{ $comision->com_description }}</p>
                 </div>
 
                 {{-- Progreso --}}
@@ -44,19 +44,106 @@
                     @endif
                 </div>
 
-                {{-- Cliente --}}
-                <div class="flex flex-col">
-                    <h2 class="text-xl font-bold text-rclaro me-2">Cliente</h2>
+                <div class="flex gap-x-10">
+                    {{-- Cliente --}}
+                    <div class="w-1/3 flex flex-col">
+                        <h2 class="text-xl font-bold text-rclaro">Cliente</h2>
 
-                    <ul class="min-h-24 flex flex-col justify-evenly">
-                        <li><span class="text-roscuro" >Contacto:</span> {{ $comision->com_client }}</li>
-                        <li><span class="text-roscuro" >Método:</span> {{ $comision->social->social_media_name }}</li>
-                        <li><span class="text-roscuro" >Método de pago:</span> {{ $comision->payment->payment_method_name }}</li>
-                    </ul>
+                        <ul class="min-h-24 mt-2 flex flex-col gap-y-5">
+                            <li><span class="text-roscuro" >Contacto:</span> {{ $comision->com_client }}</li>
+                            <li><span class="text-roscuro" >Método:</span> {{ $comision->social->social_media_name }}</li>
+                        </ul>
+                    </div>
 
+                    {{-- Pago --}}
+                    <div class="w-2/3 flex flex-col">
+                        <div class="flex items-center gap-x-5">
+                            <h2 class="text-xl font-bold text-rclaro">Pago</h2>
+                            @if ($comision->com_reciept == null)
+                                <a href="{{ route('reciept.upload', ['id'=>$comision->com_id] ) }}" class="link-style">Subir comprobante de pago</a>
+                            @else
+                                {{-- <a href="{{ route('reciept.download', ['id'=>$comision->com_id]) }}" class="link-style" target="_blank" ta>Descargar comprobante de pago</a> --}}
+
+                                <div class="flex justify-center">
+                                    <div
+                                        x-data="{
+                                            open: false,
+                                            toggle() {
+                                                if (this.open) {
+                                                    return this.close()
+                                                }
+
+                                                this.$refs.button.focus()
+
+                                                this.open = true
+                                            },
+                                            close(focusAfter) {
+                                                if (! this.open) return
+
+                                                this.open = false
+
+                                                focusAfter && focusAfter.focus()
+                                            }
+                                        }"
+                                        x-on:keydown.escape.prevent.stop="close($refs.button)"
+                                        x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                                        x-id="['dropdown-button']"
+                                        class="relative"
+                                    >
+                                        <!-- Button -->
+                                        <button
+                                            x-ref="button"
+                                            x-on:click="toggle()"
+                                            :aria-expanded="open"
+                                            :aria-controls="$id('dropdown-button')"
+                                            type="button"
+                                            class="relative flex items-center justify-center gap-2 link-style"
+                                        >
+                                            <span>Opciones</span>
+                                        </button>
+
+                                        <!-- Panel -->
+                                        <div
+                                            x-ref="panel"
+                                            x-show="open"
+                                            x-transition.origin.top.left
+                                            x-on:click.outside="close($refs.button)"
+                                            :id="$id('dropdown-button')"
+                                            x-cloak
+                                            class="min-w-48 mt-2 p-1.5 absolute left-0 rounded-lg shadow-sm origin-top-left bg-white outline-none border border-gray-200 z-10 font-kanit"
+                                        >
+                                            <a href="{{ route('reciept.download', ['id'=>$comision->com_id]) }}" class="px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                Descargar recibo
+                                            </a>
+
+                                            <a href="{{ route('reciept.upload', ['id'=>$comision->com_id]) }}" class="px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-gray-50 focus-visible:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                Editar recibo
+                                            </a>
+
+                                            <x-modals.confirm-modal title="¿Eliminar Recibo?" tagline="¿Esta seguro? Una vez eliminada, el recibo no puede recuperarse." route="reciept.delete" param="id" :paramValue="$comision->com_id"  method="DELETE" submitTxt="Eliminar">
+                                                <button x-on:click="isModalOpen = true" class="px-2 lg:py-1.5 py-2 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-rclaro/20 hover:text-roscuro focus-visible:bg-rclaro/20 focus-visible:text-roscuro disabled:opacity-50 disabled:cursor-not-allowed">Eliminar recibo</button>
+                                            </x-modals.confirm-modal>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+
+                        <ul class="min-h-24 mt-2 flex flex-col gap-y-5">
+                            <li><span class="text-roscuro" >Método de pago:</span> {{ $comision->payment->payment_method_name }}</li>
+                            <li><span class="text-roscuro" >Precio:</span> {{ $comision->currency->payment_currency_name}}$ {{ number_format($comision->com_price)}}</li>
+                            @if ($comision->is_payed == true)
+                                <li><span class="text-roscuro" >Estado:</span> Pagado</li>
+                            @else
+                                <li><span class="text-roscuro" >Estado:</span> Sin Pagar</li>
+                            @endif
+
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="flex justify-evenly gap-x-3">
+                {{-- Acciones --}}
+                <div class="mt-8 flex justify-evenly gap-x-3">
                     {{-- Eliminar --}}
                     <x-modals.confirm-modal title="¿Eliminar Comisión?" tagline="¿Esta seguro? Una vez eliminada, la comisión no puede recuperarse." route="espacio.details.delete" param="id" :paramValue="$comision->com_id"  method="DELETE" submitTxt="Eliminar">
                         <button x-on:click="isModalOpen = true" class="btn-secundario">Eliminar</button>
@@ -208,7 +295,6 @@
             </a>
 
             <x-modals.delete-one-of-many-modal title="¿Eliminar la Nota?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="note.delete.process" param="id" :paramValue="$comision->com_id" valueName="note_id">
-
                 <div class="my-5 flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-3 gap-y-4">
                     @foreach ($notas as $key => $nota )
                         <div class="min-h-52 border border-rclaro rounded-md">
@@ -246,17 +332,10 @@
 @section('gallery')
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
-            <x-comision-details-title
-                    title="Galería"
-                    route="picture.add"
-                    :status='$comision->is_complete'
-                    :param='$comision->com_id'
-            />
-        </div>
-    </div>
+            <a href="{{ route('picture.add', ['id'=>$comision->com_id]) }}">
+                <h2 class="link-style">Agregar Imagen</h2>
+            </a>
 
-    <div class="mt-5 flex justify-center">
-        <div class="w-4/5">
             <x-modals.delete-one-of-many-modal
                     title="¿Eliminar la Imagen?"
                     tagline="¿Esta seguro? Una vez eliminada no se puede recuperar."
@@ -265,7 +344,7 @@
                     :paramValue="$comision->com_id"
                     valueName="pic_id"
                 >
-                <div class="grid grid-cols-3 gap-x-3 gap-y-4">
+                <div class="my-5 grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-4">
                     @foreach ($gallery as $key => $image )
                         <div class="p-2 h-64 border-2 border-rclaro rounded-md">
                             <img src="{{ Storage::url($image->pic_route) }}" class="h-full w-full object-cover" x-on:click="lightbox = true, imageSrc = '{{ Storage::url($gallery[$key]->pic_route)}}'">

@@ -1,25 +1,25 @@
 @extends('layouts.comisionForm')
 
-@section('title', 'Añadir Fotos')
+@section('title', 'Subir recibo')
 
 @section('back', route('espacio.details', ['id'=>$comision->com_id]))
 
 @section('content')
     <div class="mt-20 flex justify-center">
         <div class="w-4/5 border-b-2 border-rclaro">
-            <h1 class="font-kanit font-semibold text-2xl text-negro">Añadir a Galeria</h1>
+            <h1 class="font-kanit font-semibold text-2xl text-negro">Añadir Comprobante</h1>
         </div>
     </div>
 
     <div class="mt-4 flex justify-center">
         <div class="w-4/5">
-            <form action="{{route('picture.add.process', ['id'=>$comision->com_id])}}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('reciept.upload.process', ['id'=>$comision->com_id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <x-inputs.label-form>
-                    <x-slot name="forName">pic_route[]</x-slot>
-                    <x-slot name="title">Subir fotos</x-slot>
-                    Subí las fotos que necesites como referencias. Solo podés subir formatos PNG, JPG y JPEG y pueden ser como máximo 2 MB.
+                    <x-slot name="forName">com_reciept</x-slot>
+                    <x-slot name="title">Subir recibo</x-slot>
+                    El recibo puede ser en formato pdf, jpg o png y pueden ser como máximo 2 MB.
                 </x-inputs.label-form>
 
                 <input class="
@@ -31,14 +31,14 @@
                     file:px-3
                     file:me-10
                     w-full text-lg text-gray-900 border border-gray-300 rounded-md focus:outline-none"
-                    type="file" name="pic_route[]" multiple>
+                    type="file" name="com_reciept">
 
-                @error('pic_route')
+                @error('com_reciept')
                 <div class="error-notice">
                     {{ $message }}
                 </div>
                 @enderror
-                @error('pic_route.*')
+                @error('com_reciept.*')
                 <div class="error-notice">
                     {{ $message }}
                 </div>
@@ -48,7 +48,7 @@
                     <div class="w-4/5 flex justify-center">
                         <button
                         class="btn-principal w-1/3"
-                        >Crear</button>
+                        >Subir</button>
                     </div>
                 </div>
             </form>

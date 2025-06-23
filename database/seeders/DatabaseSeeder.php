@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             [
                 SocialMediaSeeder::class,
                 PaymentMethodSeeder::class,
+                PaymentCurrencySeeder::class,
                 ComissionsSeeder::class,
                 GallerySeeder::class,
             ]);

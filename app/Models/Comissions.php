@@ -10,7 +10,23 @@ class Comissions extends Model
 
     protected $primaryKey = 'com_id';
 
-    protected $fillable = ['com_title', 'com_description', 'com_client', 'com_due', 'is_complete','social_fk', 'payment_fk', 'user_id_fk', 'com_tasks', 'com_notes', 'com_percent'];
+    protected $fillable = [
+        'com_title',
+        'com_description',
+        'com_client',
+        'com_due',
+        'is_complete',
+        'social_fk',
+        'payment_fk',
+        'user_id_fk',
+        'com_tasks',
+        'com_notes',
+        'com_percent',
+        'currency_id_fk',
+        'com_price',
+        'com_reciept',
+        'is_payed'
+    ];
 
     public function casts(){
         return [
@@ -28,5 +44,9 @@ class Comissions extends Model
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id_fk', 'user_id');
+    }
+
+    public function currency(){
+        return $this->belongsTo(PaymentCurrency::class, 'currency_id_fk', 'id_payment_currency');
     }
 }

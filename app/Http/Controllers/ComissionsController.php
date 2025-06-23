@@ -9,6 +9,7 @@ use App\Models\SocialMedia;
 use App\Models\User;
 use App\Models\Gallery;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ComissionsController extends Controller
@@ -180,6 +181,61 @@ class ComissionsController extends Controller
         return redirect()->route('espacio.details', ['id'=>$id]);
     }
 
+    public function uploadReciept(int $id){
+        $comision_dets = Comissions::find($id);
+
+        return view('espacioTrabajo.reciept.upload_reciept', ['comision'=> $comision_dets]);
+    }
+
+    public function uploadRecieptProcess(int $id, Request $req){
+        $comision = Comissions::findOrFail($id);
+
+        $req->validate(
+            [
+                'com_reciept' => 'required',
+                'com_reciept.*'=>'mimes:pdf,jpg,png | max:2048'
+            ],
+            [
+                'com_reciept.required'=>'El recibo es requerido.',
+                'com_reciept.*.mimes'=>'El recibo debe ser de tipo pdf, png o jpg.',
+                'com_reciept.*.max'=>'El recibo debe ser como maximo 2MB.'
+            ]
+        );
+
+        $reciept = $req->com_reciept;
+
+        if ($comision->com_reciept != null) {
+            Storage::disk('public')->delete($comision->com_reciept);
+
+            $path = $reciept->store('reciepts', 'public');
+
+            $comision->update(['com_reciept'=>$path]);
+
+        }else{
+            $path = $reciept->store('reciepts', 'public');
+
+            $comision->update(['com_reciept'=>$path, 'is_payed'=>true]);
+        }
+
+        return redirect()->route('espacio.details', ['id'=>$id]);
+    }
+
+    public function downloadReciept(int $id){
+        $comision = Comissions::findOrFail($id);
+
+        return Storage::disk('public')->download($comision->com_reciept);
+    }
+
+    public function deleteReciept(int $id){
+        $comision = Comissions::findOrFail($id);
+
+        Storage::disk('public')->delete($comision->com_reciept);
+
+        $comision->update(['com_reciept'=>null, 'is_payed'=>false]);
+
+        return redirect()->route('espacio.details', ['id'=>$id]);
+    }
+
     public function completeComisionProcess(Request $req, int $id){
 
         $comision = Comissions::findOrFail($id);
@@ -213,7 +269,4 @@ class ComissionsController extends Controller
         return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
 
-    public function comisionDetails(){
-        return view('espacioTrabajo.coms-detalles',);
-    }
 }

@@ -58,6 +58,28 @@ Route::controller(App\Http\Controllers\ComissionsController::class)->group( func
         ->whereNumber('id')
         ->middleware('auth');
 
+        // Subir Recibo
+    Route::get('/workspace/comision/reciept/{id}', 'uploadReciept')
+        ->name('reciept.upload')
+        ->whereNumber('id')
+        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+
+    Route::post('/workspace/comision/reciept/{id}', 'uploadRecieptProcess')
+        ->name('reciept.upload.process')
+        ->whereNumber('id')
+        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+
+        // Descargar Recibo
+    Route::get('/workspace/comision/reciept/download/{id}', 'downloadReciept')
+        ->name('reciept.download')
+        ->whereNumber('id')
+        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+
+        // Eliminar Recibo
+    Route::delete('/workspace/comision/reciept/delete/{id}','deleteReciept')
+        ->name('reciept.delete')
+        ->whereNumber('id')
+        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
 });
 
     // Tareas

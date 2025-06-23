@@ -16,10 +16,13 @@ return new class extends Migration
             $table->string('com_title');
             $table->text('com_description');
             $table->string('com_client');
+            $table->integer('com_price');
+            $table->string('com_reciept')->nullable();
             $table->date('com_due');
             $table->json('com_tasks');
             $table->json('com_notes')->default('[]');
             $table->boolean('is_complete')->default(false);
+            $table->boolean('is_payed')->default(false);
             $table->integer('com_percent')->default('0');
             $table->timestamps();
         });
