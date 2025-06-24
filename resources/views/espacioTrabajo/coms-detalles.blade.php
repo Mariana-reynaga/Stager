@@ -11,7 +11,6 @@
             <a href="{{ route('espacio.edit', ['id'=>$comision->com_id]) }}" class="ms-10 link-style" >Editar comisión</a>
         @endif
     </div>
-
 @endsection
 
 @section('details')
@@ -149,6 +148,13 @@
                         <x-modals.confirm-modal title="¿Completar Comisión?" tagline="Una vez marcada como completa, la comisión no puede volver al estado de incompleta." route="espacio.details.complete" param="id" :paramValue="$comision->com_id"  method="PUT" submitTxt="Completar">
                             <button x-on:click="isModalOpen = true" class="btn-principal text-lg">Marcar como completado</button>
                         </x-modals.confirm-modal>
+                    @else
+                        <form action="{{ route('espacio.details.incomplete', ['id'=>$comision->com_id]) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn-principal">Marcar como incompleto</button>
+                        </form>
+                        
                     @endif
                 </div>
             </div>

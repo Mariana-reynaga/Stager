@@ -52,6 +52,12 @@ Route::controller(App\Http\Controllers\ComissionsController::class)->group( func
         ->whereNumber('id')
         ->middleware('auth');
 
+            // Incompletar
+    Route::put('/workspace/comision/incomplete/{id}', 'incompleteComissionProcess')
+        ->name('espacio.details.incomplete')
+        ->whereNumber('id')
+        ->middleware('auth');
+
         // Eliminar
     Route::delete('/workspace/comision/{id}', 'deleteComision')
         ->name('espacio.details.delete')

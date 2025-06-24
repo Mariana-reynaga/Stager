@@ -20,11 +20,9 @@
                     <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
                     <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>
                 </a>
-
                 <img src="/../images/logo/icon_black.svg" alt="" class="w-12">
             </div>
         </div>
-
 
         <style>
             [x-cloak] { display: none !important; }
@@ -90,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         @yield('gallery')
                     </div>
                 </div>

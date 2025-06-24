@@ -257,22 +257,47 @@ class ComissionsController extends Controller
         return redirect()->route('espacio.details', ['id'=>$id]);
     }
 
-    public function completeComisionProcess(Request $req, int $id){
-
+    public function completeComisionProcess(int $id){
         $comision = Comissions::findOrFail($id);
+
+        // $tasks = json_decode($comision->com_tasks);
+
+        // foreach($tasks as $key => $item){
+        //     $tasks[$key] = [
+        //         'task' => $item->task,
+        //         'is_complete' => true
+        //     ];
+        // }
+                                        // 'com_tasks' => json_encode($tasks)
+        $comision->update(['is_complete'=>true, 'com_percent'=>100]);
+
+        return redirect()->route('espacio.completas', ['user_id'=>auth()->user()->user_id]);
+    }
+
+    public function incompleteComissionProcess(int $id){
+        $comision = Comissions::findOrFail($id);
+
+        $task_completed = 0;
 
         $tasks = json_decode($comision->com_tasks);
 
-        foreach($tasks as $key => $item){
-            $tasks[$key] = [
-                'task' => $item->task,
-                'is_complete' => true
-            ];
+        $tasks_length = count($tasks);
+
+        foreach($tasks as $item){
+            if($item->is_complete === true){
+                $task_completed ++;
+            }
         }
 
-        $comision->update(['is_complete'=>true, 'com_tasks' => json_encode($tasks), 'com_percent'=>100]);
+        if ($tasks_length === 0) {
+            $percent = 0;
+        }else{
+            $percent = ceil(($task_completed / $tasks_length) * 100);
+        }
 
-        return redirect()->route('espacio.completas', ['user_id'=>auth()->user()->user_id]);
+        $comision->update(['is_complete'=>false, 'com_percent'=>$percent]);
+        
+        return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function deleteComision(int $id){
