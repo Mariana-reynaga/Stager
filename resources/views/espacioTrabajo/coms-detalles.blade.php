@@ -126,7 +126,7 @@
 
                         <ul class="min-h-24 mt-2 flex flex-col gap-y-5">
                             <li><span class="text-roscuro" >Método de pago:</span> {{ $comision->payment->payment_method_name }}</li>
-                            <li><span class="text-roscuro" >Precio:</span> {{ $comision->currency->payment_currency_name}}$ {{ number_format($comision->com_price)}}</li>
+                            <li><span class="text-roscuro" >Precio:</span> {{ $comision->currency->payment_currency_name}}$ {{ number_format($comision->com_price,0,',','.')}}</li>
                             @if ($comision->is_payed == true)
                                 <li><span class="text-roscuro" >Estado:</span> Pagado</li>
                             @else
@@ -289,37 +289,44 @@
                 <h2 class="link-style">Agregar Nota</h2>
             </a>
 
-            <x-modals.delete-one-of-many-modal title="¿Eliminar la Nota?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="note.delete.process" param="id" :paramValue="$comision->com_id" valueName="note_id">
-                <div class="my-5 flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-3 gap-y-4">
-                    @foreach ($notas as $key => $nota )
-                        <div class="min-h-52 border border-rclaro rounded-md">
-                            <div class="py-2 px-3 bg-rclaro text-white">
-                                <h3 class="font-kanit text-lg">{{ $nota->title }}</h3>
-                            </div>
-
-                            <div class="flex flex-col justify-between">
-                                <div class="h-48 md:h-56 lg:h-40 xl:h-52 2xl:h-40 mt-3 px-4 py-2 break-words overflow-hidden font-kanit">
-                                    <p>{{ $nota->note }}</p>
+            @if ((count($notas)) === 0)
+                <div class="mt-5 flex justify-center items-center">
+                    <h3 class="font-kanit text-roscuro text-xl">Parece que no hay nada ....</h3>
+                </div>
+            @else
+                <x-modals.delete-one-of-many-modal title="¿Eliminar la Nota?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="note.delete.process" param="id" :paramValue="$comision->com_id" valueName="note_id">
+                    <div class="my-5 flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-3 gap-y-4">
+                        @foreach ($notas as $key => $nota )
+                            <div class="min-h-52 border border-rclaro rounded-md">
+                                <div class="py-2 px-3 bg-rclaro text-white">
+                                    <h3 class="font-kanit text-lg">{{ $nota->title }}</h3>
                                 </div>
 
-                                @if ($comision->is_complete == false)
-                                    <div class="my-5 flex justify-evenly">
-                                        <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="btn-secundario">Eliminar</button>
-
-                                        <form action="{{route('note.edit', ['id'=>$comision->com_id])}}">
-                                            @csrf
-                                            <input type="hidden" name="noteId" id="noteId" value="{{$key}}">
-                                            <button type="submit" class="btn-principal">Editar</button>
-                                        </form>
-
+                                <div class="flex flex-col justify-between">
+                                    <div class="h-48 md:h-56 lg:h-40 xl:h-52 2xl:h-40 mt-3 px-4 py-2 break-words overflow-hidden font-kanit">
+                                        <p>{{ $nota->note }}</p>
                                     </div>
-                                @endif
-                            </div>
-                        </div>
 
-                    @endforeach
-                </div>
-            </x-modals.delete-one-of-many-modal>
+                                    @if ($comision->is_complete == false)
+                                        <div class="my-5 flex justify-evenly">
+                                            <button  x-on:click="isModalOpen = true, objectId = {{$key}} "  class="btn-secundario">Eliminar</button>
+
+                                            <form action="{{route('note.edit', ['id'=>$comision->com_id])}}">
+                                                @csrf
+                                                <input type="hidden" name="noteId" id="noteId" value="{{$key}}">
+                                                <button type="submit" class="btn-principal">Editar</button>
+                                            </form>
+
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                        @endforeach
+                    </div>
+                </x-modals.delete-one-of-many-modal>
+            @endif
+
         </div>
     </div>
 @endsection
@@ -331,29 +338,35 @@
                 <h2 class="link-style">Agregar Imagen</h2>
             </a>
 
-            <x-modals.delete-one-of-many-modal
-                    title="¿Eliminar la Imagen?"
-                    tagline="¿Esta seguro? Una vez eliminada no se puede recuperar."
-                    route="picture.delete"
-                    param="id"
-                    :paramValue="$comision->com_id"
-                    valueName="pic_id"
-                >
-                <div class="my-5 grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-4">
-                    @foreach ($gallery as $key => $image )
-                        <div class="p-2 h-64 border-2 border-rclaro rounded-md">
-                            <img src="{{ Storage::url($image->pic_route) }}" class="h-full w-full object-cover" x-on:click="lightbox = true, imageSrc = '{{ Storage::url($gallery[$key]->pic_route)}}'">
+            @if ((count($gallery)) === 0)
+                <div class="mt-5 flex justify-center items-center">
+                    <h3 class="font-kanit text-roscuro text-xl">Parece que no hay nada ....</h3>
+                </div>
+            @else
+                <x-modals.delete-one-of-many-modal
+                        title="¿Eliminar la Imagen?"
+                        tagline="¿Esta seguro? Una vez eliminada no se puede recuperar."
+                        route="picture.delete"
+                        param="id"
+                        :paramValue="$comision->com_id"
+                        valueName="pic_id"
+                    >
+                    <div class="my-5 grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-4">
+                        @foreach ($gallery as $key => $image )
+                            <div class="p-2 h-64 border-2 border-rclaro rounded-md">
+                                <img src="{{ Storage::url($image->pic_route) }}" class="h-full w-full object-cover" x-on:click="lightbox = true, imageSrc = '{{ Storage::url($gallery[$key]->pic_route)}}'">
 
-                            <div class="relative">
-                                <div class="absolute bottom-3 right-3 bg-roscuro rounded-md" x-on:click="isModalOpen = true, objectId = {{$gallery[$key]->pic_id}}">
+                                <div class="relative">
+                                    <div class="absolute bottom-3 right-3 bg-roscuro rounded-md" x-on:click="isModalOpen = true, objectId = {{$gallery[$key]->pic_id}}">
 
-                                    <img src="/images/task_icons/trash.svg" class="w-10">
+                                        <img src="/images/task_icons/trash.svg" class="w-10">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
-            </x-modals.delete-one-of-many-modal>
+                        @endforeach
+                    </div>
+                </x-modals.delete-one-of-many-modal>
+            @endif
         </div>
     </div>
 @endsection

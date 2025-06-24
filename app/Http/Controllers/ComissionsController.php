@@ -8,6 +8,7 @@ use App\Models\PaymentMethod;
 use App\Models\SocialMedia;
 use App\Models\User;
 use App\Models\Gallery;
+use App\Models\PaymentCurrency;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -60,10 +61,12 @@ class ComissionsController extends Controller
     public function createComision(){
         $social_media = SocialMedia::all();
         $metodos_pagos = PaymentMethod::all();
+        $currency = PaymentCurrency::all();
 
         return view('espacioTrabajo.create-com',[
             'social_media'=> $social_media,
-            'metodos_pagos' => $metodos_pagos
+            'metodos_pagos' => $metodos_pagos,
+            'currency' => $currency
         ]);
     }
 
@@ -88,6 +91,8 @@ class ComissionsController extends Controller
                 'social_fk'=>'required',
                 'com_client'=>'required | max:30',
                 'com_due'=>'required | after_or_equal:'.now()->format('Y-m-d'),
+                'currency_id_fk'=> 'required',
+                'com_price' =>'required | integer | min:1',
                 'payment_fk'=>'required',
                 'com_tasks'=>'required'
             ], #mensajes de error
@@ -108,6 +113,11 @@ class ComissionsController extends Controller
                 'com_due.required'=> 'La comisión necesita una fecha de entrega.',
                 'com_due.after_or_equal'=> 'La fecha de entrega no puede ser antes de hoy.',
                 //
+                'currency_id_fk.required'=> 'La comisión necesita una moneda.',
+                //
+                'com_price.required'=> 'La comisión necesita un precio.',
+                'com_price.min'=> 'La comisión no puede costar 0.',
+                //
                 'payment_fk.required'=>'La comisión necesita un método de pago.',
                 //
                 'com_tasks.required'=>'Las tareas no pueden estar vacias.'
@@ -115,16 +125,17 @@ class ComissionsController extends Controller
         );
 
         $comision = new Comissions();
-            $comision->user_id_fk       = auth()->user()->user_id;
-            $comision->com_title        = $req->com_title;
-            $comision->com_description  = $req->com_description;
-            $comision->social_fk        = $req->social_fk;
-            $comision->payment_fk         = $req->payment_fk;
-            $comision->com_client       = $req->com_client;
-            $comision->com_due      = $req->com_due;
-            $comision->com_tasks        = $task_final;
-            $comision->is_complete      = false;
-
+            $comision->user_id_fk           = auth()->user()->user_id;
+            $comision->com_title            = $req->com_title;
+            $comision->com_description      = $req->com_description;
+            $comision->social_fk            = $req->social_fk;
+            $comision->payment_fk           = $req->payment_fk;
+            $comision->currency_id_fk       = $req->currency_id_fk;
+            $comision->com_price            = $req->com_price;
+            $comision->com_client           = $req->com_client;
+            $comision->com_due              = $req->com_due;
+            $comision->com_tasks            = $task_final;
+            $comision->is_complete          = false;
         $comision->save();
 
         return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
@@ -134,11 +145,13 @@ class ComissionsController extends Controller
         $social_media = SocialMedia::all();
         $metodos_pagos = PaymentMethod::all();
         $comision = Comissions::findOrFail($id);
+        $currency = PaymentCurrency::all();
 
         return view('espacioTrabajo.edit-com',[
             'comision'=> $comision,
             'social_media'=> $social_media,
-            'metodos_pagos' => $metodos_pagos
+            'metodos_pagos' => $metodos_pagos,
+            'currency' => $currency
         ]);
     }
 
@@ -149,7 +162,9 @@ class ComissionsController extends Controller
                 'com_description'=>'required | max:150 | min:10',
                 'social_fk'=>'required',
                 'com_client'=>'required | max:30',
-                'com_due'=>'after_or_equal:'.now()->format('Y-m-d'),
+                'com_due'=>'required | after_or_equal:'.now()->format('Y-m-d'),
+                'currency_id_fk'=> 'required',
+                'com_price' =>'required | integer | min:1',
                 'payment_fk'=>'required'
             ], #mensajes de error
             [
@@ -161,14 +176,20 @@ class ComissionsController extends Controller
                 'com_description.max'=> 'La descripción debe tener como máximo 150 caracteres.',
                 'com_description.min'=> 'La descripción debe tener como minimo 10 caracteres.',
                 //
-                'social_fk.required'=>'Es requerido elegir un metodo de contacto.',
+                'social_fk.required'=>'La comisión necesita un método de contacto.',
                 //
-                'com_client.required'=>'Es requerido un nombre de usuario del cliente.',
+                'com_client.required'=>'La comisión necesita el usuario del cliente.',
                 'com_client.max' => 'El usuario debe tener como máximo 30 caracteres.',
                 //
+                'com_due.required'=> 'La comisión necesita una fecha de entrega.',
                 'com_due.after_or_equal'=> 'La fecha de entrega no puede ser antes de hoy.',
                 //
-                'payment_fk.required'=>'Se tiene que elegir un metodo de pago'
+                'currency_id_fk.required'=> 'La comisión necesita una moneda.',
+                //
+                'com_price.required'=> 'La comisión necesita un precio.',
+                'com_price.min'=> 'La comisión no puede costar 0.',
+                //
+                'payment_fk.required'=>'La comisión necesita un método de pago.',
             ]
         );
 

@@ -13,11 +13,16 @@
 
     <form action="{{ route('espacio.crear.process') }}" method="POST" x-data="formSubmit" @submit.prevent="submit">
         @csrf
-        <div class="flex w-full justify-center">
-            <div class="flex justify-evenly w-4/5 mt-4">
-                <div class="flex flex-col w-1/2">
+        <div class="w-full flex justify-center">
+            <div class="w-4/5 mt-4 flex flex-col lg:flex-row 2xl:justify-evenly gap-y-8 lg:gap-x-5 xl:gap-x-10">
+                {{-- detalles --}}
+                <div class="lg:w-1/2 flex flex-col gap-y-5">
+                    <div class="mt-5 xl:mt-0 px-2 py-3 flex items-center bg-rclaro font-kanit text-lg text-blanco rounded-md">
+                        <p class="ms-5 me-5 px-3 text-xl border-2 border-blanco rounded-2xl">1</p>
+                        <p>Detalles de la comisión</p>
+                    </div>
                     {{-- Título de la comisión --}}
-                    <div class="w-4/5">
+                    <div class="">
                         <x-inputs.label-form>
                             <x-slot name="forName">com_title</x-slot>
                             <x-slot name="title">Título de la Comisión</x-slot>
@@ -37,7 +42,7 @@
                     </div>
 
                     {{-- Descripción de la comisión --}}
-                    <div class="w-4/5 mt-4">
+                    <div class="">
                         <x-inputs.new-text-area
                             colName="com_description"
                             labelTitle="Descripción de la comisión"
@@ -53,8 +58,25 @@
                         </x-inputs.new-text-area>
                     </div>
 
+                    {{-- Lista de tareas --}}
+                    <div class="">
+                        <x-inputs.label-form>
+                            <x-slot name="forName">com_tasks</x-slot>
+                            <x-slot name="title">Lista de tareas</x-slot>
+                            Los pasos a completar, separar con comas
+                        </x-inputs.label-form>
+
+                        <textarea name="com_tasks" id="com_tasks" class="w-full h-32 xl:h-20 p-2 border border-solid border-gray-600 rounded-md focus:outline focus:outline-2 focus:outline-rclaro">{{ old('com_tasks') }}</textarea>
+
+                        @error('com_tasks')
+                        <div class="error-notice">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+
                     {{-- Fecha de entrega --}}
-                    <div class="w-4/5 mt-4">
+                    <div class="">
                         <x-inputs.label-form>
                             <x-slot name="forName">com_due</x-slot>
                             <x-slot name="title">Fecha de entrega</x-slot>
@@ -74,14 +96,19 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col w-1/2">
-                    <div class="flex justify-between">
+                <div class="lg:w-1/2 flex flex-col gap-y-5">
+                    <div class="mt-5 xl:mt-0 px-2 py-3 flex items-center bg-rclaro font-kanit text-lg text-blanco rounded-md">
+                        <p class="ms-5 me-5 px-3 text-xl border-2 border-blanco rounded-2xl">2</p>
+                        <p>Detalles del cliente</p>
+                    </div>
+                    {{-- Cliente --}}
+                    <div class="flex lg:flex-col xl:flex-row gap-x-4 lg:gap-x-0 lg:gap-y-5 xl:gap-x-4">
                         {{-- Red social del cliente --}}
-                        <div class="w-1/3">
+                        <div class="w-1/2 lg:w-full">
                             <x-inputs.label-form>
                                 <x-slot name="forName">social_fk</x-slot>
                                 <x-slot name="title">Red social</x-slot>
-                                Método de comunicación con el cliente
+                                Forma de comunicación con el cliente
                             </x-inputs.label-form>
 
                             <select
@@ -113,7 +140,7 @@
                         </div>
 
                         {{-- Username del cliente --}}
-                        <div class="w-2/3 flex flex-col justify-between ms-3">
+                        <div class="w-1/2 lg:w-full flex flex-col">
                             <x-inputs.label-form>
                                 <x-slot name="forName">com_client</x-slot>
                                 <x-slot name="title">Nombre de usuario</x-slot>
@@ -133,8 +160,12 @@
                         </div>
                     </div>
 
+                    <div class="mt-5 xl:mt-0 px-2 py-3 flex items-center bg-rclaro font-kanit text-lg text-blanco rounded-md">
+                        <p class="ms-5 me-5 px-3 text-xl border-2 border-blanco rounded-2xl">3</p>
+                        <p>Detalles del pago</p>
+                    </div>
                     {{-- Método de pago --}}
-                    <div class="w-2/3 mt-4">
+                    <div class="">
                         <x-inputs.label-form>
                             <x-slot name="forName">payment_fk</x-slot>
                             <x-slot name="title">Método de pago</x-slot>
@@ -169,35 +200,70 @@
                         @enderror
                     </div>
 
-                    {{-- Lista de tareas --}}
-                    <div class="w-2/3 mt-4">
-                        <x-inputs.label-form>
-                            <x-slot name="forName">com_tasks</x-slot>
-                            <x-slot name="title">Lista de tareas</x-slot>
-                            Los pasos a completar, separar con comas
-                        </x-inputs.label-form>
+                    {{-- Precio --}}
+                    <div class="flex lg:flex-col xl:flex-row gap-x-4 lg:gap-x-0 lg:gap-y-5 xl:gap-x-4">
+                        {{-- Moneda --}}
+                        <div class="w-1/2 lg:w-full">
+                            <x-inputs.label-form>
+                                <x-slot name="forName">currency_id_fk</x-slot>
+                                <x-slot name="title">Moneda</x-slot>
+                                La moneda utilizada
+                            </x-inputs.label-form>
 
-                        <x-inputs.form-input
-                                type="text"
-                                inputName="com_tasks"
-                        />
+                            <select
+                                name="currency_id_fk"
+                                id="currency_id_fk"
+                                class="
+                                    border
+                                    border-solid
+                                    border-gray-600
+                                    rounded-md
+                                    p-2
+                                    w-full
+                                    focus:outline
+                                    focus:outline-2
+                                    focus:outline-rclaro
+                                ">
 
-                        @error('com_tasks')
-                        <div class="error-notice">
-                            {{ $message }}
+                                <option value="">Elija una opción</option>
+                                @foreach ( $currency as $coin )
+                                    <option value="{{ $coin->id_payment_currency }}" @selected( $coin->id_payment_currency == old('currency_id_fk')) >{{ $coin->payment_currency_name }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('currency_id_fk')
+                                <div class="error-notice">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @enderror
+                        {{-- Precio --}}
+                        <div class="w-1/2 lg:w-full">
+                            <x-inputs.label-form>
+                                <x-slot name="forName">com_price</x-slot>
+                                <x-slot name="title">Precio</x-slot>
+                                Precio de la comisión, sin puntos.
+                            </x-inputs.label-form>
+
+                            <div class="ps-2 flex items-center border border-solid border-gray-600 rounded-md focus:outline focus:outline-2 focus:outline-rclaro font-kanit">
+                                <div class="text-lg">$</div>
+                                <input type="number" name="com_price" id="com_price" class="ms-1 py-2 ps-2 pe-4 w-full rounded-r-md focus:outline focus:outline-2 focus:outline-rclaro">
+                            </div>
+
+                            @error('com_price')
+                                <div class="error-notice">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <div class="flex w-full justify-center my-10 ">
+        <div class="my-10 flex w-full justify-center">
             <div class="w-4/5 flex justify-center">
-                <button
-                class="btn-principal w-1/3"
-                x-ref="btn">Crear</button>
+                <button class="w-1/3 btn-principal" x-ref="btn">Crear</button>
             </div>
         </div>
     </form>

@@ -41,11 +41,26 @@
                     <form action="{{ route('verification.send') }}" method="POST">
                         @csrf
 
-                        <button class="btn-principal">Reenviar el e-mail</button>
+                        <button class="btn-principal" x-ref="btn">Reenviar el e-mail</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('formSubmit', () => ({
+                submit() {
+                    this.$refs.btn.disabled = true;
+                    this.$refs.btn.classList.remove('btn-principal');
+                    this.$refs.btn.classList.add('btn-secundario');
+                    this.$refs.btn.innerHTML =
+                        `Por favor espere...`;
+                    this.$el.submit()
+                }
+            }))
+        })
+    </script>
 </body>
 </html>
