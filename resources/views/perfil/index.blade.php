@@ -7,10 +7,12 @@
         <div class="w-4/5 mt-28 md:mt-0 flex justify-between items-center">
             <div class="flex flex-wrap items-center gap-x-6 gap-y-8">
                 @if(!auth()->user()->user_image)
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-slate-300 rounded-full"></div>
+                    <div class="w-12 h-12 md:w-14 md:h-14 2xl:w-20 2xl:h-20 bg-roscuro rounded-full shadow-md">
+                        <img src='/images/landing/logo.svg' class="w-full h-full object-cover rounded-full">
+                    </div>
                 @else
-                    <div class="w-16 h-16 md:w-20 md:h-20">
-                        <img src='/storage/{{ auth()->user()->user_image }}' class="w-full h-full object-cover rounded-full">
+                    <div class="w-16 h-16 md:w-20 md:h-20 ">
+                        <img src='/storage/{{ auth()->user()->user_image }}' class="w-full h-full object-cover rounded-full shadow-md">
                     </div>
                 @endif
                 <p class="font-kanit font-semibold text-2xl text-negro">{{ auth()->user()->name }}</p>
@@ -31,7 +33,11 @@
 
                     <div class="lg:w-1/2 h-32 p-4 flex flex-col justify-evenly border-2 border-rclaro rounded-md font-kanit text-lg">
                         <p><span class="text-roscuro font-semibold">Plan:</span> {{ ucfirst($user->plan) }}</p>
-                        <p><span class="text-roscuro font-semibold">Fin de suscripción:</span> {{ $user->created_at->format('d/m/Y') }}</p>
+                        @if ($user->plan === 'prueba')
+                            <p><span class="text-roscuro font-semibold">Fin de suscripción:</span> - </p>
+                        @else
+                            <p><span class="text-roscuro font-semibold">Fin de suscripción:</span> {{ $user->created_at->format('d/m/Y') }}</p>
+                        @endif
 
                         <a href="" class="mt-3 link-style">Renovar Subscripción</a>
                     </div>

@@ -33,6 +33,7 @@
             inactive: 'mx-5 lg:mx-3 py-2 px-5 font-kanit border-2 border-b-0 border-rclaro rounded-t-lg',
             showMsgSuccess: @if(session('success.msg')) true @else false @endif,
             showMsgFail: @if(session('failure.msg')) true @else false @endif}">
+
             <div class="mt-24 flex flex-col items-center">
                 <div class="w-4/5 flex flex-col lg:flex-row justify-between border-b-2 border-rclaro">
                     @yield('content')

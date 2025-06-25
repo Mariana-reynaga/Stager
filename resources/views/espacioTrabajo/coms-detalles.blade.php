@@ -154,7 +154,7 @@
                             @method('PUT')
                             <button type="submit" class="btn-principal">Marcar como incompleto</button>
                         </form>
-                        
+
                     @endif
                 </div>
             </div>
@@ -207,8 +207,9 @@
                         </div>
                     </div>
 
-                    <p x-on:click="addOpen = true" class="w-fit link-style">Agregar Tarea</p>
-
+                    @if ($comision->is_complete == false)
+                        <p x-on:click="addOpen = true" class="w-fit link-style">Agregar Tarea</p>
+                    @endif
                 </div>
 
                 <x-modals.delete-one-of-many-modal title="¿Eliminar la Tarea?" tagline="¿Esta seguro? Una vez eliminada no se puede recuperar." route="task.delete.process" param="id" :paramValue="$comision->com_id" valueName="tasks_id">
@@ -291,9 +292,11 @@
 @section('notes')
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
-            <a href="{{ route('note.add', ['id'=>$comision->com_id]) }}">
-                <h2 class="link-style">Agregar Nota</h2>
-            </a>
+            @if ($comision->is_complete == false)
+                <a href="{{ route('note.add', ['id'=>$comision->com_id]) }}">
+                    <h2 class="link-style">Agregar Nota</h2>
+                </a>
+            @endif
 
             @if ((count($notas)) === 0)
                 <div class="mt-5 flex justify-center items-center">
@@ -340,9 +343,11 @@
 @section('gallery')
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
-            <a href="{{ route('picture.add', ['id'=>$comision->com_id]) }}">
-                <h2 class="link-style">Agregar Imagen</h2>
-            </a>
+            @if ($comision->is_complete == false)
+                <a href="{{ route('picture.add', ['id'=>$comision->com_id]) }}">
+                    <h2 class="link-style">Agregar Imagen</h2>
+                </a>
+            @endif
 
             @if ((count($gallery)) === 0)
                 <div class="mt-5 flex justify-center items-center">

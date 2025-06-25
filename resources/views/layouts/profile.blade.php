@@ -23,10 +23,15 @@
                     {{-- nombre y foto usuario --}}
                     <x-links.nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id">
                         <div class="w-1/4 md:w-full flex items-center 2xl:justify-start">
-
-                            <div class="w-12 h-12 md:w-14 md:h-14 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full">
-                                <img src='/storage/{{ $user->user_image }}' class="w-full h-full object-cover rounded-full">
-                            </div>
+                            @if ($user->user_image === NULL)
+                                <div class="w-12 h-12 md:w-14 md:h-14 2xl:w-20 2xl:h-20 bg-roscuro rounded-full">
+                                    <img src='/images/landing/logo.svg' class="w-full h-full object-cover rounded-full">
+                                </div>
+                            @else
+                                <div class="w-12 h-12 md:w-14 md:h-14 2xl:w-20 2xl:h-20 bg-slate-300 rounded-full">
+                                    <img src='/storage/{{ $user->user_image }}' class="w-full h-full object-cover rounded-full">
+                                </div>
+                            @endif
 
                             <span class="ms-5 2xl:ms-5 md:text-lg text-blanco font-kanit">{{ auth()->user()->name }}</span>
                         </div>

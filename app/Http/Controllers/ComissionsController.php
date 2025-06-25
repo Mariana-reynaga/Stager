@@ -296,7 +296,7 @@ class ComissionsController extends Controller
         }
 
         $comision->update(['is_complete'=>false, 'com_percent'=>$percent]);
-        
+
         return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
 

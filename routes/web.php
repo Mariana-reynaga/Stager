@@ -216,6 +216,11 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
     Route::post('/register', "registerProcess")
         ->name('auth.register.process');
 
+        // Seleccionar plan
+    Route::get('/select/plan', 'selectTrial')
+        ->name('auth.register.plan')
+        ->middleware('auth');
+
         // Alerta Verificar email
     Route::get('/email/notice', 'verifyNotice')
         ->name('verification.notice')
