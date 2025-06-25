@@ -29,7 +29,7 @@ Route::controller(App\Http\Controllers\ComissionsController::class)->group( func
             // Crear
     Route::get('/workspace/create', 'createComision')
         ->name('espacio.crear.form')
-        ->middleware(['auth', 'verified']);
+        ->middleware(['auth', 'verified', 'PlanCheckCreateCom']);
 
     Route::post('/workspace/create', 'createComisionProcess')
         ->name('espacio.crear.process')
@@ -127,7 +127,7 @@ Route::controller(App\Http\Controllers\NoteController::class)->group( function()
     Route::get('/workspace/notes/add/{id}', 'addNote')
     ->name('note.add')
     ->whereNumber('id')
-    ->middleware('auth');
+    ->middleware(['auth', 'PlanCheckCreateNote']);
 
     Route::post('/workspace/notes/add/{id}', 'addNoteProcess')
     ->name('note.add.process')
@@ -155,12 +155,12 @@ Route::controller(App\Http\Controllers\GalleryController::class)->group( functio
     Route::get('/workspace/gallery/add/{id}', 'addPicture')
     ->name('picture.add')
     ->whereNumber('id')
-    ->middleware('auth');
+    ->middleware(['auth', 'PlanCheckCreateImg']);
 
     Route::post('/workspace/gallery/add/{id}', 'addPictureProcess')
     ->name('picture.add.process')
     ->whereNumber('id')
-    ->middleware('auth');
+    ->middleware(['auth', 'PlanCheckUploadImg']);
 
     Route::delete('/workspace/gallery/delete/{id}', 'deletePicture')
     ->name('picture.delete')

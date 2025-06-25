@@ -48,7 +48,7 @@
                             </div>
 
                             <ul class="mt-5 h-24 flex flex-col justify-between list-disc font-kanit text-lg">
-                                <li>Máximo <span class="text-roscuro">3</span> comisiones</li>
+                                <li>Máximo <span class="text-roscuro">3</span> comisiones activas</li>
                                 <li>Máximo <span class="text-roscuro">3</span> Notas por comisión</li>
                                 <li>Máximo <span class="text-roscuro">4</span> Imágenes por comisión</li>
                             </ul>

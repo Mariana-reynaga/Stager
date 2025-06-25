@@ -5,9 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\User;
 use App\Models\Comissions;
 
-class ComissionUrlCheck
+class PlanCheckCreateCom
 {
     /**
      * Handle an incoming request.
@@ -16,14 +17,16 @@ class ComissionUrlCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $comision = Comissions::find((int)$request->route('id'));
+        $comissions = Comissions::all()->where('user_id_fk', $request->user()->user_id )->where('is_complete', false);
 
-        if($comision->user_id_fk === $request->user()->user_id){
+        if ($request->user()->plan === 'premium') {
             return $next($request);
         }else{
-            return redirect()->route('espacio.trabajo', ['user_id' => $request->user()->user_id]);
-        }
+            if (count($comissions) >= 3) {
+                return redirect()->route('espacio.trabajo', ['user_id' => $request->user()->user_id])->with('feedback', true);
+            }
 
-        return $next($request);
+            return $next($request);
+        }
     }
 }

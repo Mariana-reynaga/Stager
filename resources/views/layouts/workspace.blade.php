@@ -44,6 +44,10 @@
                         </li>
 
                         <li>
+                            <a href="{{ route('landing.page') }}">Volver al Inicio</a>
+                        </li>
+
+                        <li>
                             <form action="{{ route('auth.logout.process') }}" method="POST">
                                 @csrf
                                 <button type="submit">Cerrar sesión</button>
@@ -62,6 +66,35 @@
             @yield('content')
         </div>
 
+        <div x-data="{isModalOpen: @if(session('feedback')) true @else false @endif}" x-on:keydown.escape="isModalOpen=false" class="relative">
+            {{-- Fondo --}}
+            <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
+
+            <div x-show="isModalOpen === true" x-on:click.away="isModalOpen = false" x-cloak x-transition class="w-full 2xl:w-4/5 fixed inset-y-[5rem] 2xl:inset-y-[10rem] start-0 2xl:start-[11.7rem] z-40" tabindex="-1">
+                <div class="flex justify-center items-center">
+                    <div class="w-4/5 2xl:w-3/5 p-4 rounded-md shadow-md bg-white">
+                        <div class="flex flex-col items-center gap-y-5 font-kanit">
+                            <div class="w-full pb-2 flex justify-between items-center border-b-2 border-rclaro ">
+                                <h1 class="font-kanit font-semibold text-xl text-roscuro">¡No tenes más comisiones disponibles!</h1>
+
+                                <div x-on:click="isModalOpen = false">
+                                    <img src="/images/task_icons/close.svg" alt="" class="w-8">
+                                </div>
+                            </div>
+
+                            <p class="text-center">Llegaste al limite de comisiones para el plan de prueba. Para poder crear otra comisión, completa una de tus comisiones activas o subite al plan premium.</p>
+
+                            <div class="flex gap-x-8">
+                                <p class="btn-principal" x-on:click="isModalOpen = false">Cerrar</p>
+
+                                <a href="" class="btn-secundario">Suscribirme</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 </html>

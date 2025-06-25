@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('user_id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->enum('plan', ['free', 'premium']);
             $table->string('user_image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -41,6 +42,7 @@ return new class extends Migration
             'name' => 'Tilla',
             'email'=> 'test@admin.com',
             'password'=> \Hash::make('admin123'),
+            'plan'=>'premium',
             'user_image'=>'users/zvlZuV9Ngd2EueMSAddHhqXhphakbVKxSuZNnNEC.png',
             'email_verified_at' => '2025-03-09 19:00:26',
             'created_at'=>now()
@@ -49,6 +51,7 @@ return new class extends Migration
             'name' => 'otro user',
             'email'=> 'user@gmail.com',
             'password'=> \Hash::make('12345678'),
+            'plan'=>'free',
             'created_at'=>now()
         ]);
     }

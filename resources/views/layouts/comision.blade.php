@@ -31,7 +31,8 @@
             activeTab: @if (session('tabNum')) {{(int) session('tabNum')}} @else 1  @endif,
             active: 'mx-5 lg:mx-3 py-2 px-5 font-kanit text-white rounded-t-lg bg-rclaro',
             inactive: 'mx-5 lg:mx-3 py-2 px-5 font-kanit border-2 border-b-0 border-rclaro rounded-t-lg',
-            showMsg: @if(session('success.msg')) true @else false @endif}">
+            showMsgSuccess: @if(session('success.msg')) true @else false @endif,
+            showMsgFail: @if(session('failure.msg')) true @else false @endif}">
             <div class="mt-24 flex flex-col items-center">
                 <div class="w-4/5 flex flex-col lg:flex-row justify-between border-b-2 border-rclaro">
                     @yield('content')
@@ -49,27 +50,36 @@
                         @yield('details')
                     </div>
                     <div x-show="activeTab === 2" x-transition>
-                        <div x-show="showMsg === true" class="flex justify-center">
+                        <div x-show="showMsgSuccess === true" class="flex justify-center">
                             <div class="w-4/5 flex justify-center">
                                 <div class="w-4/5 lg:w-1/2 2xl:w-1/3 mt-5 p-6 flex justify-between items-center bg-green-500/30 shadow-md font-kanit text-xl rounded-md">
                                     {!! session()->get('success.msg') !!}
-                                    <div x-on:click="showMsg = false">
+                                    <div x-on:click="showMsgSuccess = false">
                                         <img src="/images/task_icons/close.svg" alt="" class="w-10">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         @yield('tasks')
                     </div>
                     <div x-show="activeTab === 3" x-transition>
-                        <div x-show="showMsg === true" class="flex justify-center">
+                        <div x-show="showMsgSuccess === true" class="flex justify-center">
                             <div class="w-4/5 flex justify-center">
                                 <div class="w-4/5 lg:w-1/2 2xl:w-1/3 mt-5 p-6 flex justify-between items-center bg-green-500/30 shadow-md font-kanit text-xl rounded-md">
                                     {!! session()->get('success.msg') !!}
 
-                                    <div x-on:click="showMsg = false">
+                                    <div x-on:click="showMsgSuccess = false">
                                         <img src="/images/task_icons/close.svg" alt="" class="w-5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div x-show="showMsgFail === true" class="flex justify-center">
+                            <div class="w-4/5 flex justify-center">
+                                <div class="w-4/5 lg:w-1/2 2xl:w-1/3 mt-5 p-6 flex justify-between items-center gap-x-3 bg-red-500/30 shadow-md font-kanit text-xl rounded-md">
+                                    {!! session()->get('failure.msg') !!}
+                                    <div x-on:click="showMsgFail = false">
+                                        <img src="/images/task_icons/close.svg" alt="" class="w-10">
                                     </div>
                                 </div>
                             </div>
@@ -77,18 +87,27 @@
                         @yield('notes')
                     </div>
                     <div x-show="activeTab === 4" x-transition>
-                        <div x-show="showMsg === true" class="flex justify-center">
+                        <div x-show="showMsgSuccess === true" class="flex justify-center">
                             <div class="w-4/5 flex justify-center">
                                 <div class="w-4/5 lg:w-1/2 2xl:w-1/3 mt-5 p-6 flex justify-between items-center bg-green-500/30 shadow-md font-kanit text-xl rounded-md">
                                     {!! session()->get('success.msg') !!}
 
-                                    <div x-on:click="showMsg = false">
+                                    <div x-on:click="showMsgSuccess = false">
                                         <img src="/images/task_icons/close.svg" alt="" class="w-5">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <div x-show="showMsgFail === true" class="flex justify-center">
+                            <div class="w-4/5 flex justify-center">
+                                <div class="w-4/5 lg:w-1/2 2xl:w-1/3 mt-5 p-6 flex justify-between items-center gap-x-3 bg-red-500/30 shadow-md font-kanit text-xl rounded-md">
+                                    {!! session()->get('failure.msg') !!}
+                                    <div x-on:click="showMsgFail = false">
+                                        <img src="/images/task_icons/close.svg" alt="" class="w-10">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @yield('gallery')
                     </div>
                 </div>

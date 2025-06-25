@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="lg:w-1/2 h-32 p-4 flex flex-col justify-evenly border-2 border-rclaro rounded-md font-kanit text-lg">
-                        <p><span class="text-roscuro font-semibold">Plan:</span> {{ $user->email }}</p>
+                        <p><span class="text-roscuro font-semibold">Plan:</span> {{ ucfirst($user->plan) }}</p>
                         <p><span class="text-roscuro font-semibold">Fin de suscripción:</span> {{ $user->created_at->format('d/m/Y') }}</p>
 
                         <a href="" class="mt-3 link-style">Renovar Subscripción</a>

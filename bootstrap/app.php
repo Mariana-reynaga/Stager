@@ -14,6 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'UserUrlCheck'=> \App\Http\Middleware\UserUrlCheck::class,
             'ComissionUrlCheck'=> \App\Http\Middleware\ComissionUrlCheck::class,
+            'PlanCheckCreateCom'=>\App\Http\Middleware\PlanCheckCreateCom::class,
+            'PlanCheckCreateNote'=>\App\Http\Middleware\PlanCheckCreateNote::class,
+            'PlanCheckCreateImg'=>\App\Http\Middleware\PlanCheckCreateImg::class,
+            'PlanCheckUploadImg'=>\App\Http\Middleware\PlanCheckUploadImg::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

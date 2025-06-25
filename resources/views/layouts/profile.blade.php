@@ -47,6 +47,10 @@
                         </li>
 
                         <li>
+                            <a href="{{ route('landing.page') }}">Volver al Inicio</a>
+                        </li>
+
+                        <li>
                             <form action="{{ route('auth.logout.process') }}" method="POST">
                                 @csrf
                                 <button type="submit">Cerrar sesión</button>
