@@ -221,6 +221,8 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
         ->name('auth.register.plan')
         ->middleware('auth');
 
+
+
         // Alerta Verificar email
     Route::get('/email/notice', 'verifyNotice')
         ->name('verification.notice')
@@ -235,5 +237,21 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
     Route::post('/email/verification-notification', 'resendVerify')
     ->name('verification.send')
     ->middleware(['auth', 'throttle:6,1']);
+
+});
+
+    // MercadoPago
+Route::controller(App\Http\Controllers\MercadoPagoController::class)->group( function(){
+    Route::get('/test/mercadopago', 'checkout')
+        ->name('test');
+
+    Route::get('/test/mercadopago/success', 'mercadopagoSuccess')
+        ->name('mercadopago.successProcess');
+
+    Route::get('/test/mercadopago/failure', 'mercadopagoFailed')
+        ->name('mercadopago.failed');
+
+    Route::get('/test/mercadopago/pending', 'mercadopagoPending')
+        ->name('mercadopago.pending');
 
 });
