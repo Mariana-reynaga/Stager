@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
                 ->subject('Stager - Verificar tu e-mail')
-                ->view('emails.verify_email', ['url'=>$url]);
+                ->view('emails.transactional', ['url'=>$url]);
         });
     }
 }

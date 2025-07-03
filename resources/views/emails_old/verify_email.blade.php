@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
     <title>Verificar e-mail</title>
 </head>
 <body>
@@ -30,7 +30,6 @@
 
             <p class="my-5 text-center font-kanit font-semibold text-blanco">¿No te registraste a Stager? Ignora este e-mail</p>
         </div>
-
     </main>
 </body>
 </html>

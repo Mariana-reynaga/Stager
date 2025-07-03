@@ -1,0 +1,66 @@
+---
+title: 'Stager - Verificar tu e-mail'
+bodyClass: bg-roscuro
+---
+
+<x-main>
+  <div class=" sm:px-4 font-kanit">
+    <table align="center" class="m-0 mx-auto">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <x-spacer height="24px" />
+
+          <table class="w-full">
+            <tr>
+              <td class="py-6 px-9 sm:p-6 bg-blanco [border:1px_solid_theme(colors.slate.200)] rounded-lg">
+                <img src="@{{asset('images/logo/stager_navbar_logo_colors.png')}}" src-production="@{{asset('images/logo/stager_navbar_logo_colors.png')}}" class="w-1/2" alt="logo Stager">
+
+                <x-spacer height="24px" />
+
+                <h1 class="m-0 mb-6 text-2xl/8 text-slate-900 font-semibold">
+                  ¡Bienvenido a Stager!
+                </h1>
+
+                <p class="m-0 mb-6 text-base/6 text-slate-600">
+                  Para poder utilizar nuestros servicios, por favor hacer click en el botón que se encuentra abajo para verificar su cuenta.
+                </p>
+
+                <x-button
+                  href="@{{$url}}"
+                  class="text-xl bg-roscuro text-blanco border-2 border-roscuro"
+                >
+                  Verificar cuenta
+                </x-button>
+
+                <x-spacer height="24px" />
+
+                <p class="m-0 text-base/6 text-slate-600">
+                  Gracias,
+                  <br>
+                  <span class="font-caramel font-extrabold">Stager</span>
+                </p>
+
+                <x-divider />
+
+                <p class="m-0 text-xs/5 text-slate-600 mso-break-all">
+                  Si estás teniendo problemas con el botón, podés utilizar este link para verificar tu cuenta:
+                  <a href="@{{$url}}" class="text-slate-800 underline">{{$url}}</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <table class="w-full">
+            <tr>
+              <td class="py-6 px-9 sm:px-6">
+                <p class="m-0 text-xs text-slate-500">
+                  &copy; {{ new Date().getFullYear() }} Stager. Todos los derechos reservados.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</x-main>
