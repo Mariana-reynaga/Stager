@@ -226,12 +226,12 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
         // Alerta Verificar email
     Route::get('/email/notice', 'verifyNotice')
         ->name('verification.notice')
-        ->middleware('auth');
+        ->middleware(['auth', 'VerificationCheck']);
 
         // Verificador de email
     Route::get('/email/{id}/{hash}', 'verifyEmail')
     ->name('verification.verify')
-    ->middleware(['auth', 'signed']);
+    ->middleware(['auth', 'signed', 'VerificationCheck']);
 
         // Re-enviar verificación de email
     Route::post('/email/verification-notification', 'resendVerify')

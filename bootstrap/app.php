@@ -17,7 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'PlanCheckCreateCom'=>\App\Http\Middleware\PlanCheckCreateCom::class,
             'PlanCheckCreateNote'=>\App\Http\Middleware\PlanCheckCreateNote::class,
             'PlanCheckCreateImg'=>\App\Http\Middleware\PlanCheckCreateImg::class,
-            'PlanCheckUploadImg'=>\App\Http\Middleware\PlanCheckUploadImg::class
+            'PlanCheckUploadImg'=>\App\Http\Middleware\PlanCheckUploadImg::class,
+            'VerificationCheck'=>\App\Http\Middleware\VerificationCheck::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
