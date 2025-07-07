@@ -293,9 +293,11 @@
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
             @if ($comision->is_complete == false)
-                <a href="{{ route('note.add', ['id'=>$comision->com_id]) }}">
-                    <h2 class="link-style">Agregar Nota</h2>
-                </a>
+                <div class="w-fit">
+                    <a href="{{ route('note.add', ['id'=>$comision->com_id]) }}">
+                        <h2 class="link-style">Agregar Nota</h2>
+                    </a>
+                </div>
             @endif
 
             @if ((count($notas)) === 0)
@@ -344,9 +346,11 @@
     <div class="mt-5 flex justify-center">
         <div class="w-4/5">
             @if ($comision->is_complete == false)
-                <a href="{{ route('picture.add', ['id'=>$comision->com_id]) }}">
-                    <h2 class="link-style">Agregar Imagen</h2>
-                </a>
+                <div class="w-fit">
+                    <a href="{{ route('picture.add', ['id'=>$comision->com_id]) }}">
+                        <h2 class="link-style">Agregar Imagen</h2>
+                    </a>
+                </div>
             @endif
 
             @if ((count($gallery)) === 0)

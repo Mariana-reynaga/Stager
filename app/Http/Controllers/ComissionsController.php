@@ -10,6 +10,9 @@ use App\Models\User;
 use App\Models\Gallery;
 use App\Models\PaymentCurrency;
 
+use App\Http\Requests\ComissionRules;
+use App\Actions\TaskActions;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -70,7 +73,7 @@ class ComissionsController extends Controller
         ]);
     }
 
-    public function createComisionProcess(Request $req){
+    public function createComisionProcess(ComissionRules $req){
         $tasks_array = [];
 
         $task = collect(explode(', ' , $req->com_tasks ) );
@@ -83,46 +86,6 @@ class ComissionsController extends Controller
         }
 
         $task_final = Str::replace('" ', '"', json_encode($tasks_array) );
-
-        $req->validate(
-            [
-                'com_title' => 'required | max:30 | min:5',
-                'com_description'=>'required | max:150 | min:10',
-                'social_fk'=>'required',
-                'com_client'=>'required | max:30',
-                'com_due'=>'required | after_or_equal:'.now()->format('Y-m-d'),
-                'currency_id_fk'=> 'required',
-                'com_price' =>'required | integer | min:1',
-                'payment_fk'=>'required',
-                'com_tasks'=>'required'
-            ], #mensajes de error
-            [
-                'com_title.required'=>'La comisión necesita un título.',
-                'com_title.max'=>'El título debe tener como máximo 30 caracteres.',
-                'com_title.min' => 'El título debe tener como minimo 5 caracteres.',
-                //
-                'com_description.required'=>'La comisión necesita una descripción.',
-                'com_description.max'=> 'La descripción debe tener como máximo 150 caracteres.',
-                'com_description.min'=> 'La descripción debe tener como minimo 10 caracteres.',
-                //
-                'social_fk.required'=>'La comisión necesita un método de contacto.',
-                //
-                'com_client.required'=>'La comisión necesita el usuario del cliente.',
-                'com_client.max' => 'El usuario debe tener como máximo 30 caracteres.',
-                //
-                'com_due.required'=> 'La comisión necesita una fecha de entrega.',
-                'com_due.after_or_equal'=> 'La fecha de entrega no puede ser antes de hoy.',
-                //
-                'currency_id_fk.required'=> 'La comisión necesita una moneda.',
-                //
-                'com_price.required'=> 'La comisión necesita un precio.',
-                'com_price.min'=> 'La comisión no puede costar 0.',
-                //
-                'payment_fk.required'=>'La comisión necesita un método de pago.',
-                //
-                'com_tasks.required'=>'Las tareas no pueden estar vacias.'
-            ]
-        );
 
         $comision = new Comissions();
             $comision->user_id_fk           = auth()->user()->user_id;
@@ -155,44 +118,7 @@ class ComissionsController extends Controller
         ]);
     }
 
-    public function editComisionProcess(int $id, Request $req){
-        $req->validate(
-            [
-                'com_title' => 'required | max:30 | min:5',
-                'com_description'=>'required | max:150 | min:10',
-                'social_fk'=>'required',
-                'com_client'=>'required | max:30',
-                'com_due'=>'required | after_or_equal:'.now()->format('Y-m-d'),
-                'currency_id_fk'=> 'required',
-                'com_price' =>'required | integer | min:1',
-                'payment_fk'=>'required'
-            ], #mensajes de error
-            [
-                'com_title.required'=>'La comisión necesita un título.',
-                'com_title.max'=>'El título debe tener como máximo 30 caracteres.',
-                'com_title.min' => 'El título debe tener como minimo 5 caracteres.',
-                //
-                'com_description.required'=>'La comisión necesita una descripción.',
-                'com_description.max'=> 'La descripción debe tener como máximo 150 caracteres.',
-                'com_description.min'=> 'La descripción debe tener como minimo 10 caracteres.',
-                //
-                'social_fk.required'=>'La comisión necesita un método de contacto.',
-                //
-                'com_client.required'=>'La comisión necesita el usuario del cliente.',
-                'com_client.max' => 'El usuario debe tener como máximo 30 caracteres.',
-                //
-                'com_due.required'=> 'La comisión necesita una fecha de entrega.',
-                'com_due.after_or_equal'=> 'La fecha de entrega no puede ser antes de hoy.',
-                //
-                'currency_id_fk.required'=> 'La comisión necesita una moneda.',
-                //
-                'com_price.required'=> 'La comisión necesita un precio.',
-                'com_price.min'=> 'La comisión no puede costar 0.',
-                //
-                'payment_fk.required'=>'La comisión necesita un método de pago.',
-            ]
-        );
-
+    public function editComisionProcess(int $id, ComissionRules $req){
         $input = $req->except('_token', '_method');
 
         $comision = Comissions::findOrFail($id);
@@ -260,40 +186,17 @@ class ComissionsController extends Controller
     public function completeComisionProcess(int $id){
         $comision = Comissions::findOrFail($id);
 
-        // $tasks = json_decode($comision->com_tasks);
-
-        // foreach($tasks as $key => $item){
-        //     $tasks[$key] = [
-        //         'task' => $item->task,
-        //         'is_complete' => true
-        //     ];
-        // }
-                                        // 'com_tasks' => json_encode($tasks)
         $comision->update(['is_complete'=>true, 'com_percent'=>100]);
 
         return redirect()->route('espacio.completas', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function incompleteComissionProcess(int $id){
-        $comision = Comissions::findOrFail($id);
+        $comision = Comissions::find($id);
 
-        $task_completed = 0;
+        $action = new TaskActions;
 
-        $tasks = json_decode($comision->com_tasks);
-
-        $tasks_length = count($tasks);
-
-        foreach($tasks as $item){
-            if($item->is_complete === true){
-                $task_completed ++;
-            }
-        }
-
-        if ($tasks_length === 0) {
-            $percent = 0;
-        }else{
-            $percent = ceil(($task_completed / $tasks_length) * 100);
-        }
+        $percent = $action->updatePercent($id);
 
         $comision->update(['is_complete'=>false, 'com_percent'=>$percent]);
 

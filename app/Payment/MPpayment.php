@@ -2,11 +2,6 @@
 
 namespace App\Payment;
 
-// use MercadoPago\Client\Preference\PreferenceClient;
-// use MercadoPago\MercadoPagoConfig;
-// use MercadoPago\Resources\Preference;
-// use Monolog\Processor\UidProcessor;
-
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Exceptions\MPApiException;
@@ -24,6 +19,7 @@ class MPpayment
         $this->accessToken = config('mercadopago.accessToken');
         $this->publicKey = config('mercadopago.publicKey');
 
+        
         if(strlen($this->accessToken) == 0) throw new \Exception('No está definido el token de acceso de Mercado Pago. Creá la clave MERCADOPAGO_ACCESS_TOKEN en el [.env].');
         if(strlen($this->publicKey) == 0) throw new \Exception('No está definida la clave pública de Mercado Pago. Creá la clave MERCADOPAGO_PUBLIC_KEY en el [.env].');
 

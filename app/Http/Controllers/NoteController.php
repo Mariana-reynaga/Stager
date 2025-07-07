@@ -6,6 +6,8 @@ use App\Models\Comissions;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\NoteRules;
+
 class NoteController extends Controller
 {
     public function addNote(int $id){
@@ -16,25 +18,10 @@ class NoteController extends Controller
         ]);
     }
 
-    public function addNoteProcess(Request $req, int $id){
+    public function addNoteProcess(NoteRules $req, int $id){
         $com_info = Comissions::find($id);
 
         $notes = json_decode($com_info->com_notes);
-
-        $req->validate(
-            [
-                'title' =>'required | max:30 | min:5',
-                'note' => 'required | max:300'
-            ],
-            [
-                'title.required' => 'El título es requerido.',
-                'title.max' => 'El título debe tener como maximo 30 caracteres.',
-                'title.min' => 'El título debe tener como minimo 5 caracteres.',
-                ///////////
-                'note.required'=>'La nota es requerida.',
-                'note.max' => 'La nota debe tener como maximo 300 caracteres.'
-            ]
-        );
 
         $arr = [];
 
@@ -68,24 +55,10 @@ class NoteController extends Controller
         ]);
     }
 
-    public function editNoteProcess(Request $req, int $id){
+    public function editNoteProcess(NoteRules $req, int $id){
         $com_info = Comissions::find($id);
 
         $notes = json_decode($com_info->com_notes);
-
-        $req->validate(
-            [
-                'title' => 'required | max:30 | min:5',
-                'note'  => 'required | max:300'
-            ],[
-                'title.required' => 'El título es requerido.',
-                'title.max' => 'El título debe tener como maximo 30 caracteres.',
-                'title.min' => 'El título debe tener como minimo 5 caracteres.',
-                //////////
-                'note.required'=>'La nota es requerida.',
-                'note.max' => 'La nota debe tener como maximo 300 caracteres.'
-            ]
-        );
 
         $notes[$req->noteId] = [
             'title' => $req->title,
