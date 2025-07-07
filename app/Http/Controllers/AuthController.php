@@ -13,6 +13,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
+use App\Http\Requests\AuthRules;
+
 class AuthController extends Controller
 {
     public function loginForm(){
@@ -35,9 +37,9 @@ class AuthController extends Controller
 
         if (!auth()->attempt($credentials)) {
             return redirect()
-                   ->back(fallback: route('login'))
-                   ->withInput()
-                   ->withErrors(['wrongpass'=>'La contraseña no es correcta.']);
+                ->back(fallback: route('login'))
+                ->withInput()
+                ->withErrors(['wrongpass'=>'La contraseña no es correcta.']);
         }else{
 
             return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
@@ -58,27 +60,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function registerProcess(Request $req) {
-        $req->validate(
-            [
-                'name' => 'required | min: 4 | max: 10',
-                'email' => 'required | max:50 | unique:users,email',
-                'password'=> 'required | min: 8'
-            ],
-            [
-                'name.required'     => 'El nombre es requerido.',
-                'name.min'          => 'El nombre debe tener un minimo de 4 caracteres.',
-                'name.max'          => 'El nombre debe tener un maximo de 10 caracteres.',
-                /////////
-                'email.required'    => 'El email es requerido.',
-                'email.max'         => 'El email debe tener un maximo de 50 caracteres.',
-                'email.unique'      => 'El email ya esta registrado.',
-                /////////
-                'password.required' => 'La contraseña es requerida.',
-                'password.min' => 'La contraseña debe tener un mínimo de 8 caracteres.',
-            ]
-        );
-
+    public function registerProcess(AuthRules $req) {
         $newUser = User::create([
             'name'=>$req->name,
             'email' => $req->email,
@@ -139,25 +121,9 @@ class AuthController extends Controller
         ]);
     }
 
-    public function editUser(int $user_id, Request $req){
+    public function editUser(int $user_id, AuthRules $req){
         $user = User::findOrFail($user_id);
-
-        $req->validate(
-            [
-                'name' => 'required | min: 4 | max: 10',
-                'email' => ['required', 'max:50', Rule::unique('users')->ignore($user) ]
-            ],
-            [
-                'name.required'     => 'El nombre es requerido.',
-                'name.min'          => 'El nombre debe tener un minimo de 4 caracteres.',
-                'name.max'          => 'El nombre debe tener un maximo de 10 caracteres.',
-                /////////
-                'email.required'    => 'El email es requerido.',
-                'email.max'         => 'El email debe tener un maximo de 50 caracteres.',
-                'email.unique'      => 'El email ya esta registrado.',
-            ]
-        );
-
+        
         $input = $req->except('_token', '_method');
 
         $user->update($input);

@@ -221,8 +221,6 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
         ->name('auth.register.plan')
         ->middleware('auth');
 
-
-
         // Alerta Verificar email
     Route::get('/email/notice', 'verifyNotice')
         ->name('verification.notice')
