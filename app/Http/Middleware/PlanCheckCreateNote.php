@@ -21,7 +21,7 @@ class PlanCheckCreateNote
 
         $notes = json_decode($comissions->com_notes);
 
-        if ($request->user()->plan === 'premium') {
+        if ($request->user()->plan_id_fk === 1) {
             return $next($request);
         }else{
             if (count($notes) >= 3) {

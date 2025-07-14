@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
+use Illuminate\Http\Middleware\TrustProxies;
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -18,8 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'PlanCheckCreateNote'=>\App\Http\Middleware\PlanCheckCreateNote::class,
             'PlanCheckCreateImg'=>\App\Http\Middleware\PlanCheckCreateImg::class,
             'PlanCheckUploadImg'=>\App\Http\Middleware\PlanCheckUploadImg::class,
-            'VerificationCheck'=>\App\Http\Middleware\VerificationCheck::class
+            'VerificationCheck'=>\App\Http\Middleware\VerificationCheck::class,
+            'UserPlanCheck'=>\App\Http\Middleware\UserPlanCheck::class
         ]);
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

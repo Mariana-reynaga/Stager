@@ -25,7 +25,7 @@ class PlanCheckUploadImg
 
         $inputImgs = $request->pic_route;
 
-        if ($request->user()->plan === 'premium') {
+        if ($request->user()->plan_id_fk === 1) {
             return $next($request);
         }else{
             if(count($inputImgs) + count($gallery_imgs) > 3){

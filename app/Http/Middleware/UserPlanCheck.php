@@ -5,10 +5,11 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\User;
-use App\Models\Comissions;
 
-class PlanCheckCreateCom
+use App\Models\User;
+use App\Models\Plans;
+
+class UserPlanCheck
 {
     /**
      * Handle an incoming request.
@@ -17,15 +18,10 @@ class PlanCheckCreateCom
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $comissions = Comissions::all()->where('user_id_fk', $request->user()->user_id )->where('is_complete', false);
-
-        if ($request->user()->plan_id_fk === 1) {
-            return $next($request);
+        if ($request->user()->plan_id_fk === NULL) {
+           return redirect()->route('plan_select.index');
+           
         }else{
-            if (count($comissions) >= 3) {
-                return redirect()->route('espacio.trabajo', ['user_id' => $request->user()->user_id])->with('feedback', true);
-            }
-
             return $next($request);
         }
     }

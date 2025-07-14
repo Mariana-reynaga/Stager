@@ -16,7 +16,6 @@
             {{-- Incluimos el SDK de JS de Mercado Pago --}}
             <script src="https://sdk.mercadopago.com/js/v2"></script>
             <script>
-
                 const mp = new MercadoPago('<?= $mpPublicKey;?>');
                 mp.bricks().create('wallet', 'mercadopago-button', {
                     initialization: {

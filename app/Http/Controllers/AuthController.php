@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Comissions;
+use App\Models\Plans;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
@@ -71,11 +74,9 @@ class AuthController extends Controller
 
         Auth::attempt($creds);
 
-        event(new Registered($newUser));
-
         $req->session()->regenerate();
 
-        return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
+        return redirect()->route('plan_select.index');
     }
 
     public function verifyNotice(){
@@ -85,21 +86,13 @@ class AuthController extends Controller
     public function verifyEmail(EmailVerificationRequest $request) {
         $request->fulfill();
 
-        return view('auth.select_plan');
+        return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function resendVerify(Request $request) {
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with('message', 'Verification link sent!');
-    }
-
-    public function selectTrial(Request $request){
-        $user = User::find($request->user()->user_id);
-
-        $user->update(['plan'=>'prueba']);
-
-        return redirect()->route('espacio.trabajo', ['user_id'=>auth()->user()->user_id]);
     }
 
     public function profile(int $user_id){
@@ -123,7 +116,7 @@ class AuthController extends Controller
 
     public function editUser(int $user_id, AuthRules $req){
         $user = User::findOrFail($user_id);
-        
+
         $input = $req->except('_token', '_method');
 
         $user->update($input);

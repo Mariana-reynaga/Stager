@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(
             [
+                PlansSeeder::class,
+                UserSeeder::class,
                 SocialMediaSeeder::class,
                 PaymentMethodSeeder::class,
                 PaymentCurrencySeeder::class,

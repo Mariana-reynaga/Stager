@@ -27,8 +27,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'user_image',
-        'plan'
+        'sub_at',
+        'end_sub',
+        'plan_id_fk'
     ];
+
+    public function plan(){
+        return $this->belongsTo(Plans::class, 'plan_id_fk','plan_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,6 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'end_sub' => 'date'
         ];
     }
 }

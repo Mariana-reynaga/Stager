@@ -23,19 +23,13 @@ class PlanCheckCreateImg
 
         $gallery_imgs = Gallery::all()->where('com_id_fk', (int)$request->route('id'));
 
-        if ($request->user()->plan === 'premium') {
+        if ($request->user()->plan_id_fk === 1) {
             return $next($request);
         }else{
             if (count($gallery_imgs) >= 3) {
                 return redirect()->route('espacio.details', ['id'=>$comissions->com_id])->with('tabNum', '4')->with('failure.msg', 'No hay más imagenes disponibles, elimine una o suscribase al plan Premium.');
             }
 
-            // $inputImgs = $request->pic_route;
-
-            // if(count($inputImgs) + count($gallery_imgs) > 3){
-            //     return redirect()->route('espacio.details', ['id'=>$comissions->com_id])->with('tabNum', '4')->with('failure.msg', 'No hay más imagenes disponibles, elimine una o suscribase al plan Premium.');
-            // }
-            
             return $next($request);
         }
     }

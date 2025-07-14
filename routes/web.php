@@ -12,24 +12,24 @@ Route::controller(App\Http\Controllers\ComissionsController::class)->group( func
     Route::get('/workspace/{user_id}', "workspace")
         ->name('espacio.trabajo')
         ->whereNumber('user_id')
-        ->middleware(['auth', 'UserUrlCheck', 'verified']);
+        ->middleware(['auth', 'UserUrlCheck', 'UserPlanCheck', 'verified']);
 
     Route::get('/workspace/{user_id}/complete', 'workspaceComplete')
         ->name('espacio.completas')
         ->whereNumber('user_id')
-        ->middleware(['auth', 'UserUrlCheck', 'verified']);
+        ->middleware(['auth', 'UserUrlCheck', 'UserPlanCheck', 'verified']);
 
         // Comissions
              // Ver
     Route::get('/workspace/comision/{id}', 'comisionDetail')
         ->name('espacio.details')
         ->whereNumber('id')
-        ->middleware(['auth', 'verified', 'ComissionUrlCheck']);
+        ->middleware(['auth', 'UserPlanCheck', 'verified', 'ComissionUrlCheck']);
 
             // Crear
     Route::get('/workspace/create', 'createComision')
         ->name('espacio.crear.form')
-        ->middleware(['auth', 'verified', 'PlanCheckCreateCom']);
+        ->middleware(['auth', 'UserPlanCheck', 'verified', 'PlanCheckCreateCom']);
 
     Route::post('/workspace/create', 'createComisionProcess')
         ->name('espacio.crear.process')
@@ -39,7 +39,7 @@ Route::controller(App\Http\Controllers\ComissionsController::class)->group( func
     Route::get('/workspace/comision/editar/{id}', 'editComision')
         ->name('espacio.edit')
         ->whereNumber('id')
-        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+        ->middleware(['auth', 'ComissionUrlCheck', 'UserPlanCheck', 'verified']);
 
     Route::put('/workspace/comision/editar/{id}', 'editComisionProcess')
         ->name('espacio.edit.process')
@@ -68,24 +68,24 @@ Route::controller(App\Http\Controllers\ComissionsController::class)->group( func
     Route::get('/workspace/comision/reciept/{id}', 'uploadReciept')
         ->name('reciept.upload')
         ->whereNumber('id')
-        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+        ->middleware(['auth', 'ComissionUrlCheck', 'UserPlanCheck', 'verified']);
 
     Route::post('/workspace/comision/reciept/{id}', 'uploadRecieptProcess')
         ->name('reciept.upload.process')
         ->whereNumber('id')
-        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+        ->middleware(['auth', 'ComissionUrlCheck', 'UserPlanCheck', 'verified']);
 
         // Descargar Recibo
     Route::get('/workspace/comision/reciept/download/{id}', 'downloadReciept')
         ->name('reciept.download')
         ->whereNumber('id')
-        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+        ->middleware(['auth', 'ComissionUrlCheck', 'UserPlanCheck', 'verified']);
 
         // Eliminar Recibo
     Route::delete('/workspace/comision/reciept/delete/{id}','deleteReciept')
         ->name('reciept.delete')
         ->whereNumber('id')
-        ->middleware(['auth', 'ComissionUrlCheck', 'verified']);
+        ->middleware(['auth', 'ComissionUrlCheck','UserPlanCheck', 'verified']);
 });
 
     // Tareas
@@ -216,11 +216,6 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
     Route::post('/register', "registerProcess")
         ->name('auth.register.process');
 
-        // Seleccionar plan
-    Route::get('/select/plan', 'selectTrial')
-        ->name('auth.register.plan')
-        ->middleware('auth');
-
         // Alerta Verificar email
     Route::get('/email/notice', 'verifyNotice')
         ->name('verification.notice')
@@ -236,20 +231,32 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
     ->name('verification.send')
     ->middleware(['auth', 'throttle:6,1']);
 
+    Route::get('/test/select', 'selectFree');
+
+});
+
+    // Planes
+Route::controller(App\Http\Controllers\PlanController::class)->group( function(){
+    Route::get('/select_plan', 'selectPlan')
+        ->name('plan_select.index')
+        ->middleware(['auth']);
 });
 
     // MercadoPago
 Route::controller(App\Http\Controllers\MercadoPagoController::class)->group( function(){
-    Route::get('/test/mercadopago', 'checkout')
-        ->name('test');
+    Route::get('/checkout/{plan_id}', 'checkout')
+        ->whereNumber('plan_id')
+        ->name('checkout');
 
-    Route::get('/test/mercadopago/success', 'mercadopagoSuccess')
-        ->name('mercadopago.successProcess');
+    Route::get('/checkout/mercadopago/success/{plan_id}', 'mercadopagoSuccess')
+        ->whereNumber('plan_id')
+        ->name('mercadopago.success');
 
-    Route::get('/test/mercadopago/failure', 'mercadopagoFailed')
+    Route::get('/checkout/mercadopago/failure/{plan_id}', 'mercadopagoFailed')
+        ->whereNumber('plan_id')
         ->name('mercadopago.failed');
 
-    Route::get('/test/mercadopago/pending', 'mercadopagoPending')
+    Route::get('/checkout/mercadopago/pending/{plan_id}', 'mercadopagoPending')
+        ->whereNumber('plan_id')
         ->name('mercadopago.pending');
-
 });
