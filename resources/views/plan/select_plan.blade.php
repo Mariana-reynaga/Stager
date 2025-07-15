@@ -19,6 +19,13 @@
                                 <div class="flex justify-center">
                                     <a href="{{ route('checkout', ['plan_id'=> $plan->plan_id]) }}" class="mt-6 btn-principal">Elegir Plan</a>
                                 </div>
+
+                                <ul class="mt-5 w-1/2 flex flex-col justify-center list-disc font-kanit text-lg">
+                                    @foreach ( json_decode($plan->plan_perks) as $key )
+                                        <li>{{ $key->perk }}</li>
+                                    @endforeach
+
+                                </ul>
                             </div>
                         </div>
                     @endforeach

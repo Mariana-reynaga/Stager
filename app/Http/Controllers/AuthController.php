@@ -74,8 +74,6 @@ class AuthController extends Controller
 
         Auth::attempt($creds);
 
-        $req->session()->regenerate();
-
         return redirect()->route('plan_select.index');
     }
 

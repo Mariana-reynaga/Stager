@@ -15,6 +15,7 @@ return new class extends Migration
             $table->tinyIncrements('plan_id');
             $table->string('plan_name');
             $table->unsignedMediumInteger('plan_price');
+            $table->json('plan_perks')->default('[]');
             $table->timestamps();
         });
     }

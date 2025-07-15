@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
                 'user_image'            => NULL,
                 'email_verified_at'     => '2025-03-09 19:00:26',
                 'sub_at'                => '2025-07-08',
-                'end_sub'               => '2025-08-08',
+                'end_sub'               => '2025-07-14',
                 'created_at'            =>  now(),
                 'plan_id_fk'            =>  1,
             ]

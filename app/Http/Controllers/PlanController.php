@@ -13,7 +13,7 @@ class PlanController extends Controller
         $plans = Plans::all();
 
         return view('plan.select_plan', [
-            'plans' => $plans
+            'plans' => $plans,
         ]);
     }
 }

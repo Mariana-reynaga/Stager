@@ -17,12 +17,15 @@ class PlansSeeder extends Seeder
             [
                 'plan_name' => 'Premium',
                 'plan_price' => 4000,
+                'plan_perks' => '[{"perk": "Comisiones ilimitadas"},{"perk": "Notas ilimitadas"},{"perk": "Imágenes ilimitadas"}]',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'plan_name' => 'Prueba',
                 'plan_price' => 0,
+                'plan_perks'=>'[{"perk": "Máximo 3 comisiones activas"},{"perk": "Máximo 3 Notas por comisión"},{"perk": "Máximo 4 Imágenes por comisión"}
+                ]',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

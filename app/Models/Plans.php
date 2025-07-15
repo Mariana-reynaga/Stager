@@ -10,5 +10,5 @@ class Plans extends Model
 
     protected $primaryKey = 'plan_id';
 
-    protected $fillable = ['plan_name', 'plan_price'];
+    protected $fillable = ['plan_name', 'plan_price', 'plan_perks'];
 }
