@@ -12,4 +12,4 @@ Artisan::command('inspire', function () {
 
 Schedule::call(function () {
     DB::table('users')->whereDate('end_sub', '<', now() )->update(['plan_id_fk' => 2]);
-})->everyMinute();
+})->hourly();
