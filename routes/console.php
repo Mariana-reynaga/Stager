@@ -11,5 +11,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::call(function () {
-    DB::table('users')->whereDate('end_sub', '<', now() )->update(['plan_id_fk' => 2]);
+    DB::table('users')->whereDate('end_sub', '<', now() )->update(['end_sub' => NULL, 'sub_at'=> NULL ,'plan_id_fk' => 2]);
 })->hourly();

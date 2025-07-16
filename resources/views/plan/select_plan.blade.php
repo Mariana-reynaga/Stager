@@ -24,7 +24,6 @@
                                     @foreach ( json_decode($plan->plan_perks) as $key )
                                         <li>{{ $key->perk }}</li>
                                     @endforeach
-
                                 </ul>
                             </div>
                         </div>

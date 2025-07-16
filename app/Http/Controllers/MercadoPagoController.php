@@ -10,11 +10,14 @@ use MercadoPago\MercadoPagoConfig;
 
 use Illuminate\Auth\Events\Registered;
 
-use DateTime;
-use DateInterval;
+// use DateTime;
+// use DateInterval;
+
+use App\Actions\MercadoPagoActions;
 
 use App\Models\Plans;
 use App\Models\User;
+
 
 use MercadoPago\Exceptions\MPApiException;
 
@@ -39,9 +42,8 @@ class MercadoPagoController extends Controller
             'quantity'=> 1
         ];
 
-        $endSubDate = new DateTime();
-        $endSubDate->add(new DateInterval('P30D'));
-        $endSubDate = date_format($endSubDate, 'd/m');
+        $action = new MercadoPagoActions;
+        $endSubDate = $action->CheckOutAdd30days();
 
         try {
             MercadoPagoConfig::setAccessToken(config('mercadopago.accessToken'));
@@ -75,9 +77,8 @@ class MercadoPagoController extends Controller
 
         $today = Date('Y-m-d');
 
-        $endSubDate = new DateTime();
-        $endSubDate->add(new DateInterval('P30D'));
-        $endSubDate = date_format($endSubDate, 'Y-m-d');
+        $action = new MercadoPagoActions;
+        $endSubDate = $action->add30days();
 
         $user->update(['plan_id_fk'=>$plan_id, 'sub_at'=> $today, 'end_sub'=> $endSubDate]);
 
@@ -95,9 +96,8 @@ class MercadoPagoController extends Controller
 
         $today = Date('Y-m-d');
 
-        $endSubDate = new DateTime();
-        $endSubDate->add(new DateInterval('P30D'));
-        $endSubDate = date_format($endSubDate, 'Y-m-d');
+        $action = new MercadoPagoActions;
+        $endSubDate = $action->add30days();
 
         $user->update(['plan_id_fk'=>$plan_id, 'sub_at'=> $today, 'end_sub'=> $endSubDate]);
 

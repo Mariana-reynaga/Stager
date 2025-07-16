@@ -230,13 +230,11 @@ Route::controller(App\Http\Controllers\AuthController::class)->group( function()
     Route::post('/email/verification-notification', 'resendVerify')
     ->name('verification.send')
     ->middleware(['auth', 'throttle:6,1']);
-
-    Route::get('/test/select', 'selectFree');
-
 });
 
     // Planes
 Route::controller(App\Http\Controllers\PlanController::class)->group( function(){
+    // Pagina de seleción de plan
     Route::get('/select_plan', 'selectPlan')
         ->name('plan_select.index')
         ->middleware(['auth']);

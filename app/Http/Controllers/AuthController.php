@@ -97,7 +97,7 @@ class AuthController extends Controller
         $user = User::find($user_id);
 
         $comision = Comissions::all()->where('user_id_fk', $user_id );
-
+        
         return view('perfil.index', [
             "user" => $user,
             "comision" => $comision

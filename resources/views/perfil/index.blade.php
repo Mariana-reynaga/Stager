@@ -36,13 +36,13 @@
                         @if ($user->plan->plan_name === 'Prueba')
                             <p><span class="text-roscuro font-semibold">Fin de suscripción:</span> - </p>
 
-                            <a href="" class="mt-3 link-style">Suscribirse a Premium</a>
+                            <a href="{{ route('checkout', ['plan_id'=>1]) }}" class="mt-3 link-style">Suscribirse a Premium</a>
                         @else
                             <p><span class="text-roscuro font-semibold">Fin de suscripción:</span> {{
 
                             $user->end_sub->format('d/m/Y') }}</p>
 
-                            <a href="" class="mt-3 link-style">Renovar Subscripción</a>
+                            <a href="{{ route('checkout', ['plan_id'=>1]) }}" class="mt-3 link-style">Renovar Subscripción</a>
                         @endif
 
                     </div>
