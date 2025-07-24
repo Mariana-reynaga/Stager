@@ -1,4 +1,4 @@
-<div>
+<div class="flex justify-center items-center">
     <form action="{{ route($route, [$param=> $paramValue]) }}" method="POST">
         @method($method)
         @csrf

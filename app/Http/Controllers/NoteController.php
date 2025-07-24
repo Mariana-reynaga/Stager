@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\Comissions;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,8 +29,19 @@ class NoteController extends Controller
 
         $arr = [
             'title'=> $req->title,
-            'note'=> $req->note
+            'note'=> $req->note,
+            'date'=>date('d/m/Y - g:i a')
         ];
+
+        if ($req->pic_route != NULL) {
+            $inputImg = $req->pic_route;
+
+            $path = $inputImg->store('notePics', 'public');
+
+            $arr['image'] = $path;
+        }else{
+            $arr['image'] = NULL;
+        }
 
         array_unshift($notes, $arr);
 

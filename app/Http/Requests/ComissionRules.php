@@ -22,7 +22,7 @@ class ComissionRules extends FormRequest
     public function rules(): array
     {
         $rules = [
-                'com_title' => 'required | max:30 | min:5',
+                'com_title' => 'required | max:20 | min:5',
                 'com_description'=>'required | max:150 | min:10',
                 'social_fk'=>'required',
                 'com_client'=>'required | max:30',
@@ -42,7 +42,7 @@ class ComissionRules extends FormRequest
     public function messages(): array{
         return[
                 'com_title.required'=>'La comisión necesita un título.',
-                'com_title.max'=>'El título debe tener como máximo 30 caracteres.',
+                'com_title.max'=>'El título debe tener como máximo 20 caracteres.',
                 'com_title.min' => 'El título debe tener como minimo 5 caracteres.',
                 //
                 'com_description.required'=>'La comisión necesita una descripción.',

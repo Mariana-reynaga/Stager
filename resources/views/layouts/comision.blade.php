@@ -10,17 +10,18 @@
     {{-- Alpine --}}
     @vite(['resources/js/app.js'])
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.css" />
     <title>Stager - @yield('title')</title>
 </head>
-<body>
-    <main>
-        <div class="w-full shadow-md flex justify-center fixed top-0 bg-white z-10">
-            <div class="w-5/6 p-3 flex justify-between bg-white">
+<body class="bg-blanco">
+    <main class="h-dvh flex flex-col justify-between">
+        <div class="w-full h-20 flex justify-center fixed top-0 bg-[url('/../../../public/images/top_curtain.svg')] z-10">
+            <div class="w-5/6 pb-4 flex justify-between items-center">
                 <a href="{{ route('espacio.trabajo', ['user_id'=>auth()->user()->user_id] ) }}" class="flex items-center">
                     <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
-                    <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>
+                    <p class="ms-3 font-kanit font-semibold text-2xl text-blanco" >Volver</p>
                 </a>
-                <img src="/../images/logo/icon_black.svg" alt="" class="w-12">
+                <img src="/../images/logo/logo_white.png" alt="" class="w-28">
             </div>
         </div>
 
@@ -30,11 +31,11 @@
         <div x-cloak x-data="{
             activeTab: @if (session('tabNum')) {{(int) session('tabNum')}} @else 1  @endif,
             active: 'mx-5 lg:mx-3 py-2 px-5 font-kanit text-white rounded-t-lg bg-rclaro',
-            inactive: 'mx-5 lg:mx-3 py-2 px-5 font-kanit border-2 border-b-0 border-rclaro rounded-t-lg',
+            inactive: 'mx-5 lg:mx-3 py-2 px-5 font-kanit border-2 border-b-0 border-rclaro rounded-t-lg bg-white',
             showMsgSuccess: @if(session('success.msg')) true @else false @endif,
             showMsgFail: @if(session('failure.msg')) true @else false @endif}">
 
-            <div class="mt-24 flex flex-col items-center">
+            <div class="mt-24 flex flex-col items-center flex-1">
                 <div class="w-4/5 flex flex-col lg:flex-row justify-between border-b-2 border-rclaro">
                     @yield('content')
 
@@ -114,6 +115,21 @@
                 </div>
             </div>
         </div>
+
+        <footer class="w-full h-24 mt-10 relative shrink-0 bg-[url('/../../../public/images/landing/seats_footer.svg')]">
+            <div class="w-full absolute bottom-0">
+                <div class="w-full flex justify-center">
+                    <p class="text-blanco font-kanit text-center mt-10"><span class="font-bold">Stager</span> es una marca registrada 2024.</p>
+                </div>
+            </div>
+        </footer>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+      Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+      });
+    </script>
 </body>
 </html>

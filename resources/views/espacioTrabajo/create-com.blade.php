@@ -247,7 +247,7 @@
 
                             <div class="ps-2 flex items-center border border-solid border-gray-600 rounded-md focus:outline focus:outline-2 focus:outline-rclaro font-kanit">
                                 <div class="text-lg">$</div>
-                                <input type="number" name="com_price" id="com_price" class="ms-1 py-2 ps-2 pe-4 w-full rounded-r-md focus:outline focus:outline-2 focus:outline-rclaro">
+                                <input type="number" name="com_price" id="com_price" value="{{ old('com_price') }}" class="ms-1 py-2 ps-2 pe-4 w-full rounded-r-md focus:outline focus:outline-2 focus:outline-rclaro">
                             </div>
 
                             @error('com_price')

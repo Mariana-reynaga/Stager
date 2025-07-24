@@ -17,7 +17,7 @@ export default {
                 caramel: ['caramel', 'cursive'],
             },
             colors:{
-                'rclaro': '#CC0428',
+                'rclaro': '#cd202a',
                 'roscuro': '#9A031E',
                 'negro': '#0A100D',
                 'blanco': '#FEF9EF',

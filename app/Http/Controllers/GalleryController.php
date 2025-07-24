@@ -9,6 +9,8 @@ use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use App\Http\Requests\ImageRules;
+
 class GalleryController extends Controller
 {
     public function addPicture(int $id){
@@ -19,22 +21,10 @@ class GalleryController extends Controller
         ]);
     }
 
-    public function addPictureProcess(int $id, Request $req){
+    public function addPictureProcess(int $id, ImageRules $req){
         $com_id_fk = $id;
 
         $inputImgs = $req->pic_route;
-
-        $req->validate(
-            [
-                'pic_route' => 'required',
-                'pic_route.*'=>'mimes:png,jpg,jpeg | max:2048'
-            ],
-            [
-                'pic_route.required'=>'La imagen es requerida.',
-                'pic_route.*.mimes'=>'La imagen debe ser de tipo png, jpg o jpeg.',
-                'pic_route.*.max'=>'La imagen debe ser como maximo 2MB.'
-            ]
-        );
 
         foreach($inputImgs as $image){
             $path = $image->store('gallery', 'public');

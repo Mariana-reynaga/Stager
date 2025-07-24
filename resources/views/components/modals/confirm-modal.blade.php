@@ -1,7 +1,7 @@
 <div>
     <div x-data="{isModalOpen: false}" x-on:keydown.escape="isModalOpen=false" class="relative">
         {{-- Fondo --}}
-        <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20"></div>
+        <div x-show="isModalOpen === true" class="w-full h-full fixed top-0 left-0 bg-black/20 z-20"></div>
 
         {{-- Modal --}}
         <div x-show="isModalOpen === true" x-on:click.away="isModalOpen = false" x-cloak x-transition class="w-full 2xl:w-4/5 fixed inset-y-[5rem] 2xl:inset-y-[10rem] start-0 2xl:start-[11.7rem] z-40" tabindex="-1">

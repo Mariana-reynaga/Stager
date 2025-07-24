@@ -10,20 +10,16 @@ use MercadoPago\MercadoPagoConfig;
 
 use Illuminate\Auth\Events\Registered;
 
-// use DateTime;
-// use DateInterval;
-
 use App\Actions\MercadoPagoActions;
-
 use App\Models\Plans;
 use App\Models\User;
-
+use App\Models\SubscriptionHistory;
 
 use MercadoPago\Exceptions\MPApiException;
 
 class MercadoPagoController extends Controller
 {
-    public function checkout(int $plan_id){
+    public function checkout(int $plan_id, Request $request){
         $plan = Plans::find($plan_id);
 
         if ($plan->plan_name === 'Prueba' ) {
@@ -64,6 +60,8 @@ class MercadoPagoController extends Controller
             dd($th);
         }
 
+        $request->session()->put('mp_id', $preference->id);
+
         return view('plan.checkout', [
             'plan' => $plan,
             'endDate' => $endSubDate,
@@ -72,7 +70,7 @@ class MercadoPagoController extends Controller
         ]);
     }
 
-    public function mercadopagoSuccess(int $plan_id){
+    public function mercadopagoSuccess(int $plan_id, Request $request){
         $user = User::find(auth()->user()->user_id);
 
         $today = Date('Y-m-d');
@@ -80,9 +78,21 @@ class MercadoPagoController extends Controller
         $action = new MercadoPagoActions;
         $endSubDate = $action->add30days();
 
+        if (auth()->user()->end_sub != NULL) {
+            event(new Registered($user));
+        }
+
         $user->update(['plan_id_fk'=>$plan_id, 'sub_at'=> $today, 'end_sub'=> $endSubDate]);
 
-        event(new Registered($user));
+        $payRecord = SubscriptionHistory::create([
+            'MP_payment_id' => session()->get('mp_id'),
+            'sub_start'     => $today,
+            'sub_end'       => $endSubDate,
+            'status'        => 'success',
+            'user_id_fk'    => $user->user_id
+        ]);
+
+        $request->session()->forget('mp_id');
 
         return redirect()->route('espacio.trabajo', ['user_id' => $user->user_id]);
     }
@@ -91,7 +101,7 @@ class MercadoPagoController extends Controller
         return redirect()->route('checkout', ['plan_id'=>$plan_id])->with('failure.msg', 'El pago no se pudo realizar, por favor, intente de vuelta.');
     }
 
-    public function mercadopagoPending(int $plan_id){
+    public function mercadopagoPending(int $plan_id, Request $request){
         $user = User::find(auth()->user()->user_id);
 
         $today = Date('Y-m-d');
@@ -99,9 +109,21 @@ class MercadoPagoController extends Controller
         $action = new MercadoPagoActions;
         $endSubDate = $action->add30days();
 
+        if (auth()->user()->end_sub != NULL) {
+            event(new Registered($user));
+        }
+
         $user->update(['plan_id_fk'=>$plan_id, 'sub_at'=> $today, 'end_sub'=> $endSubDate]);
 
-        event(new Registered($user));
+        $payRecord = SubscriptionHistory::create([
+            'MP_payment_id' => session()->get('mp_id'),
+            'sub_start'     => $today,
+            'sub_end'       => $endSubDate,
+            'status'        => 'pending',
+            'user_id_fk'    => $user->user_id
+        ]);
+
+        $request->session()->forget('mp_id');
 
         return redirect()->route('espacio.trabajo', ['user_id' => $user->user_id]);
     }

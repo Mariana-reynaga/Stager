@@ -29,7 +29,7 @@ class PlanCheckUploadImg
             return $next($request);
         }else{
             if(count($inputImgs) + count($gallery_imgs) > 3){
-                return redirect()->route('espacio.details', ['id'=>$comissions->com_id])->with('tabNum', '4')->with('failure.msg', 'No hay más imagenes disponibles, elimine una o suscribase al plan Premium.');
+                return redirect()->route('espacio.details', ['id'=>$comissions->com_id])->with('tabNum', '4')->with('failure.msg', 'Llegaste al limite de imagenes para el plan de prueba, elimina una imagen o suscribite al plan Premium.');
             }
 
             return $next($request);

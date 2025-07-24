@@ -12,15 +12,15 @@
 
     <title>Stager - @yield('title')</title>
 </head>
-<body>
+<body class="bg-blanco">
     <main>
-        <div class="md:h-full w-full md:w-48 lg:w-48 2xl:w-80 md:pt-3 md:px-3 fixed bg-rclaro">
+        <div class="md:h-full w-full md:w-52 lg:w-64 2xl:w-80 md:pt-3 md:px-3 fixed bg-rclaro">
             <div class="h-full flex flex-col justify-between">
                 <div class="md:mt-5 flex justify-center">
                     <div class="w-4/5 my-3">
                         {{-- nombre y foto usuario --}}
                         <div class="flex items-center">
-                            <div class="w-2/3 md:w-full">
+                            <div class="w-2/3 md:w-full text-blanco">
                                 <x-links.nav-link-param route="user.profile" param="user_id" :paramValue="auth()->user()->user_id">
                                     <div class="md:w-full flex items-center 2xl:justify-start">
                                         @if ($user->user_image === NULL)
@@ -44,27 +44,32 @@
                         </div>
 
                         {{-- links --}}
-                        <ul class="h-fit pt-3 md:h-60 2xl:h-52 mt-3 md:mt-5 flex md:flex-col justify-between text-blanco font-kanit text-md text-center md:text-start md:text-base 2xl:text-lg sm:border-t border-blanco">
-                            <li>
+                        <ul class="h-fit pt-3 md:h-72 mt-3 md:mt-5 2xl:pt-10 flex md:flex-col justify-between text-blanco font-kanit text-md text-center md:text-start md:text-base 2xl:text-lg sm:border-t border-blanco">
+                            <li class="flex gap-x-3 group items-center">
+                                <img src="/../images/star_point.svg" alt="" class="w-5 hidden md:inline md:group-hover:animate-spin">
                                 <x-links.nav-link route="espacio.crear.form">Cargar comisión</x-links.nav-link>
                             </li>
 
-                            <li>
+                            <li class="flex gap-x-3 group items-center">
+                                <img src="/../images/star_point.svg" alt="" class="w-5 hidden md:inline md:group-hover:animate-spin">
                                 <x-links.nav-link-param route="espacio.trabajo" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones en proceso</x-links.nav-link-param>
                             </li>
 
-                            <li>
+                            <li class="flex gap-x-3 group items-center">
+                                <img src="/../images/star_point.svg" alt="" class="w-5 hidden md:inline md:group-hover:animate-spin">
                                 <x-links.nav-link-param route="espacio.completas" param="user_id" :paramValue="auth()->user()->user_id" >Comisiones completas</x-links.nav-link-param>
                             </li>
 
-                            <li>
-                                <a href="{{ route('landing.page') }}">Volver al Inicio</a>
+                            <li class="flex gap-x-3 group items-center">
+                                <img src="/../images/star_point.svg" alt="" class="w-5 hidden md:inline md:group-hover:animate-spin">
+                                <a href="{{ route('landing.page') }}" class="hover:underline hover:underline-offset-2 hover:decoration-2">Volver al Inicio</a>
                             </li>
 
-                            <li>
+                            <li class="flex gap-x-3 group items-center">
+                                <img src="/../images/star_point.svg" alt="" class="w-5 hidden md:inline md:group-hover:animate-spin">
                                 <form action="{{ route('auth.logout.process') }}" method="POST">
                                     @csrf
-                                    <button type="submit">Cerrar sesión</button>
+                                    <button type="submit" class="hover:underline hover:underline-offset-2 hover:decoration-2">Cerrar sesión</button>
                                 </form>
                             </li>
                         </ul>
@@ -75,12 +80,11 @@
                     <img src="/images/logo/logo_white.png" class="h-10 2xl:h-3/5" alt="">
                 </div>
             </div>
-
         </div>
 
-        <div class="lg:w-4/5 mx-3 md:ms-48 pt-3 2xl:ms-80">
-            <div class="w-full mt-[8.3rem] md:mt-0 pb-2 border-b-2 border-rclaro bg-white fixed md:top-0">
-                <h1 class="mt-5 ms-5 font-kanit text-3xl font-semibold text-negro">@yield('sectionTitle')</h1>
+        <div class="lg:w-4/5 md:mx-3 md:ms-52 lg:ms-64 pt-3 2xl:ms-80">
+            <div class="w-full h-24 mt-[8.3rem] md:mt-0 fixed md:top-0 bg-[url('/../../../public/images/top_curtain.svg')] z-20">
+                <h1 class="mt-5 md:ms-8 font-kanit text-3xl font-semibold text-blanco text-center md:text-start">@yield('sectionTitle')</h1>
             </div>
 
             @yield('content')
@@ -110,7 +114,7 @@
                             <div class="flex gap-x-8">
                                 <p class="btn-principal" x-on:click="isModalOpen = false">Cerrar</p>
 
-                                <a href="" class="btn-secundario">Suscribirme</a>
+                                <a href="{{ route('checkout', ['plan_id'=>1]) }}" class="btn-secundario">Suscribirme</a>
                             </div>
                         </div>
 

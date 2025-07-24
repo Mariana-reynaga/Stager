@@ -11,10 +11,13 @@ use App\Models\Gallery;
 use App\Models\PaymentCurrency;
 
 use App\Http\Requests\ComissionRules;
+use App\Http\Requests\ImageRules;
 use App\Actions\TaskActions;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
+use DateTime;
 
 class ComissionsController extends Controller
 {
@@ -53,8 +56,11 @@ class ComissionsController extends Controller
 
         $gallery_imgs = Gallery::all()->where('com_id_fk', $id);
 
+        $is_Passed = $comision_dets->com_due < new DateTime('now');
+
         return view('espacioTrabajo.coms-detalles', [
             'comision'=> $comision_dets,
+            'is_Passed' => $is_Passed,
             'tareas'  => $tasks,
             'notas'   => $notes,
             'gallery' => $gallery_imgs
@@ -134,20 +140,8 @@ class ComissionsController extends Controller
         return view('espacioTrabajo.reciept.upload_reciept', ['comision'=> $comision_dets]);
     }
 
-    public function uploadRecieptProcess(int $id, Request $req){
+    public function uploadRecieptProcess(int $id, ImageRules $req){
         $comision = Comissions::findOrFail($id);
-
-        $req->validate(
-            [
-                'com_reciept' => 'required',
-                'com_reciept.*'=>'mimes:pdf,jpg,png | max:2048'
-            ],
-            [
-                'com_reciept.required'=>'El recibo es requerido.',
-                'com_reciept.*.mimes'=>'El recibo debe ser de tipo pdf, png o jpg.',
-                'com_reciept.*.max'=>'El recibo debe ser como maximo 2MB.'
-            ]
-        );
 
         $reciept = $req->com_reciept;
 

@@ -17,6 +17,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\AuthRules;
+use App\Http\Requests\ImageRules;
 
 class AuthController extends Controller
 {
@@ -97,7 +98,7 @@ class AuthController extends Controller
         $user = User::find($user_id);
 
         $comision = Comissions::all()->where('user_id_fk', $user_id );
-        
+
         return view('perfil.index', [
             "user" => $user,
             "comision" => $comision
@@ -140,23 +141,11 @@ class AuthController extends Controller
         return redirect()->route('user.profile', ['user_id'=>$user_id]);
     }
 
-    public function editImage(int $user_id, Request $req){
+    public function editImage(int $user_id, ImageRules $req){
 
         $user = User::findOrFail($user_id);
 
         $pfp = $req->user_image;
-
-        $req->validate(
-            [
-                'user_image' => 'required',
-                'user_image.*'=>'mimes:png,jpg,jpeg | max:2048'
-            ],
-            [
-                'user_image.required'=>'La imagen es requerida.',
-                'user_image.*.mimes'=>'La imagen debe ser de tipo png, jpg o jpeg.',
-                'user_image.*.max'=>'La imagen debe ser como maximo 2MB.'
-            ]
-        );
 
         if($user->user_image != null){
 

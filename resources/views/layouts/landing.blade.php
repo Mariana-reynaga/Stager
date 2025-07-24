@@ -22,6 +22,9 @@
             @yield('content')
         </div>
 
+        <div class="w-full h-24 bg-[url('/../../../public/images/landing/seats_footer.svg')]">
+        </div>
+
         <footer class="bg-negro w-full min-h-40 p-5 flex flex-col items-center inset-x-0 bottom-0">
             <div class="w-4/5 flex">
                 <div class="flex flex-col w-1/2">
@@ -47,6 +50,7 @@
 
             <p class="text-blanco font-kanit text-center mt-10"><span class="font-bold">Stager</span> es una marca registrada 2024.</p>
         </footer>
+
     </main>
 
 </body>

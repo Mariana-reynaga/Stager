@@ -15,6 +15,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@fancyapps/ui": "^6.0.16",
         "alpinejs": "^3.14.8"
     }
 }
