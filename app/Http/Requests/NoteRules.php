@@ -30,6 +30,12 @@ class NoteRules extends FormRequest
             'pic_route.*'   => 'nullable',
         ];
 
+        if ($this->isMethod('put')) {
+            $rules['pic_route'] = 'nullable';
+            $rules['pic_route.*'] = 'nullable|mimes:png,jpg,jpeg|max:2048';
+        }
+
+    
         return $rules;
     }
 

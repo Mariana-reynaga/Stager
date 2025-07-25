@@ -75,8 +75,23 @@ class NoteController extends Controller
 
         $notes[$req->noteId] = [
             'title' => $req->title,
-            'note'  => $req->note
+            'note'  => $req->note,
+            'date'  => $notes[$req->noteId]->date,
+            'image' => $notes[$req->noteId]->image
         ];
+
+        if ($req->pic_route != NULL ) {
+
+            $inputImg = $req->pic_route;
+
+            if ($notes[$req->noteId]['image'] != $req->pic_route && $notes[$req->noteId]['image'] != NULL ) {
+                Storage::disk('public')->delete($notes[$req->noteId]['image']);
+            }
+
+            $path = $inputImg->store('notePics', 'public');
+
+            $notes[$req->noteId]['image'] = $path;
+        }
 
         $notes_final = json_encode($notes);
 
@@ -91,6 +106,8 @@ class NoteController extends Controller
         $notes = json_decode($com_info->com_notes);
 
         $note2delete = (int) $req->note_id;
+
+        Storage::disk('public')->delete($notes[$note2delete]->image);
 
         $notes = array_filter($notes, function($key) use ($note2delete) {
             return $key != $note2delete;

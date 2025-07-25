@@ -13,16 +13,16 @@
 
     <title>Stager - @yield('title')</title>
 </head>
-<body>
+<body class="bg-blanco">
     <main>
-        <div class="w-full shadow-md flex justify-center fixed top-0">
-            <div class="w-5/6 p-3 flex justify-between bg-white">
+        <div class="w-full h-20 flex justify-center fixed top-0 bg-[url('/../../../public/images/top_curtain.svg')] z-10">
+            <div class="w-5/6 pb-4 flex justify-between items-center">
                 <a href="@yield('back')" class="flex items-center">
                     <img src="{{ url('/images/back_arrow.svg') }}" class="w-10" alt="Flecha negra que apunta a la izquierda.">
-                    <p class="ms-3 font-kanit font-semibold text-2xl text-negro" >Volver</p>
+                    <p class="ms-3 font-kanit font-semibold text-2xl text-blanco" >Volver</p>
                 </a>
 
-                <img src="/../images/logo/icon_black.svg" alt="" class="w-12">
+                <img src="/../images/logo/logo_white.png" alt="" class="w-28">
             </div>
         </div>
 

@@ -367,7 +367,7 @@
                                 </div>
 
                                 <div class="">
-                                    @if ($nota->image != NULL)
+                                    @if ( $nota->image != NULL)
                                         <div class="h-56">
                                             <a data-fancybox data-src="{{ Storage::url($nota->image) }}">
                                                 <img src="{{ Storage::url($nota->image) }}" alt="" class="w-full h-full object-cover object-top">
